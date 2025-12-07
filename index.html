@@ -386,38 +386,60 @@
         /* Direct Support */
         .direct-support {
             margin-top: 2rem;
-            padding: 1.5rem;
-            background: var(--sand);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
+            padding: 2rem;
+            border: 1px solid var(--warm-black);
+            background: var(--cream);
+        }
+
+        .direct-support-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .direct-support-title {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
         }
 
         .direct-support-text {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
+            opacity: 0.7;
+            line-height: 1.5;
         }
 
         .direct-links {
             display: flex;
-            gap: 1rem;
+            justify-content: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
         }
 
         .direct-link {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             letter-spacing: 0.1em;
             text-transform: uppercase;
             color: var(--warm-black);
             text-decoration: none;
-            padding: 0.5rem 1rem;
+            padding: 0.6rem 1.2rem;
             border: 1px solid var(--warm-black);
             transition: all 0.2s ease;
+            background: var(--cream);
         }
 
         .direct-link:hover {
             background: var(--warm-black);
             color: var(--cream);
+        }
+
+        .direct-link.primary {
+            background: var(--warm-black);
+            color: var(--cream);
+        }
+
+        .direct-link.primary:hover {
+            background: var(--terracotta);
+            border-color: var(--terracotta);
         }
 
         /* Footer */
@@ -631,10 +653,10 @@
 
         <section class="links-section">
             <div class="links-grid">
-                <a href="#" class="link-card" id="crowdfund-link">
+                <a href="https://ko-fi.com/whereisriax" class="link-card" id="support-link" target="_blank">
                     <span class="link-arrow">↗</span>
                     <p class="link-card-label">Support the Journey</p>
-                    <h3 class="link-card-title">Crowdfunding Campaign</h3>
+                    <h3 class="link-card-title">Buy Me a Coffee</h3>
                     <p class="link-card-desc">Help make this transcontinental run a reality. Every contribution fuels the next kilometer.</p>
                 </a>
 
@@ -671,11 +693,16 @@
             </div>
 
             <div class="direct-support">
-                <span class="direct-support-text">Prefer to support directly?</span>
+                <div class="direct-support-header">
+                    <p class="direct-support-title">Support Directly</p>
+                    <p class="direct-support-text">100% of contributions go toward equipment, crew, and logistics.<br>Choose your preferred payment method below.</p>
+                </div>
                 <div class="direct-links">
-                    <a href="https://venmo.com/u/whereisriax" class="direct-link" target="_blank">Venmo</a>
+                    <a href="https://ko-fi.com/whereisriax" class="direct-link primary" target="_blank">Ko-fi</a>
+                    <a href="https://wise.com/pay/me/yuweix2" class="direct-link" target="_blank">Wise</a>
                     <a href="https://revolut.me/whereisriax" class="direct-link" target="_blank">Revolut</a>
                     <a href="https://paypal.me/whereisriax" class="direct-link" target="_blank">PayPal</a>
+                    <a href="https://venmo.com/u/whereisriax" class="direct-link" target="_blank">Venmo</a>
                 </div>
             </div>
         </section>
