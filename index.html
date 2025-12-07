@@ -408,19 +408,44 @@
         }
 
         .support-highlight {
-            display: inline-block;
-            margin-top: 1.5rem;
-            padding: 0.75rem 1.5rem;
-            background: var(--warm-black);
-            color: var(--cream);
+            margin-top: 2rem;
             font-family: 'Instrument Serif', serif;
-            font-size: 1.1rem;
+            font-size: 1.3rem;
+            line-height: 1.6;
         }
 
         .support-highlight span {
             color: var(--terracotta);
             font-family: 'Space Mono', monospace;
-            font-size: 0.9rem;
+        }
+
+        /* Runner Image */
+        .runner-image {
+            margin-top: 2.5rem;
+            text-align: center;
+        }
+
+        .runner-image img {
+            max-width: 100%;
+            height: auto;
+            max-height: 400px;
+            object-fit: cover;
+        }
+
+        .runner-image figcaption {
+            margin-top: 0.75rem;
+            font-size: 0.7rem;
+            opacity: 0.5;
+            font-style: italic;
+        }
+
+        .runner-image figcaption a {
+            color: var(--warm-black);
+            text-decoration: none;
+        }
+
+        .runner-image figcaption a:hover {
+            text-decoration: underline;
         }
 
         .direct-support {
@@ -463,14 +488,25 @@
             color: var(--cream);
         }
 
-        .direct-link.primary {
+        .credit-card-link {
+            width: 100%;
+            margin-top: 0.75rem;
+            text-align: center;
+            padding: 1rem 2rem;
             background: var(--warm-black);
             color: var(--cream);
         }
 
-        .direct-link.primary:hover {
+        .credit-card-link:hover {
             background: var(--terracotta);
             border-color: var(--terracotta);
+        }
+
+        .credit-card-link .cc-note {
+            font-size: 0.65rem;
+            opacity: 0.7;
+            margin-left: 0.5rem;
+            letter-spacing: 0.05em;
         }
 
         /* Footer */
@@ -685,13 +721,18 @@
             <div class="support-header">
                 <h2 class="support-title">Support the Journey</h2>
                 <p class="support-subtitle">Your contribution covers the essentials: a support vehicle, crew logistics, travel permits, and documenting the journey.</p>
-                <div class="support-highlight"><span>€5</span> sponsors one kilometer</div>
+                <p class="support-highlight"><span>€5</span> sponsors one kilometer</p>
             </div>
+
+            <figure class="runner-image">
+                <img src="sinai-run.jpg" alt="Running with friends in Sinai">
+                <figcaption>Photo by <a href="https://instagram.com/jack.lawes" target="_blank">Jack Lawes</a></figcaption>
+            </figure>
 
             <div class="fundraise-section">
                 <div class="fundraise-header">
-                    <span class="fundraise-title">Fundraising Progress</span>
-                    <span class="fundraise-amount">€0 <span>/ €100,000</span></span>
+                    <span class="fundraise-title">Kilometers Funded</span>
+                    <span class="fundraise-amount">0 <span>/ 20,000 km</span></span>
                 </div>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progress-fill"></div>
@@ -701,11 +742,11 @@
             <div class="direct-support">
                 <p class="direct-support-label">Choose your payment method</p>
                 <div class="direct-links">
-                    <a href="https://ko-fi.com/whereisriax" class="direct-link primary" target="_blank">Ko-fi</a>
                     <a href="https://wise.com/pay/me/yuweix2" class="direct-link" target="_blank">Wise</a>
                     <a href="https://revolut.me/whereisriax" class="direct-link" target="_blank">Revolut</a>
                     <a href="https://paypal.me/whereisriax" class="direct-link" target="_blank">PayPal</a>
                     <a href="https://venmo.com/u/whereisriax" class="direct-link" target="_blank">Venmo</a>
+                    <a href="https://ko-fi.com/whereisriax" class="direct-link credit-card-link" target="_blank">Buy Me a Coffee <span class="cc-note">(credit card)</span></a>
                 </div>
             </div>
         </section>
