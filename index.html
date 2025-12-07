@@ -793,9 +793,9 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     // Set this percentage based on actual fundraising progress
-                    // Using minimum 2% for visibility when progress is small
+                    // Using minimum 1% for visibility when progress is small
                     const actualProgress = 0.015;
-                    const displayProgress = Math.max(actualProgress, 2);
+                    const displayProgress = Math.max(actualProgress, 1);
                     progressFill.style.width = displayProgress + '%';
                 }
             });
