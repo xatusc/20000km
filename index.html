@@ -269,8 +269,6 @@
         /* Links Section */
         .links-section {
             padding: 4rem 0;
-            border-top: 1px solid var(--warm-black);
-            margin-top: 3rem;
         }
 
         .links-grid {
@@ -328,7 +326,7 @@
 
         /* Fundraising Progress */
         .fundraise-section {
-            padding: 3rem 0;
+            margin-top: 2rem;
         }
 
         .fundraise-header {
@@ -383,7 +381,48 @@
             );
         }
 
-        /* Direct Support */
+        /* Support Section */
+        .support-section {
+            padding: 4rem 0;
+            border-top: 1px solid var(--warm-black);
+            margin-top: 3rem;
+        }
+
+        .support-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .support-title {
+            font-family: 'Instrument Serif', serif;
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .support-subtitle {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            line-height: 1.6;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .support-highlight {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--warm-black);
+            color: var(--cream);
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.1rem;
+        }
+
+        .support-highlight span {
+            color: var(--terracotta);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+        }
+
         .direct-support {
             margin-top: 2rem;
             padding: 2rem;
@@ -391,21 +430,13 @@
             background: var(--cream);
         }
 
-        .direct-support-header {
+        .direct-support-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
             text-align: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .direct-support-title {
-            font-family: 'Instrument Serif', serif;
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .direct-support-text {
-            font-size: 0.75rem;
-            opacity: 0.7;
-            line-height: 1.5;
+            margin-bottom: 1rem;
+            opacity: 0.6;
         }
 
         .direct-links {
@@ -416,12 +447,12 @@
         }
 
         .direct-link {
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             letter-spacing: 0.1em;
             text-transform: uppercase;
             color: var(--warm-black);
             text-decoration: none;
-            padding: 0.6rem 1.2rem;
+            padding: 0.75rem 1.5rem;
             border: 1px solid var(--warm-black);
             transition: all 0.2s ease;
             background: var(--cream);
@@ -577,7 +608,7 @@
             }
         }
 
-        .hero-left, .hero-right, .link-card, .fundraise-section {
+        .hero-left, .hero-right, .link-card, .support-section {
             animation: fadeInUp 0.8s ease-out forwards;
         }
 
@@ -585,14 +616,13 @@
             animation-delay: 0.2s;
         }
 
-        .link-card:nth-child(1) { animation-delay: 0.3s; }
-        .link-card:nth-child(2) { animation-delay: 0.4s; }
-        .link-card:nth-child(3) { animation-delay: 0.5s; }
-        .link-card:nth-child(4) { animation-delay: 0.6s; }
-
-        .fundraise-section {
-            animation-delay: 0.7s;
+        .support-section {
+            animation-delay: 0.3s;
         }
+
+        .link-card:nth-child(1) { animation-delay: 0.4s; }
+        .link-card:nth-child(2) { animation-delay: 0.5s; }
+        .link-card:nth-child(3) { animation-delay: 0.6s; }
     </style>
 </head>
 <body>
@@ -651,15 +681,37 @@
             <img src="route-map.png" alt="Route from Vladivostok to Lisbon">
         </div>
 
+        <section class="support-section">
+            <div class="support-header">
+                <h2 class="support-title">Support the Journey</h2>
+                <p class="support-subtitle">Your contribution covers the essentials: a support vehicle, crew logistics, travel permits, and documenting the journey.</p>
+                <div class="support-highlight"><span>€5</span> sponsors one kilometer</div>
+            </div>
+
+            <div class="fundraise-section">
+                <div class="fundraise-header">
+                    <span class="fundraise-title">Fundraising Progress</span>
+                    <span class="fundraise-amount">€0 <span>/ €100,000</span></span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+            </div>
+
+            <div class="direct-support">
+                <p class="direct-support-label">Choose your payment method</p>
+                <div class="direct-links">
+                    <a href="https://ko-fi.com/whereisriax" class="direct-link primary" target="_blank">Ko-fi</a>
+                    <a href="https://wise.com/pay/me/yuweix2" class="direct-link" target="_blank">Wise</a>
+                    <a href="https://revolut.me/whereisriax" class="direct-link" target="_blank">Revolut</a>
+                    <a href="https://paypal.me/whereisriax" class="direct-link" target="_blank">PayPal</a>
+                    <a href="https://venmo.com/u/whereisriax" class="direct-link" target="_blank">Venmo</a>
+                </div>
+            </div>
+        </section>
+
         <section class="links-section">
             <div class="links-grid">
-                <a href="https://ko-fi.com/whereisriax" class="link-card" id="support-link" target="_blank">
-                    <span class="link-arrow">↗</span>
-                    <p class="link-card-label">Support the Journey</p>
-                    <h3 class="link-card-title">Buy Me a Coffee</h3>
-                    <p class="link-card-desc">Help make this transcontinental run a reality. Every contribution fuels the next kilometer.</p>
-                </a>
-
                 <a href="https://forms.gle/4hi4gMRhXii32uax5" class="link-card" id="crew-link" target="_blank">
                     <span class="link-arrow">↗</span>
                     <p class="link-card-label">Join the Team</p>
@@ -680,30 +732,6 @@
                     <h3 class="link-card-title">Instagram</h3>
                     <p class="link-card-desc">Live updates, behind-the-scenes, and visual stories from the preparation and the road.</p>
                 </a>
-            </div>
-        </section>
-
-        <section class="fundraise-section">
-            <div class="fundraise-header">
-                <span class="fundraise-title">Fundraising Progress</span>
-                <span class="fundraise-amount">$0 <span>/ $50,000</span></span>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progress-fill"></div>
-            </div>
-
-            <div class="direct-support">
-                <div class="direct-support-header">
-                    <p class="direct-support-title">Support Directly</p>
-                    <p class="direct-support-text">100% of contributions go toward equipment, crew, and logistics.<br>Choose your preferred payment method below.</p>
-                </div>
-                <div class="direct-links">
-                    <a href="https://ko-fi.com/whereisriax" class="direct-link primary" target="_blank">Ko-fi</a>
-                    <a href="https://wise.com/pay/me/yuweix2" class="direct-link" target="_blank">Wise</a>
-                    <a href="https://revolut.me/whereisriax" class="direct-link" target="_blank">Revolut</a>
-                    <a href="https://paypal.me/whereisriax" class="direct-link" target="_blank">PayPal</a>
-                    <a href="https://venmo.com/u/whereisriax" class="direct-link" target="_blank">Venmo</a>
-                </div>
             </div>
         </section>
 
