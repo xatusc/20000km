@@ -1,0 +1,7 @@
+[build]
+  # Your build settings
+  publish = "."
+
+[build.ignore]
+  # Don't rebuild if only fundraising-data.json changed
+  command = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ':(exclude)fundraising-data.json'"
