@@ -7,7 +7,7 @@
     <title>20,000KM | Planetary Neighborhood Run</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <style>
         :root {
             --cream: #F5F2EB;
@@ -692,7 +692,10 @@
         </main>
 
         <div class="route-map-banner">
-            <img src="route-map.png" alt="Route from Vladivostok to Lisbon">
+            <picture>
+                <source srcset="route-map.webp" type="image/webp">
+                <img src="route-map.png" alt="Route from Vladivostok to Lisbon" loading="lazy">
+            </picture>
         </div>
 
         <section class="support-section">
@@ -724,7 +727,10 @@
             </div>
 
             <figure class="runner-image">
-                <img src="sinai-run.jpg" alt="Running with friends in Sinai">
+                <picture>
+                    <source srcset="sinai-run.webp" type="image/webp">
+                    <img src="sinai-run.jpg" alt="Running with friends in Sinai" loading="lazy">
+                </picture>
                 <figcaption>Photo by <a href="https://instagram.com/jack.lawes" target="_blank">Jack Lawes (@jack.lawes)</a></figcaption>
             </figure>
         </section>
