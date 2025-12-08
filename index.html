@@ -705,7 +705,7 @@
             <div class="fundraise-section">
                 <div class="fundraise-header">
                     <span class="fundraise-title">Kilometers Funded</span>
-                    <span class="fundraise-amount">3 <span>/ 20,000 km</span></span>
+                    <span class="fundraise-amount"><span id="funded-km">0</span> <span>/ <span id="total-km">20,000</span> km</span></span>
                 </div>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progress-fill"></div>
@@ -787,21 +787,40 @@
         updateCountdown();
         setInterval(updateCountdown, 1000);
 
-        // Animate progress bar on scroll (placeholder - set to 0% for now)
-        const progressFill = document.getElementById('progress-fill');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Set this percentage based on actual fundraising progress
-                    // Using minimum 1% for visibility when progress is small
-                    const actualProgress = 0.015;
-                    const displayProgress = Math.max(actualProgress, 1);
-                    progressFill.style.width = displayProgress + '%';
-                }
-            });
-        }, { threshold: 0.5 });
+        // Load and display fundraising progress
+        async function loadFundraisingData() {
+            try {
+                const response = await fetch('fundraising-data.json');
+                const data = await response.json();
 
-        observer.observe(document.querySelector('.fundraise-section'));
+                // Update the displayed numbers
+                document.getElementById('funded-km').textContent = data.fundedKm.toLocaleString();
+                document.getElementById('total-km').textContent = data.totalKm.toLocaleString();
+
+                // Calculate and update progress bar
+                const actualProgress = (data.fundedKm / data.totalKm) * 100;
+                // Using minimum 1% for visibility when progress is small
+                const displayProgress = Math.max(actualProgress, 1);
+
+                const progressFill = document.getElementById('progress-fill');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            progressFill.style.width = displayProgress + '%';
+                        }
+                    });
+                }, { threshold: 0.5 });
+
+                observer.observe(document.querySelector('.fundraise-section'));
+            } catch (error) {
+                console.error('Error loading fundraising data:', error);
+                // Fallback to default values if fetch fails
+                document.getElementById('funded-km').textContent = '0';
+                document.getElementById('total-km').textContent = '20,000';
+            }
+        }
+
+        loadFundraisingData();
     </script>
 </body>
 </html>
