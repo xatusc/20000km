@@ -487,6 +487,56 @@
             text-transform: none;
         }
 
+        /* Instagram Updates Section */
+        .instagram-section {
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--warm-black);
+        }
+
+        .instagram-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .instagram-title {
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .instagram-subtitle {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.2rem;
+            color: var(--terracotta);
+        }
+
+        .instagram-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .instagram-embed {
+            width: 100%;
+            min-height: 400px;
+        }
+
+        @media (max-width: 900px) {
+            .instagram-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .instagram-grid {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+        }
+
         /* Footer */
         footer {
             padding: 3rem 0;
@@ -733,6 +783,34 @@
                 </picture>
                 <figcaption>Photo by <a href="https://instagram.com/jack.lawes" target="_blank">Jack Lawes (@jack.lawes)</a></figcaption>
             </figure>
+
+            <div class="instagram-section">
+                <div class="instagram-header">
+                    <p class="instagram-title">Project Updates</p>
+                    <p class="instagram-subtitle">Follow the journey on Instagram</p>
+                </div>
+                <div class="instagram-grid">
+                    <!-- Post 1: 5 month -->
+                    <div class="instagram-embed">
+                        <!-- PASTE EMBED CODE FOR: https://www.instagram.com/reel/DRpxJ9LiL8Y/ -->
+                    </div>
+
+                    <!-- Post 2: Crew call -->
+                    <div class="instagram-embed">
+                        <!-- PASTE EMBED CODE FOR: https://www.instagram.com/reel/DSM8ScaiGNH/ -->
+                    </div>
+
+                    <!-- Post 3: 7 months -->
+                    <div class="instagram-embed">
+                        <!-- PASTE EMBED CODE FOR: https://www.instagram.com/reel/DQugpThCOVd/ -->
+                    </div>
+
+                    <!-- Post 4: Who am I -->
+                    <div class="instagram-embed">
+                        <!-- PASTE EMBED CODE FOR: https://www.instagram.com/p/DMyk5i2oJy-/ -->
+                    </div>
+                </div>
+            </div>
         </section>
 
         <section class="links-section">
@@ -828,5 +906,8 @@
 
         loadFundraisingData();
     </script>
+
+    <!-- Instagram Embed Script -->
+    <script async src="//www.instagram.com/embed.js"></script>
 </body>
 </html>
