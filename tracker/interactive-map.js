@@ -121,12 +121,25 @@ const InteractiveMap = (function() {
         </div>
 
         <div class="interactive-map__image-wrapper">
-          <picture>
+          <!-- Gray route (base layer - unfunded portion visible) -->
+          <picture class="interactive-map__picture interactive-map__picture--gray">
+            <source srcset="route-map-gray.webp" type="image/webp">
+            <img
+              src="route-map-gray.png"
+              alt=""
+              class="interactive-map__image interactive-map__image--gray"
+              loading="lazy"
+              aria-hidden="true"
+            >
+          </picture>
+
+          <!-- Red route (overlay - revealed as runner passes, from right to left) -->
+          <picture class="interactive-map__picture interactive-map__picture--red" id="map-red-overlay">
             <source srcset="${config.imageWebp}" type="image/webp">
             <img
               src="${config.imageSrc}"
               alt="Route from Vladivostok to Cabo da Roca"
-              class="interactive-map__image"
+              class="interactive-map__image interactive-map__image--red"
               loading="lazy"
             >
           </picture>
@@ -542,6 +555,7 @@ const InteractiveMap = (function() {
    */
   function setRunnerPosition(path, length) {
     const runner = document.getElementById('map-runner');
+    const redOverlay = document.getElementById('map-red-overlay');
     if (!runner) return;
 
     const point = path.getPointAtLength(length);
@@ -558,6 +572,12 @@ const InteractiveMap = (function() {
     runner.style.left = `${point.x}%`;
     runner.style.top = `${point.y}%`;
     runner.classList.add('interactive-map__runner--visible');
+
+    // Update clip-path on red overlay to reveal from right edge to runner position
+    // inset(top right bottom left) - we clip from left side up to runner position
+    if (redOverlay) {
+      redOverlay.style.clipPath = `inset(0 0 0 ${point.x}%)`;
+    }
   }
 
   /**
