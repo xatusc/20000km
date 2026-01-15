@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 200" role="img" aria-label="Route from Vladivostok to Cabo da Roca">
+  <title>20,000 KM Running Route - Traced from Map</title>
+  <desc>A hand-traced route showing the path from Vladivostok, Russia to Cabo da Roca, Portugal, passing through China, Central Asia, Iran, Turkey, and Europe.</desc>
+
+  <defs>
+    <!-- Gradient for locked portion (faded) -->
+    <linearGradient id="lockedGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#D4C8B8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D4C8B8;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Gradient for unlocked portion (terracotta) -->
+    <linearGradient id="unlockedGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#C4603C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C4603C;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!--
+    Path traced from route-map.png
+    Starts at Vladivostok (right) and ends at Cabo da Roca (left)
+    Key waypoints along the path:
+    - Vladivostok (start): ~950, 65
+    - Beijing: ~870, 85
+    - Xi'an: ~820, 105
+    - Urumqi: ~720, 75
+    - Samarkand: ~520, 95
+    - Iran/Turkey: ~350, 85
+    - Istanbul: ~280, 65
+    - Europe: ~150, 70
+    - Lisbon/Cabo da Roca (end): ~35, 75
+  -->
+
+  <!-- Background/locked path (full route) -->
+  <path
+    id="route-background"
+    class="route-locked"
+    d="M 950 65
+       C 940 60, 920 55, 900 58
+       C 880 62, 870 75, 870 85
+       C 870 95, 860 105, 840 108
+       C 820 110, 800 105, 780 95
+       C 760 85, 740 70, 720 75
+       C 700 80, 680 90, 660 88
+       C 640 86, 620 80, 600 82
+       C 580 84, 560 90, 540 95
+       C 520 100, 500 98, 480 92
+       C 460 86, 440 78, 420 80
+       C 400 82, 380 88, 360 90
+       C 340 92, 320 88, 300 82
+       C 280 76, 270 65, 260 62
+       C 250 59, 230 58, 210 60
+       C 190 62, 170 68, 150 72
+       C 130 76, 110 78, 90 76
+       C 70 74, 50 72, 35 75"
+    fill="none"
+    stroke="url(#lockedGradient)"
+    stroke-width="6"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  <!-- Unlocked/funded path (animated via stroke-dashoffset) -->
+  <path
+    id="route-progress"
+    class="route-unlocked"
+    d="M 950 65
+       C 940 60, 920 55, 900 58
+       C 880 62, 870 75, 870 85
+       C 870 95, 860 105, 840 108
+       C 820 110, 800 105, 780 95
+       C 760 85, 740 70, 720 75
+       C 700 80, 680 90, 660 88
+       C 640 86, 620 80, 600 82
+       C 580 84, 560 90, 540 95
+       C 520 100, 500 98, 480 92
+       C 460 86, 440 78, 420 80
+       C 400 82, 380 88, 360 90
+       C 340 92, 320 88, 300 82
+       C 280 76, 270 65, 260 62
+       C 250 59, 230 58, 210 60
+       C 190 62, 170 68, 150 72
+       C 130 76, 110 78, 90 76
+       C 70 74, 50 72, 35 75"
+    fill="none"
+    stroke="url(#unlockedGradient)"
+    stroke-width="6"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  <!-- Start point marker (Vladivostok) -->
+  <circle
+    cx="950"
+    cy="65"
+    r="8"
+    fill="#1A1814"
+    class="route-marker route-start"
+  />
+
+  <!-- End point marker (Cabo da Roca) -->
+  <circle
+    cx="35"
+    cy="75"
+    r="8"
+    fill="none"
+    stroke="#1A1814"
+    stroke-width="2"
+    class="route-marker route-end"
+  />
+
+  <!-- Progress indicator (current position) -->
+  <circle
+    id="progress-indicator"
+    class="progress-indicator"
+    cx="950"
+    cy="65"
+    r="6"
+    fill="#C4603C"
+  />
+</svg>
