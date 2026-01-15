@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 400" role="img" aria-label="Route from Vladivostok to Cabo da Roca">
+  <title>20,000 KM Running Route - Mobile Vertical View</title>
+  <desc>A vertical simplified route showing key waypoints from Vladivostok, Russia to Cabo da Roca, Portugal.</desc>
+
+  <defs>
+    <linearGradient id="lockedGradient-mobile" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D4C8B8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D4C8B8;stop-opacity:1" />
+    </linearGradient>
+
+    <linearGradient id="unlockedGradient-mobile" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#C4603C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C4603C;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!--
+    Vertical waypoints (8 key cities for readability)
+    Cumulative KM mapped to Y position (0-20000 -> 20-380)
+
+    1. Vladivostok: 0 km -> y=20
+    2. Beijing: 1,854 km -> y=53
+    3. Urumqi: 5,584 km -> y=120
+    4. Samarkand: 8,262 km -> y=168
+    5. Istanbul: 13,244 km -> y=258
+    6. Italy/France: 16,387 km -> y=314
+    7. Santiago: 17,167 km -> y=328
+    8. Cabo da Roca: 20,000 km -> y=380
+  -->
+
+  <!-- Background/locked path (full route) -->
+  <path
+    id="route-background-mobile"
+    class="route-locked"
+    d="M 30 20 L 30 380"
+    fill="none"
+    stroke="url(#lockedGradient-mobile)"
+    stroke-width="4"
+    stroke-linecap="round"
+  />
+
+  <!-- Unlocked/funded path -->
+  <path
+    id="route-progress-mobile"
+    class="route-unlocked"
+    d="M 30 20 L 30 380"
+    fill="none"
+    stroke="url(#unlockedGradient-mobile)"
+    stroke-width="4"
+    stroke-linecap="round"
+  />
+
+  <!-- Waypoint markers -->
+  <!-- Vladivostok (start) -->
+  <circle cx="30" cy="20" r="6" fill="#1A1814" class="waypoint" data-km="0" />
+
+  <!-- Beijing -->
+  <circle cx="30" cy="53" r="4" fill="#1A1814" class="waypoint" data-km="1854" />
+
+  <!-- Urumqi -->
+  <circle cx="30" cy="120" r="4" fill="#1A1814" class="waypoint" data-km="5584" />
+
+  <!-- Samarkand -->
+  <circle cx="30" cy="168" r="4" fill="#1A1814" class="waypoint" data-km="8262" />
+
+  <!-- Istanbul -->
+  <circle cx="30" cy="258" r="4" fill="#1A1814" class="waypoint" data-km="13244" />
+
+  <!-- Italy/France -->
+  <circle cx="30" cy="314" r="4" fill="#1A1814" class="waypoint" data-km="16387" />
+
+  <!-- Santiago -->
+  <circle cx="30" cy="328" r="4" fill="#1A1814" class="waypoint" data-km="17167" />
+
+  <!-- Cabo da Roca (end) -->
+  <circle cx="30" cy="380" r="6" fill="none" stroke="#1A1814" stroke-width="2" class="waypoint" data-km="20000" />
+
+  <!-- Progress indicator -->
+  <circle
+    id="progress-indicator-mobile"
+    class="progress-indicator"
+    cx="30"
+    cy="20"
+    r="5"
+    fill="#C4603C"
+  />
+</svg>

@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="tracker/interactive-map.css">
     <style>
         :root {
             --cream: #F5F2EB;
@@ -656,7 +657,7 @@
                     <div class="route">
                         <span>Vladivostok</span>
                         <span class="route-line"></span>
-                        <span>Lisbon</span>
+                        <span>Cabo da Roca</span>
                     </div>
                     <p class="delusional">"Only delusional until it's not"</p>
                 </div>
@@ -694,7 +695,7 @@
         <div class="route-map-banner">
             <picture>
                 <source srcset="route-map.webp" type="image/webp">
-                <img src="route-map.png" alt="Route from Vladivostok to Lisbon" loading="lazy">
+                <img src="route-map.png" alt="Route from Vladivostok to Cabo da Roca" loading="lazy">
             </picture>
         </div>
 
@@ -733,6 +734,15 @@
                 </picture>
                 <figcaption>Photo by <a href="https://instagram.com/jack.lawes" target="_blank">Jack Lawes (@jack.lawes)</a></figcaption>
             </figure>
+        </section>
+
+        <!-- Interactive Route Map Section -->
+        <section class="interactive-map-section" aria-labelledby="interactive-map-title">
+            <div class="interactive-map-section__header">
+                <h2 id="interactive-map-title" class="interactive-map-section__title">The Route</h2>
+                <p class="interactive-map-section__subtitle">Hover over waypoints to explore the journey</p>
+            </div>
+            <div id="interactive-map-container"></div>
         </section>
 
         <section class="links-section">
@@ -827,6 +837,19 @@
         }
 
         loadFundraisingData();
+    </script>
+
+    <!-- Interactive Map Module -->
+    <script src="tracker/interactive-map.js"></script>
+    <script>
+        // Initialize the interactive map
+        InteractiveMap.init({
+            container: '#interactive-map-container',
+            dataUrl: 'https://gist.githubusercontent.com/xatusc/c0f8cb44d773b6b06ac4cda016feb759/raw/fundraising-data.json',
+            totalKm: 20000,
+            imageSrc: 'route-map.png',
+            imageWebp: 'route-map.webp'
+        });
     </script>
 </body>
 </html>
