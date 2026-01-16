@@ -1,0 +1,414 @@
+/**
+ * RouteTracker Styles
+ * WCAG AAA compliant
+ */
+
+/* ========================================
+   CSS Custom Properties (inherits from page)
+   ======================================== */
+.route-tracker {
+  --tracker-cream: var(--cream, #F5F2EB);
+  --tracker-warm-black: var(--warm-black, #1A1814);
+  --tracker-terracotta: var(--terracotta, #C4603C);
+  --tracker-sage: var(--sage, #8B9B7A);
+  --tracker-sand: var(--sand, #D4C8B8);
+  --tracker-faded-red: var(--faded-red, #A63D2F);
+}
+
+/* ========================================
+   Base Container
+   ======================================== */
+.route-tracker {
+  width: 100%;
+  margin: 2rem 0;
+}
+
+/* ========================================
+   Header (subtitle + stats)
+   ======================================== */
+.route-tracker__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.route-tracker__subtitle {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--tracker-terracotta);
+}
+
+.route-tracker__stats {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.9rem;
+}
+
+.route-tracker__funded {
+  font-weight: 700;
+  color: var(--tracker-warm-black);
+}
+
+.route-tracker__separator,
+.route-tracker__total,
+.route-tracker__unit {
+  opacity: 0.6;
+}
+
+.route-tracker__unit {
+  margin-left: 0.25rem;
+}
+
+/* ========================================
+   SVG Container
+   ======================================== */
+.route-tracker__svg-container {
+  position: relative;
+  width: 100%;
+  min-height: 100px;
+}
+
+.route-tracker__svg {
+  width: 100%;
+}
+
+.route-tracker__svg svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Desktop/Mobile visibility */
+.route-tracker__svg--mobile {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .route-tracker__svg--desktop {
+    display: none;
+  }
+
+  .route-tracker__svg--mobile {
+    display: block;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .route-tracker__svg--mobile svg {
+    height: 400px;
+    width: auto;
+  }
+}
+
+/* ========================================
+   SVG Path Styles
+   ======================================== */
+.route-locked {
+  opacity: 0.4;
+}
+
+.route-unlocked {
+  stroke-dasharray: 0;
+  stroke-dashoffset: 0;
+}
+
+.progress-indicator {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.route-marker {
+  transition: transform 0.3s ease;
+}
+
+/* ========================================
+   Endpoint Labels (Desktop)
+   ======================================== */
+.route-tracker__endpoints {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.75rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--tracker-warm-black);
+  opacity: 0.7;
+}
+
+.route-tracker__endpoints--desktop {
+  display: flex;
+}
+
+@media (max-width: 767px) {
+  .route-tracker__endpoints--desktop {
+    display: none;
+  }
+}
+
+/* ========================================
+   Mobile Waypoints
+   ======================================== */
+.route-tracker__waypoints {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .route-tracker__waypoints--mobile {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-left: 80px;
+    margin-top: 1rem;
+  }
+
+  .route-tracker__waypoint {
+    position: relative;
+    padding: 0.5rem 0;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--tracker-warm-black);
+    opacity: 0.4;
+    transition: opacity 0.3s ease;
+  }
+
+  .route-tracker__waypoint--reached {
+    opacity: 1;
+  }
+
+  .route-tracker__waypoint--reached .route-tracker__waypoint-name {
+    color: var(--tracker-terracotta);
+    font-weight: 700;
+  }
+
+  .route-tracker__waypoint::before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--tracker-sand);
+    transition: background 0.3s ease;
+  }
+
+  .route-tracker__waypoint--reached::before {
+    background: var(--tracker-terracotta);
+  }
+
+  .route-tracker__waypoint:first-child::before,
+  .route-tracker__waypoint:last-child::before {
+    width: 12px;
+    height: 12px;
+  }
+
+  .route-tracker__waypoint:last-child::before {
+    background: transparent;
+    border: 2px solid var(--tracker-warm-black);
+  }
+}
+
+/* ========================================
+   Loading Skeleton
+   ======================================== */
+.route-tracker__skeleton {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--tracker-cream);
+}
+
+.route-tracker__skeleton[hidden] {
+  display: none;
+}
+
+.route-tracker__skeleton-bar {
+  width: 80%;
+  height: 6px;
+  background: var(--tracker-sand);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.route-tracker__skeleton-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-pulse {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .route-tracker__skeleton-bar::after {
+    animation: none;
+    left: 0;
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .route-unlocked,
+  .progress-indicator,
+  .route-marker {
+    transition: none !important;
+  }
+}
+
+/* ========================================
+   Overfunding Message
+   ======================================== */
+.route-tracker__overfund {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--tracker-terracotta);
+  color: var(--tracker-cream);
+  font-size: 0.8rem;
+  text-align: center;
+  border-radius: 2px;
+}
+
+.route-tracker__overfund[hidden] {
+  display: none;
+}
+
+/* ========================================
+   Error State
+   ======================================== */
+.route-tracker__error {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--tracker-warm-black);
+  opacity: 0.5;
+  text-align: center;
+  font-style: italic;
+}
+
+.route-tracker__error[hidden] {
+  display: none;
+}
+
+/* ========================================
+   Accessibility
+   ======================================== */
+
+/* Visually hidden but accessible to screen readers */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus styles (WCAG AAA - 3px visible ring) */
+.route-tracker [tabindex="0"]:focus {
+  outline: 3px solid var(--tracker-terracotta);
+  outline-offset: 2px;
+}
+
+.route-tracker [tabindex="0"]:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.route-tracker [tabindex="0"]:focus-visible {
+  outline: 3px solid var(--tracker-terracotta);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: more) {
+  .route-tracker__subtitle,
+  .route-tracker__funded {
+    color: var(--tracker-warm-black);
+  }
+
+  .route-locked {
+    opacity: 0.6;
+  }
+
+  .route-tracker__waypoint {
+    opacity: 0.6;
+  }
+
+  .route-tracker__waypoint--reached {
+    opacity: 1;
+  }
+}
+
+/* ========================================
+   Comparison Section (temporary)
+   ======================================== */
+.tracker-comparison {
+  padding: 2rem 0;
+  border-top: 1px solid var(--tracker-warm-black);
+}
+
+.tracker-comparison__title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.tracker-comparison__description {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.tracker-comparison__option {
+  margin-bottom: 3rem;
+  padding: 1.5rem;
+  border: 1px solid var(--tracker-sand);
+  background: var(--tracker-cream);
+}
+
+.tracker-comparison__option-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--tracker-terracotta);
+  margin-bottom: 0.5rem;
+}
+
+.tracker-comparison__option-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.2rem;
+  margin-bottom: 0.25rem;
+}
+
+.tracker-comparison__option-desc {
+  font-size: 0.75rem;
+  opacity: 0.6;
+  margin-bottom: 1rem;
+}
