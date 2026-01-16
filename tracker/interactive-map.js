@@ -217,19 +217,22 @@ const InteractiveMap = (function() {
     const container = document.getElementById('map-waypoints');
     if (!container) return;
 
-    container.innerHTML = waypoints.map(wp => `
+    container.innerHTML = waypoints.map(wp => {
+      const isEndpoint = wp.id === 'vladivostok' || wp.id === 'lisbon';
+      return `
       <button
-        class="interactive-map__waypoint"
+        class="interactive-map__waypoint${isEndpoint ? ' interactive-map__waypoint--endpoint' : ''}"
         data-waypoint="${wp.id}"
         data-km="${wp.km}"
         style="left: ${wp.x}%; top: ${wp.y}%;"
-        aria-label="${wp.name}, ${wp.country} - ${wp.km.toLocaleString()} km"
+        aria-label="${wp.name}, ${wp.country} - ${wp.km.toLocaleString()} km. ${wp.info}"
         tabindex="0"
       >
         <span class="interactive-map__waypoint-dot"></span>
         <span class="interactive-map__waypoint-label">${wp.name}</span>
       </button>
-    `).join('');
+    `;
+    }).join('');
   }
 
   /**
@@ -468,6 +471,12 @@ const InteractiveMap = (function() {
     const runnerTooltipKm = document.getElementById('runner-tooltip-km');
     if (runnerTooltipKm) {
       runnerTooltipKm.textContent = `${fundedKm.toLocaleString()} km`;
+    }
+
+    // Update runner aria-label with current progress
+    const runner = document.getElementById('map-runner');
+    if (runner) {
+      runner.setAttribute('aria-label', `Fundraising progress: ${fundedKm.toLocaleString()} of ${totalKm.toLocaleString()} kilometers funded`);
     }
 
     // Update waypoint states

@@ -97,7 +97,7 @@
   transform: translate(-50%, -50%);
   background: none;
   border: none;
-  padding: 0;
+  padding: 16px; /* Invisible touch target padding */
   cursor: pointer;
   pointer-events: auto;
   z-index: 10;
@@ -171,8 +171,8 @@
 /* Runner icon */
 .interactive-map__runner {
   position: absolute;
-  width: 28px;
-  height: 28px;
+  width: 48px;
+  height: 48px;
   transform: translate(-50%, -50%);
   color: var(--terracotta, #C4603C);
   z-index: 15;
@@ -184,7 +184,8 @@
   cursor: pointer;
   background: none;
   border: none;
-  padding: 0;
+  padding: 8px; /* Touch target padding */
+  margin: -4px; /* Compensate to keep visual position */
 }
 
 .interactive-map__runner:focus {
@@ -424,6 +425,13 @@
 }
 
 /* Responsive adjustments */
+@media (max-width: 767px) {
+  /* Hide all waypoints on mobile, only runner visible */
+  .interactive-map__waypoint {
+    display: none;
+  }
+}
+
 @media (max-width: 768px) {
   .interactive-map__waypoint-dot {
     width: 10px;
@@ -436,8 +444,8 @@
   }
 
   .interactive-map__runner {
-    width: 22px;
-    height: 22px;
+    width: 36px;
+    height: 36px;
   }
 
   .interactive-map__tooltip {
