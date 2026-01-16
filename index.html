@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="tracker/interactive-map.css">
     <style>
         :root {
             --cream: #F5F2EB;
@@ -679,7 +680,7 @@
         <div class="route-map-banner">
             <picture>
                 <source srcset="route-map.webp" type="image/webp">
-                <img src="route-map.png" alt="Route from Vladivostok to Lisbon" loading="lazy">
+                <img src="route-map.png" alt="Route from Vladivostok to Cabo da Roca" loading="lazy">
             </picture>
         </div>
 
@@ -688,21 +689,14 @@
                 <h2 class="support-title">Support the Journey</h2>
                 <p class="support-subtitle">Your contribution covers the essentials: a support vehicle, crew logistics, travel permits, and documenting the journey.</p>
                 <p class="support-highlight"><span>€5</span> sponsors one kilometer</p>
-            </div>
-
-            <div class="fundraise-section">
-                <div class="fundraise-header">
-                    <span class="fundraise-title">Kilometers Funded</span>
-                    <span class="fundraise-amount"><span id="funded-km">0</span> <span>/ <span id="total-km">20,000</span> km</span></span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progress-fill"></div>
-                </div>
-            </div>
-
-            <div class="direct-support">
-                <a href="https://www.gofundme.com/f/rias-20000-km-run-across-asia-and-europe?attribution_id=sl:9f3b9bd8-559a-4e32-8b97-75cb9530d9fe&lang=en_US&utm_campaign=man_ss_icons&utm_medium=customer&utm_source=copy_link" class="direct-link" target="_blank">Donate</a>
-            </div>
+                <!-- Interactive Route Map -->
+                <div id="interactive-map-container"></div>
+                <div class="direct-support">
+                <p class="direct-support-label">Choose your payment method</p>
+                   <div class="direct-support">
+                    <a href="https://www.gofundme.com/f/rias-20000-km-run-across-asia-and-europe?attribution_id=sl:9f3b9bd8-559a-4e32-8b97-75cb9530d9fe&lang=en_US&utm_campaign=man_ss_icons&utm_medium=customer&utm_source=copy_link" class="direct-link" target="_blank">Donate</a>
+                  </div>
+                  </div>
 
             <figure class="runner-image">
                 <picture>
@@ -805,6 +799,19 @@
         }
 
         loadFundraisingData();
+    </script>
+
+    <!-- Interactive Map Module -->
+    <script src="tracker/interactive-map.js"></script>
+    <script>
+        // Initialize the interactive map
+        InteractiveMap.init({
+            container: '#interactive-map-container',
+            dataUrl: 'https://gist.githubusercontent.com/xatusc/c0f8cb44d773b6b06ac4cda016feb759/raw/fundraising-data.json',
+            totalKm: 20000,
+            imageSrc: 'route-map.png',
+            imageWebp: 'route-map.webp'
+        });
     </script>
 </body>
 </html>
