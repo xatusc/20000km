@@ -63,8 +63,7 @@
   grid-template-columns: 1.2fr 1fr;
   gap: $space-12;
   align-items: start;
-  padding: $space-16 0;
-  border-bottom: $border-width solid $warm-black;
+  padding: $space-8 0;
 
   @media (max-width: $breakpoint-xl) {
     grid-template-columns: 1fr;
@@ -121,7 +120,7 @@
 
 .support-cta {
   display: inline-block;
-  background: $terracotta;
+  background: $terracotta-700;
   color: $cream;
   padding: $space-4 $space-8;
   font-family: $font-mono;
@@ -129,13 +128,13 @@
   letter-spacing: $tracking-wide;
   text-transform: uppercase;
   text-decoration: none;
-  border: 2px solid $terracotta;
+  border: 2px solid $terracotta-700;
   transition: background 0.2s ease, color 0.2s ease;
   min-height: 48px;
 
   &:hover {
-    background: $terracotta-600;
-    border-color: $terracotta-600;
+    background: $terracotta-800;
+    border-color: $terracotta-800;
   }
 }
 

@@ -65,7 +65,7 @@
 }
 
 .email {
-  color: $terracotta;
+  color: $terracotta-700;
   text-decoration: none;
 
   &:hover {

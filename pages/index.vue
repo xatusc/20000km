@@ -1,13 +1,9 @@
 <script setup lang="ts">
-// Home page structure:
-// 1. Hero (cream background, centered text)
-// 2. Video Banner (cinematic visual break)
-// 3. Progress Teaser (km funded progress bar)
-// 4. Route Map Banner (full-width visual break)
-// 5. Story Section (the "why")
-// 6. Support Section (simplified, single CTA)
-// 7. Journey Teaser (stories from the ground)
-// 8. Links Grid (secondary actions)
+// Home page structure (simplified, story-focused):
+// 1. Hero (full-bleed video/image background)
+// 2. Story Section (the personal narrative)
+// 3. Pull Quote (visual break with impactful quote)
+// 4. Route Map Banner (full-width with CTA to journey page)
 
 useSeoMeta({
   title: '20,000KM | The First Human to Run the Silk Road',
@@ -17,35 +13,19 @@ useSeoMeta({
 
 <template>
   <div class="home">
-    <div class="container">
-      <!-- 1. Hero Section (cream background) -->
-      <HeroSection />
-    </div>
-
-    <!-- 2. Video Banner (cinematic break) -->
-    <VideoBanner />
+    <!-- 1. Hero Section -->
+    <HeroSection />
 
     <div class="container">
-      <!-- 3. Progress Teaser (km funded) -->
-      <ProgressTeaser />
-    </div>
-
-    <!-- 4. Route Map Banner (full-width) -->
-    <RouteMapBanner />
-
-    <div class="container">
-      <!-- 5. Story Section (the "why") -->
+      <!-- 2. Story Section -->
       <StorySection />
-
-      <!-- 6. Support Section (simplified, single CTA) -->
-      <SupportSection />
-
-      <!-- 7. Journey Teaser (stories from the ground) -->
-      <JourneyTeaser />
-
-      <!-- 8. Links Grid (secondary actions) -->
-      <LinksGrid />
     </div>
+
+    <!-- 3. Pull Quote (full-width) -->
+    <PullQuote />
+
+    <!-- 4. Route Map Banner (full-width with CTA) -->
+    <RouteMapBanner />
   </div>
 </template>
 

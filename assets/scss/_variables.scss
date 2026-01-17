@@ -151,6 +151,10 @@ $border-radius-sm: 2px;
 $border-radius-md: 4px;
 $border-radius-lg: 8px;
 
+// Semantic border styles
+$border-section: $border-width solid $warm-black;  // Section dividers
+$border-card: $border-width solid $earth-200;      // Cards, lighter elements
+
 // --------------------------------------------
 // SHADOWS
 // --------------------------------------------

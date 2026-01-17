@@ -291,22 +291,22 @@ const handleSubmit = async (e: Event) => {
 
 .form-submit {
   display: inline-block;
-  background: $terracotta;
+  background: $terracotta-700;
   color: $cream;
   padding: $space-4 $space-8;
   font-family: $font-mono;
   font-size: $text-sm;
   letter-spacing: $tracking-wide;
   text-transform: uppercase;
-  border: 2px solid $terracotta;
+  border: 2px solid $terracotta-700;
   cursor: pointer;
   transition: background 0.2s ease;
   min-height: 48px;
   min-width: 48px;
 
   &:hover:not(:disabled) {
-    background: $terracotta-600;
-    border-color: $terracotta-600;
+    background: $terracotta-800;
+    border-color: $terracotta-800;
   }
 
   &:disabled {

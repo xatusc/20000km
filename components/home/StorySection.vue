@@ -1,5 +1,6 @@
 <script setup lang="ts">
-// Story section - the "why" that comes before asking for support
+// Story section - the personal narrative that builds emotional connection
+// Themes moved to PullQuote component for visual impact
 </script>
 
 <template>
@@ -21,21 +22,6 @@
           Now she's attempting the impossible: running 20,000 kilometers from Vladivostok
           to Lisbon, retracing the ancient Silk Road on foot.
         </p>
-      </div>
-
-      <div class="story-themes">
-        <div class="theme">
-          <h3>Women's Empowerment</h3>
-          <p>The first woman-led ultra-distance crossing of the Eurasian continent.</p>
-        </div>
-        <div class="theme">
-          <h3>Mental Health</h3>
-          <p>Proof that movement and ambitious goals can rebuild a sense of meaning.</p>
-        </div>
-        <div class="theme">
-          <h3>Connection</h3>
-          <p>At human speed, strangers become hosts. Headlines become handshakes.</p>
-        </div>
       </div>
 
       <NuxtLink to="/about" class="story-link">
@@ -62,7 +48,6 @@
   gap: $space-12;
   align-items: start;
   padding: $space-16 0;
-  border-bottom: $border-width solid $warm-black;
 
   @media (max-width: $breakpoint-xl) {
     grid-template-columns: 1fr;
@@ -82,7 +67,7 @@
   p {
     font-size: $text-base;
     line-height: $leading-loose;
-    color: $earth-600;
+    color: $earth-700;
     margin-bottom: $space-4;
 
     &:last-child {
@@ -98,35 +83,6 @@
     padding-left: $space-4;
     border-left: 2px solid $terracotta;
     margin-top: $space-6;
-  }
-}
-
-.story-themes {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: $space-6;
-  margin-bottom: $space-8;
-
-  @media (max-width: $breakpoint-lg) {
-    grid-template-columns: 1fr;
-    gap: $space-4;
-  }
-}
-
-.theme {
-  h3 {
-    font-family: $font-mono;
-    font-size: $text-xs;
-    letter-spacing: $tracking-wide;
-    text-transform: uppercase;
-    color: $terracotta;
-    margin-bottom: $space-2;
-  }
-
-  p {
-    font-size: $text-sm;
-    line-height: $leading-relaxed;
-    color: $earth-500;
   }
 }
 
