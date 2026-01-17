@@ -1,53 +1,58 @@
 <script setup lang="ts">
-// Home page
+// Home page structure:
+// 1. Hero (cream background, centered text)
+// 2. Video Banner (cinematic visual break)
+// 3. Progress Teaser (km funded progress bar)
+// 4. Route Map Banner (full-width visual break)
+// 5. Story Section (the "why")
+// 6. Support Section (simplified, single CTA)
+// 7. Journey Teaser (stories from the ground)
+// 8. Links Grid (secondary actions)
+
 useSeoMeta({
-  title: '20,000KM | Planetary Neighborhood Run',
-  description: 'One woman. 20,000 kilometers. Vladivostok to Lisbon. A Planetary Neighborhood Run.'
+  title: '20,000KM | The First Human to Run the Silk Road',
+  description: 'One woman. 20,000 kilometers. Seventeen countries. The first human to run across Asia and Europe, retracing the ancient Silk Road on foot.'
 })
 </script>
 
 <template>
-  <div class="container">
-    <!-- Hero Section -->
-    <main class="hero">
-      <div class="hero-content">
-        <HeroSection />
-        <CountdownTimer />
-      </div>
-    </main>
+  <div class="home">
+    <div class="container">
+      <!-- 1. Hero Section (cream background) -->
+      <HeroSection />
+    </div>
 
-    <!-- Route Map Banner -->
+    <!-- 2. Video Banner (cinematic break) -->
+    <VideoBanner />
+
+    <div class="container">
+      <!-- 3. Progress Teaser (km funded) -->
+      <ProgressTeaser />
+    </div>
+
+    <!-- 4. Route Map Banner (full-width) -->
     <RouteMapBanner />
 
-    <!-- Support Section with Interactive Map -->
-    <SupportSection />
+    <div class="container">
+      <!-- 5. Story Section (the "why") -->
+      <StorySection />
 
-    <!-- Links Grid -->
-    <LinksGrid />
+      <!-- 6. Support Section (simplified, single CTA) -->
+      <SupportSection />
+
+      <!-- 7. Journey Teaser (stories from the ground) -->
+      <JourneyTeaser />
+
+      <!-- 8. Links Grid (secondary actions) -->
+      <LinksGrid />
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 @use '~/assets/scss/_variables' as *;
 
-.hero {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: $space-8 0;
-}
-
-.hero-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: $space-16;
-  align-items: center;
-
-  @media (max-width: $breakpoint-xl) {
-    grid-template-columns: 1fr;
-    gap: $space-12;
-    text-align: center;
-  }
+.home {
+  // Home page wrapper
 }
 </style>

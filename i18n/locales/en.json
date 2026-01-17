@@ -1,21 +1,61 @@
 {
   "nav": {
     "home": "Home",
-    "liveUpdates": "Live Updates",
-    "runClub": "Planetary Run Club",
+    "theJourney": "The Journey",
+    "runClub": "Run Club",
     "about": "About",
-    "contact": "Contact"
+    "connect": "Connect"
   },
   "site": {
     "title": "20,000KM",
-    "tagline": "A Planetary Neighborhood Run"
+    "tagline": "The Silk Road on Foot"
   },
   "hero": {
+    "kicker": "Retracing the Silk Road on foot",
     "title": "20,000",
-    "titleUnit": "KILOMETERS",
-    "routeStart": "Vladivostok",
-    "routeEnd": "Lisbon",
-    "delusional": "\"Only delusional until it's not\""
+    "titleUnit": "kilometers",
+    "subtitle": "The first human to run across Asia and Europe. One woman. Seventeen countries. Pacific to Atlantic.",
+    "cta": "Support the Journey",
+    "tagline": "\"Only delusional until it's not\"",
+    "progressLabel": "of 20,000 km funded"
+  },
+  "story": {
+    "title": "The Story",
+    "paragraph1": "Two years ago, Ria Xi couldn't get out of bed. Burned out from her tech career in Silicon Valley, she started running as a 30-day challenge after a breakup.",
+    "paragraph2": "Within a year, she went from struggling to finish a half marathon to setting Fastest Known Times on world-renowned routes. The Via Francigena: 1,014 km in 21 days. The Camino de Santiago: 780 km in 12 days.",
+    "highlight": "Now she's attempting the impossible: running 20,000 kilometers from Vladivostok to Lisbon, retracing the ancient Silk Road on foot.",
+    "themes": {
+      "empowerment": {
+        "title": "Women's Empowerment",
+        "desc": "The first woman-led ultra-distance crossing of the Eurasian continent."
+      },
+      "mentalHealth": {
+        "title": "Mental Health",
+        "desc": "Proof that movement and ambitious goals can rebuild a sense of meaning."
+      },
+      "connection": {
+        "title": "Connection",
+        "desc": "At human speed, strangers become hosts. Headlines become handshakes."
+      }
+    },
+    "link": "Read the full story"
+  },
+  "support": {
+    "title": "Sponsor the Road Ahead",
+    "description": "From the Pacific to the Atlantic. 20,000 kilometers of ancient trade routes, mountain passes, and human stories. Your contribution funds the support vehicle, crew logistics, visas across 17 countries, and the documentary film capturing every step.",
+    "cta": "Support on GoFundMe",
+    "note": "All unused funds will be returned to supporters proportionally.",
+    "impact": {
+      "1km": "1 kilometer",
+      "morning": "a morning's run",
+      "day": "a full day on the road",
+      "week": "a week of progress"
+    }
+  },
+  "journey": {
+    "title": "Follow the Journey",
+    "description": "Stories from the ground. Conversations with runners joining the route. Dispatches from seventeen countries and the communities along the way.",
+    "cta": "See the Route & Stories"
   },
   "countdown": {
     "label": "Departure Countdown",
@@ -27,35 +67,61 @@
   },
   "badge": {
     "title": "Planetary Run Club",
-    "text": "Nowhere we can run to is too far,—and everyone you meet is a neighbor"
-  },
-  "support": {
-    "title": "Support the Journey",
-    "description": "Your contribution covers the essentials: a support vehicle, crew logistics, travel permits, and documenting the journey.",
-    "highlight": "€5 sponsors one kilometer",
-    "directLabel": "Choose your payment method"
+    "text": "Nowhere we run is too far to call neighborhood. No one we meet is too foreign to call neighbor."
   },
   "map": {
     "ariaLabel": "Interactive route progress map",
-    "runningDirection": "← Running West",
+    "runningDirection": "Running West",
     "kmFunded": "km funded",
     "routeAlt": "Route from Vladivostok to Cabo da Roca"
   },
   "links": {
-    "crew": {
-      "label": "Join the Team",
-      "title": "Crew Application",
-      "desc": "Looking for support crew across 29 segments. Be part of something delusional."
+    "journey": {
+      "label": "Stories & Updates",
+      "title": "The Journey",
+      "desc": "Real-time dispatches, podcast episodes, and stories from the communities along the route."
     },
     "newsletter": {
       "label": "Read the Journey",
-      "title": "Long Run Letter",
-      "desc": "Philosophy, endurance, and cultural musings from the road. Subscribe for updates."
+      "title": "The Long Run Letter",
+      "desc": "Dispatches on endurance, philosophy, and what running teaches about being human."
     },
     "instagram": {
       "label": "Follow Along",
       "title": "Instagram",
-      "desc": "Live updates, behind-the-scenes, and visual stories from the preparation and the road."
+      "desc": "Real-time updates from training and the road."
+    },
+    "crew": {
+      "label": "Join the Team",
+      "title": "Crew Application",
+      "desc": "29 segments. 17 countries. Limited spots. Apply to support in-person."
+    }
+  },
+  "contact": {
+    "title": "Connect",
+    "intro": "Whether you're press, a potential partner, or someone who knows the route, we'd love to hear from you.",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "reason": "I'm reaching out about",
+      "message": "Message",
+      "submit": "Send Message",
+      "sending": "Sending..."
+    },
+    "reasons": {
+      "press": "Press & Media",
+      "sponsorship": "Sponsorship",
+      "landCrew": "Land Crew (Limited)",
+      "other": "Other"
+    },
+    "success": {
+      "title": "Message Sent",
+      "message": "Thanks for reaching out. We'll get back to you within 48 hours."
+    },
+    "emailFallback": "Prefer email?",
+    "crew": {
+      "title": "Land Crew",
+      "desc": "Know the route? Have a vehicle? We're looking for local support in select regions. This is a limited opportunity during specific segments of the journey."
     }
   },
   "footer": {
@@ -63,8 +129,8 @@
     "email": "hello{'@'}20000km.com"
   },
   "sensory": {
-    "enableMotion": "Enable animations",
-    "disableMotion": "Disable animations"
+    "enableMotion": "Turn on motion",
+    "disableMotion": "Motion is off"
   },
   "accessibility": {
     "skipToContent": "Skip to main content"

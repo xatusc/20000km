@@ -4,10 +4,10 @@ const mobileMenuOpen = ref(false)
 
 const navItems = [
   { path: '/', label: 'nav.home' },
-  { path: '/live-updates', label: 'nav.liveUpdates' },
+  { path: '/live-updates', label: 'nav.theJourney' },
   { path: '/planetary-run-club', label: 'nav.runClub' },
   { path: '/about', label: 'nav.about' },
-  { path: '/contact', label: 'nav.contact' },
+  { path: '/contact', label: 'nav.connect' },
 ]
 
 const toggleMobileMenu = () => {
