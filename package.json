@@ -1,0 +1,25 @@
+{
+  "name": "20000km",
+  "version": "1.0.0",
+  "description": "20,000KM Planetary Neighborhood Run",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "nuxt": "^3.16.1",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@nuxt/image": "^1.10.0",
+    "@nuxtjs/i18n": "^9.5.3",
+    "sass": "^1.88.0",
+    "typescript": "^5.8.3"
+  }
+}

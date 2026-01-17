@@ -1,0 +1,72 @@
+{
+  "nav": {
+    "home": "Home",
+    "liveUpdates": "Live Updates",
+    "runClub": "Planetary Run Club",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "site": {
+    "title": "20,000KM",
+    "tagline": "A Planetary Neighborhood Run"
+  },
+  "hero": {
+    "title": "20,000",
+    "titleUnit": "KILOMETERS",
+    "routeStart": "Vladivostok",
+    "routeEnd": "Lisbon",
+    "delusional": "\"Only delusional until it's not\""
+  },
+  "countdown": {
+    "label": "Departure Countdown",
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Mins",
+    "seconds": "Secs",
+    "startDate": "May 1st, 2026"
+  },
+  "badge": {
+    "title": "Planetary Run Club",
+    "text": "Nowhere we can run to is too far,—and everyone you meet is a neighbor"
+  },
+  "support": {
+    "title": "Support the Journey",
+    "description": "Your contribution covers the essentials: a support vehicle, crew logistics, travel permits, and documenting the journey.",
+    "highlight": "€5 sponsors one kilometer",
+    "directLabel": "Choose your payment method"
+  },
+  "map": {
+    "ariaLabel": "Interactive route progress map",
+    "runningDirection": "← Running West",
+    "kmFunded": "km funded",
+    "routeAlt": "Route from Vladivostok to Cabo da Roca"
+  },
+  "links": {
+    "crew": {
+      "label": "Join the Team",
+      "title": "Crew Application",
+      "desc": "Looking for support crew across 29 segments. Be part of something delusional."
+    },
+    "newsletter": {
+      "label": "Read the Journey",
+      "title": "Long Run Letter",
+      "desc": "Philosophy, endurance, and cultural musings from the road. Subscribe for updates."
+    },
+    "instagram": {
+      "label": "Follow Along",
+      "title": "Instagram",
+      "desc": "Live updates, behind-the-scenes, and visual stories from the preparation and the road."
+    }
+  },
+  "footer": {
+    "contact": "Get in touch:",
+    "email": "hello{'@'}20000km.com"
+  },
+  "sensory": {
+    "enableMotion": "Enable animations",
+    "disableMotion": "Disable animations"
+  },
+  "accessibility": {
+    "skipToContent": "Skip to main content"
+  }
+}

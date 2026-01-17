@@ -1,0 +1,172 @@
+// ============================================
+// DESIGN TOKENS - 20,000KM Website
+// ============================================
+
+// --------------------------------------------
+// COLORS - Culturally Neutral Earth Tones
+// --------------------------------------------
+
+// Sand tones (primary backgrounds)
+$sand-50: #FAF7F2;
+$sand-100: #F5F1E8;
+$sand-200: #E8E0D4;
+$sand-300: #D4C8B8;
+$sand-400: #B8A890;
+$sand-500: #9C8B72;
+$sand-600: #7A6B56;
+$sand-700: #5C5042;
+$sand-800: #3A2F1E;
+$sand-900: #2A2216;
+
+// Terracotta tones (accent/CTA)
+$terracotta-50: #FDF5F3;
+$terracotta-100: #FAEAE5;
+$terracotta-200: #F5D5CC;
+$terracotta-300: #E8AFA0;
+$terracotta-400: #D4806A;
+$terracotta-500: #C4603C;
+$terracotta-600: #A63D2F;
+$terracotta-700: #8B3328;
+$terracotta-800: #6E3432;
+$terracotta-900: #5C2D2A;
+
+// Earth browns (text, dark elements)
+$earth-50: #F7F5F3;
+$earth-100: #EFEBE7;
+$earth-200: #DED6CE;
+$earth-300: #C4B8A8;
+$earth-400: #A69882;
+$earth-500: #8B7A64;
+$earth-600: #6E5F4C;
+$earth-700: #574A3C;
+$earth-800: #3B3229;
+$earth-900: #1A1814;
+
+// Teal accents (secondary accent)
+$teal-50: #F0F7F6;
+$teal-100: #E0EDEB;
+$teal-200: #C2DBD7;
+$teal-300: #96C2BC;
+$teal-400: #6AA69E;
+$teal-500: #4D8B83;
+$teal-600: #3D6F68;
+$teal-700: #345855;
+$teal-800: #2D4744;
+$teal-900: #273E3A;
+
+// Semantic color aliases (matching existing site)
+$cream: $sand-50;
+$warm-black: $earth-900;
+$terracotta: $terracotta-500;
+$sage: #8B9B7A;
+$sand: $sand-300;
+$faded-red: $terracotta-600;
+
+// --------------------------------------------
+// TYPOGRAPHY
+// --------------------------------------------
+
+// Font stacks
+$font-serif: 'Libre Baskerville', 'Noto Serif', Georgia, serif;
+$font-sans: 'Noto Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+$font-mono: 'Space Mono', ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace;
+
+// Font sizes (fluid typography)
+$text-xs: 0.65rem;      // 10.4px - labels
+$text-sm: 0.75rem;      // 12px - captions
+$text-base: 1rem;       // 16px - body
+$text-lg: 1.125rem;     // 18px - large body
+$text-xl: 1.25rem;      // 20px
+$text-2xl: 1.5rem;      // 24px
+$text-3xl: 1.875rem;    // 30px
+$text-4xl: 2.25rem;     // 36px
+$text-5xl: 3rem;        // 48px
+
+// Line heights
+$leading-none: 1;
+$leading-tight: 1.1;
+$leading-snug: 1.2;
+$leading-normal: 1.5;
+$leading-relaxed: 1.6;
+$leading-loose: 1.8;
+
+// Letter spacing
+$tracking-tighter: -0.02em;
+$tracking-tight: -0.01em;
+$tracking-normal: 0;
+$tracking-wide: 0.1em;
+$tracking-wider: 0.15em;
+$tracking-widest: 0.2em;
+$tracking-label: 0.3em;
+
+// --------------------------------------------
+// SPACING
+// --------------------------------------------
+
+$space-0: 0;
+$space-1: 0.25rem;   // 4px
+$space-2: 0.5rem;    // 8px
+$space-3: 0.75rem;   // 12px
+$space-4: 1rem;      // 16px
+$space-5: 1.25rem;   // 20px
+$space-6: 1.5rem;    // 24px
+$space-8: 2rem;      // 32px
+$space-10: 2.5rem;   // 40px
+$space-12: 3rem;     // 48px
+$space-16: 4rem;     // 64px
+$space-20: 5rem;     // 80px
+$space-24: 6rem;     // 96px
+
+// --------------------------------------------
+// LAYOUT
+// --------------------------------------------
+
+$max-width-content: 1200px;
+$max-width-narrow: 800px;
+$max-width-prose: 65ch;
+
+// Breakpoints
+$breakpoint-sm: 480px;
+$breakpoint-md: 600px;
+$breakpoint-lg: 768px;
+$breakpoint-xl: 900px;
+$breakpoint-2xl: 1200px;
+
+// --------------------------------------------
+// TRANSITIONS
+// --------------------------------------------
+
+$transition-fast: 0.15s ease;
+$transition-base: 0.2s ease;
+$transition-slow: 0.3s ease;
+$transition-slower: 0.5s ease;
+
+// --------------------------------------------
+// BORDERS
+// --------------------------------------------
+
+$border-width: 1px;
+$border-color: $warm-black;
+$border-radius-sm: 2px;
+$border-radius-md: 4px;
+$border-radius-lg: 8px;
+
+// --------------------------------------------
+// SHADOWS
+// --------------------------------------------
+
+$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+// --------------------------------------------
+// Z-INDEX SCALE
+// --------------------------------------------
+
+$z-base: 0;
+$z-dropdown: 100;
+$z-sticky: 200;
+$z-fixed: 300;
+$z-modal: 400;
+$z-tooltip: 500;
+$z-grain: 1000;
