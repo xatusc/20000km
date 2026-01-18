@@ -15,7 +15,7 @@ const { motionAllowed } = useSensoryMode()
           muted
           loop
           playsinline
-          poster="/Ria_farawayrun_horizontal.webp"
+          poster="/images/Ria_farawayrun_horizontal.webp"
           aria-label="Ria running across a vast open landscape at sunset, silhouetted against the horizon"
         >
           <source src="/video/ria-run.mp4" type="video/mp4">
@@ -26,7 +26,7 @@ const { motionAllowed } = useSensoryMode()
 
       <template v-else>
         <img
-          src="/Ria_farawayrun_horizontal.webp"
+          src="/images/Ria_farawayrun_horizontal.webp"
           alt="Ria running alone across a vast open landscape, silhouetted against the horizon"
           class="hero__media"
           loading="eager"

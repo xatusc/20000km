@@ -290,7 +290,7 @@ onUnmounted(() => {
     <div class="interactive-map__image-wrapper">
       <!-- Gray route (base layer) -->
       <img
-        src="/route-map-gray.webp"
+        src="/images/route-map-gray.webp"
         alt=""
         class="interactive-map__image interactive-map__image--gray"
         loading="lazy"
@@ -303,7 +303,7 @@ onUnmounted(() => {
         class="interactive-map__picture interactive-map__picture--red"
       >
         <img
-          src="/route-map.webp"
+          src="/images/route-map.webp"
           :alt="$t('map.routeAlt')"
           class="interactive-map__image interactive-map__image--red"
           loading="lazy"

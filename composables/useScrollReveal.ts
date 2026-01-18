@@ -128,7 +128,8 @@ export function useTypewriter(options: TypewriterOptions = {}) {
   const typewrite = (
     el: HTMLElement | null,
     text: string,
-    onComplete?: () => void
+    onComplete?: () => void,
+    fallbackDelay: number = 3000 // fallback after 3s
   ) => {
     if (!el) return
 
@@ -145,20 +146,124 @@ export function useTypewriter(options: TypewriterOptions = {}) {
 
     el.textContent = ''
     let index = 0
+    let completed = false
 
     const type = () => {
+      if (completed) return
       if (index < text.length) {
         el.textContent += text.charAt(index)
         index++
         setTimeout(type, charDelay)
       } else {
+        completed = true
         el.classList.add('typing-complete')
         onComplete?.()
       }
     }
 
+    // Fallback: show full text if not completed after fallbackDelay
+    const fallbackTimeout = setTimeout(() => {
+      if (!completed) {
+        el.textContent = text
+        el.classList.add('typing-complete')
+        completed = true
+        onComplete?.()
+      }
+    }, fallbackDelay + startDelay)
+
     setTimeout(type, startDelay)
   }
 
-  return { typewrite }
+  /**
+   * Typewriter effect for HTML content
+   * Types out text character by character, preserving HTML tags
+   */
+  const typewriteHtml = (
+    el: HTMLElement | null,
+    html: string,
+    onComplete?: () => void,
+    fallbackDelay: number = 5000
+  ) => {
+    if (!el) return
+
+    // Extract plain text for accessibility
+    const tempDiv = document.createElement('div')
+    tempDiv.innerHTML = html
+    const plainText = tempDiv.textContent || ''
+    el.setAttribute('aria-label', plainText)
+
+    // If motion not allowed, show full HTML immediately
+    if (!motionAllowed.value) {
+      el.innerHTML = html
+      el.classList.add('typing-complete')
+      onComplete?.()
+      return
+    }
+
+    el.innerHTML = ''
+    let index = 0
+    let completed = false
+
+    // Parse HTML into segments: text and tags
+    const segments: { type: 'text' | 'tag'; content: string }[] = []
+    let current = ''
+    let inTag = false
+
+    for (const char of html) {
+      if (char === '<') {
+        if (current) segments.push({ type: 'text', content: current })
+        current = '<'
+        inTag = true
+      } else if (char === '>' && inTag) {
+        current += '>'
+        segments.push({ type: 'tag', content: current })
+        current = ''
+        inTag = false
+      } else {
+        current += char
+      }
+    }
+    if (current) segments.push({ type: 'text', content: current })
+
+    // Flatten into characters, but keep tags as single units
+    const chars: string[] = []
+    for (const seg of segments) {
+      if (seg.type === 'tag') {
+        chars.push(seg.content)
+      } else {
+        for (const c of seg.content) {
+          chars.push(c)
+        }
+      }
+    }
+
+    const type = () => {
+      if (completed) return
+      if (index < chars.length) {
+        el.innerHTML += chars[index]
+        index++
+        // Tags are instant, only delay for actual characters
+        const delay = chars[index - 1].startsWith('<') ? 0 : charDelay
+        setTimeout(type, delay)
+      } else {
+        completed = true
+        el.classList.add('typing-complete')
+        onComplete?.()
+      }
+    }
+
+    // Fallback: show full HTML if not completed
+    setTimeout(() => {
+      if (!completed) {
+        el.innerHTML = html
+        el.classList.add('typing-complete')
+        completed = true
+        onComplete?.()
+      }
+    }, fallbackDelay + startDelay)
+
+    setTimeout(type, startDelay)
+  }
+
+  return { typewrite, typewriteHtml }
 }

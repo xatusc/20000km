@@ -7,7 +7,7 @@
   <section class="route-map">
     <div class="route-map__wrapper">
       <img
-        src="/route-map.webp"
+        src="/images/route-map.webp"
         alt="Map showing the 20,000km route across Asia and Europe, from Vladivostok on the Pacific coast through China, Central Asia, Iran, Turkey, and Europe to Cabo da Roca on the Atlantic"
         loading="lazy"
         class="route-map__image"

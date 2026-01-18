@@ -59,7 +59,7 @@ watch(motionAllowed, (allowed) => {
           </div>
           <figure class="hero-image">
             <img
-              src="/Ria_vertical.webp"
+              src="/images/Ria_vertical.webp"
               alt="Ria Xi standing on a mountain trail at golden hour, looking toward the horizon"
             >
             <figcaption>The road ahead: 20,000 kilometers</figcaption>
@@ -263,10 +263,15 @@ watch(motionAllowed, (allowed) => {
     </section>
 
     <!-- ============================================
-         EXPEDITION BADGE - Vintage closer
+         COVER IMAGE with EXPEDITION BADGE overlay
          ============================================ -->
-    <section class="badge-section">
-      <div class="container">
+    <section class="cover-image-section">
+      <img
+        src="/images/Mountain.webp"
+        alt="Mountain landscape"
+        class="cover-image"
+      >
+      <div class="badge-overlay">
         <div class="expedition-badge">
           <span class="badge-label">Official Expedition</span>
           <span class="badge-year">2026–2027</span>
@@ -722,20 +727,36 @@ watch(motionAllowed, (allowed) => {
 }
 
 // ============================================
-// EXPEDITION BADGE
+// COVER IMAGE WITH BADGE OVERLAY
 // ============================================
-.badge-section {
-  padding: $space-12 0 $space-16;
-  background: $sand-100;
+.cover-image-section {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.cover-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.badge-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .expedition-badge {
   max-width: 280px;
-  margin: 0 auto;
   padding: $space-6;
   border: 2px solid $warm-black;
   text-align: center;
   position: relative;
+  background: $cream;
 
   // Corner notches for vintage stamp feel
   &::before,
@@ -744,7 +765,7 @@ watch(motionAllowed, (allowed) => {
     position: absolute;
     width: 10px;
     height: 10px;
-    background: $sand-100;
+    background: $cream;
     border: 2px solid $warm-black;
   }
 

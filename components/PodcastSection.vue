@@ -77,7 +77,7 @@ const seek = (event: MouseEvent) => {
 }
 
 // Placeholder cover image
-const coverImage = '/Ria_lookback.webp'
+const coverImage = '/images/Ria_lookback.webp'
 </script>
 
 <template>

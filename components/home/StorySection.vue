@@ -41,7 +41,7 @@ onMounted(() => {
 
     <figure class="story-section__image reveal">
       <img
-        src="/Ria_flash.webp"
+        src="/images/Ria_flash.webp"
         alt="Ria Xi mid-stride on a dusty trail, determination visible in her posture as she runs through challenging terrain"
         loading="lazy"
       >

@@ -58,7 +58,7 @@ const { formattedFunded, formattedTotal, progress } = useFundraising()
     <!-- Right: Large dramatic image -->
     <figure class="support-section__image">
       <img
-        src="/Ria_lookback.webp"
+        src="/images/Ria_lookback.webp"
         alt="Ria looking back over her shoulder while running through dramatic terrain"
         loading="lazy"
       >
@@ -191,22 +191,22 @@ const { formattedFunded, formattedTotal, progress } = useFundraising()
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: $terracotta-600;
-    color: #fff;
+    background: $terracotta-700;
+    color: $cream;
     padding: $space-4 $space-10;
     font-family: $font-mono;
     font-size: $text-sm;
     letter-spacing: $tracking-wide;
     text-transform: uppercase;
     text-decoration: none;
-    border: 2px solid $terracotta-600;
-    transition: background 0.2s ease, transform 0.2s ease;
+    border: 2px solid $terracotta-700;
+    transition: all 0.2s ease;
     min-height: 56px;
 
     &:hover {
-      background: $terracotta-700;
-      border-color: $terracotta-700;
-      transform: translateY(-2px);
+      background: $terracotta-800;
+      border-color: $terracotta-800;
+      transform: translateY(-1px);
     }
   }
 

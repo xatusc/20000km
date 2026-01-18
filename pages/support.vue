@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { ref, onMounted, watch } from 'vue'
+import { useTypewriter } from '~/composables/useScrollReveal'
+import { useSensoryMode } from '~/composables/useSensoryMode'
+
 // Support page - BOLD conversion page with National Geographic/1970s Patagonia aesthetic
 useSeoMeta({
   title: 'Support | 20,000KM',
@@ -7,6 +11,45 @@ useSeoMeta({
 
 const { formattedFunded, formattedTotal, progress, fundedKm, totalKm } = useFundraising()
 const { formatted } = useCountdown('2026-05-01')
+
+// Typewriter setup for the featured quote
+const quoteRef = ref<HTMLElement | null>(null)
+const hasTypedQuote = ref(false)
+const { typewriteHtml } = useTypewriter({ charDelay: 30, startDelay: 400 })
+const { motionAllowed } = useSensoryMode()
+
+const quoteHtml = `"I'm trying to write the real-life <em>Forrest Gump</em> story of our generation, as a 27-year-old Asian woman. This isn't just a run—it's an experiment to prove we can pursue seemingly delusional goals and make them happen through <strong>collective power</strong>."`
+
+const setupTypewriter = () => {
+  if (quoteRef.value) {
+    if (motionAllowed.value && !hasTypedQuote.value) {
+      typewriteHtml(quoteRef.value, quoteHtml, () => { hasTypedQuote.value = true })
+    } else {
+      quoteRef.value.innerHTML = quoteHtml
+      quoteRef.value.classList.add('typing-complete')
+      hasTypedQuote.value = true
+    }
+  }
+}
+
+onMounted(() => {
+  setupTypewriter()
+})
+
+watch(motionAllowed, (allowed) => {
+  if (quoteRef.value) {
+    if (!allowed) {
+      quoteRef.value.innerHTML = quoteHtml
+      quoteRef.value.classList.add('typing-complete')
+      hasTypedQuote.value = true
+    } else if (allowed && !hasTypedQuote.value) {
+      quoteRef.value.innerHTML = ''
+      quoteRef.value.classList.remove('typing-complete')
+      hasTypedQuote.value = false
+      typewriteHtml(quoteRef.value, quoteHtml, () => { hasTypedQuote.value = true })
+    }
+  }
+})
 
 // Milestone data with full details
 interface Milestone {
@@ -186,10 +229,7 @@ const toggleFaq = (index: number) => {
       <div class="container">
         <blockquote class="quote">
           <p>
-            "I'm trying to write the real-life <em>Forrest Gump</em> story of our generation,
-            as a 27-year-old Asian woman. This isn't just a run—it's an experiment
-            to prove we can pursue seemingly delusional goals and make them happen
-            through <strong>collective power</strong>."
+            <span ref="quoteRef" class="typewriter"></span>
           </p>
           <cite>— Ria</cite>
         </blockquote>
@@ -202,13 +242,10 @@ const toggleFaq = (index: number) => {
     <section class="image-moment">
       <figure class="image-moment__figure">
         <img
-          src="/Ria_lookback.webp"
+          src="/images/Ria_faraway_flat.webp"
           alt="Ria pausing on the trail, looking back at the path already traveled"
           loading="lazy"
         >
-        <figcaption class="image-moment__caption">
-          <span class="image-moment__location">Sinai Trail, 2024</span>
-        </figcaption>
       </figure>
     </section>
 
@@ -309,7 +346,7 @@ const toggleFaq = (index: number) => {
     <section class="landscape-moment">
       <figure class="landscape-moment__figure">
         <img
-          src="/sinai-run.webp"
+          src="/images/Ria_farawayrun_horizontal.webp"
           alt="Golden hour across the Sinai desert, endless horizon stretching ahead"
           loading="lazy"
         >
@@ -400,7 +437,6 @@ const toggleFaq = (index: number) => {
 
 .support-page {
   position: relative;
-  padding-bottom: $space-8;
 }
 
 // ============================================
@@ -814,7 +850,7 @@ const toggleFaq = (index: number) => {
 
   img {
     width: 100%;
-    height: 400px;
+    height: 540px;
     object-fit: cover;
     object-position: center 40%;
     display: block;
@@ -1193,7 +1229,7 @@ const toggleFaq = (index: number) => {
 
   img {
     width: 100%;
-    height: 350px;
+    height: 70vh;
     object-fit: cover;
     object-position: center;
     display: block;

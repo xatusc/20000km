@@ -1,8 +1,12 @@
 <script setup lang="ts">
-/**
- * MediaCoverage - Social proof section showing press mentions
- * Displays logos for each media outlet
- */
+import { ref, onMounted, watch } from 'vue'
+import { useTypewriter } from '~/composables/useScrollReveal'
+import { useSensoryMode } from '~/composables/useSensoryMode'
+
+const quoteRef = ref<HTMLElement | null>(null)
+const hasTypedQuote = ref(false)
+const { typewrite } = useTypewriter({ charDelay: 35, startDelay: 400 })
+const { motionAllowed } = useSensoryMode()
 
 interface MediaMention {
   name: string
@@ -36,6 +40,40 @@ const mentions: MediaMention[] = [
     logoHeight: 40
   }
 ]
+
+const quoteText = mentions[0]?.quote || ''
+
+const setupTypewriter = () => {
+  if (quoteRef.value) {
+    if (motionAllowed.value && !hasTypedQuote.value) {
+      typewrite(quoteRef.value, quoteText, () => { hasTypedQuote.value = true })
+    } else {
+      quoteRef.value.textContent = quoteText
+      quoteRef.value.classList.add('typing-complete')
+      hasTypedQuote.value = true
+    }
+  }
+}
+
+onMounted(() => {
+  setupTypewriter()
+})
+
+watch(motionAllowed, (allowed) => {
+  if (quoteRef.value) {
+    if (!allowed) {
+      quoteRef.value.textContent = quoteText
+      quoteRef.value.classList.add('typing-complete')
+      hasTypedQuote.value = true
+    } else if (allowed && !hasTypedQuote.value) {
+      quoteRef.value.textContent = ''
+      quoteRef.value.classList.remove('typing-complete')
+      hasTypedQuote.value = false
+      typewrite(quoteRef.value, quoteText, () => { hasTypedQuote.value = true })
+    }
+  }
+})
+// ...existing code...
 </script>
 
 <template>
@@ -61,7 +99,9 @@ const mentions: MediaMention[] = [
     </div>
 
     <blockquote v-if="mentions[0].quote" class="media-coverage__quote">
-      <p>"{{ mentions[0].quote }}"</p>
+      <p>
+        <span ref="quoteRef" class="typewriter" :aria-label="quoteText"></span>
+      </p>
       <cite>— {{ mentions[0].name }}</cite>
     </blockquote>
   </section>

@@ -120,11 +120,12 @@ watch(() => route.path, () => {
   letter-spacing: $tracking-wide;
   text-transform: uppercase;
   text-decoration: none;
-  border: none;
-  transition: background 0.2s ease;
+  border: 2px solid $terracotta-700;
+  transition: all 0.2s ease;
 
   &:hover {
-    background: $terracotta-600;
+    background: $terracotta-800;
+    border-color: $terracotta-800;
   }
 }
 

@@ -9,6 +9,12 @@
  * 5. Voice Notes CTA (after investment)
  */
 
+useHead({
+  script: [
+    { src: 'https://cdn.lightwidget.com/widgets/lightwidget.js', async: true }
+  ]
+})
+
 useSeoMeta({
   title: 'The Journey | 20,000KM',
   description: 'Follow the live progress of the 20,000km run from Vladivostok to Lisbon. Stories, podcast, and updates from the Silk Road.'
@@ -85,27 +91,15 @@ useSeoMeta({
         </header>
       </div>
 
-      <!-- Full-bleed image strip -->
-      <div class="instagram-strip">
-        <a
-          v-for="(image, index) in [
-            { src: '/Ria_lookback.webp', alt: 'Ria pausing to look back at the trail' },
-            { src: '/Ria_run_2.webp', alt: 'Ria in motion during a training run' },
-            { src: '/sinai-run.webp', alt: 'Golden hour run through Sinai desert' },
-            { src: '/Ria_truck.webp', alt: 'Ria beside the support vehicle' },
-            { src: '/Ria_flash.webp', alt: 'Ria running at dusk' },
-            { src: '/Ria_farawayrun_horizontal.webp', alt: 'Distant shot of Ria running on trail' },
-            { src: '/Ria_teamrun_horizontal.webp', alt: 'Ria running with team' },
-            { src: '/Ria_team_horizontal.webp', alt: 'Ria and team together' }
-          ]"
-          :key="index"
-          href="https://instagram.com/whereisriax"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="instagram-item"
-        >
-          <img :src="image.src" :alt="image.alt" loading="lazy">
-        </a>
+      <!-- LightWidget Instagram embed -->
+      <div class="lightwidget-container">
+        <iframe
+          src="https://cdn.lightwidget.com/widgets/b5655f5969955de3b8508c977c21c321.html"
+          scrolling="no"
+          allowtransparency="true"
+          class="lightwidget-widget"
+          style="width:100%;border:0;overflow:hidden;"
+        ></iframe>
       </div>
     </section>
 
@@ -282,48 +276,16 @@ useSeoMeta({
   background: $sand-100; // Flat
 }
 
-// Full-bleed horizontal scroll strip
-.instagram-strip {
-  display: flex;
-  gap: $space-4;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  padding: 0 $space-4;
-  margin-bottom: $space-10;
-
-  // Hide scrollbar
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
+// LightWidget embed - full bleed
+.lightwidget-container {
+  width: 100%;
 }
 
-.instagram-item {
-  flex-shrink: 0;
-  width: 300px;
-  height: 300px;
-  scroll-snap-align: start;
-  position: relative;
+.lightwidget-widget {
+  width: 100%;
+  height: 400px;
+  border: 0;
   overflow: hidden;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border: 3px solid $warm-black;
-    transition: transform $transition-slow;
-  }
-
-  &:hover img {
-    transform: scale(1.03);
-  }
-
-  @media (max-width: $breakpoint-md) {
-    width: 240px;
-    height: 240px;
-  }
 }
 
 </style>

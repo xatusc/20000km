@@ -21,7 +21,7 @@ onMounted(() => {
 
     <!-- All content fades in together, slowly -->
     <div class="intro__content reveal">
-      <!-- Location stamp - expedition journal style -->
+      <!-- Location stamps - expedition journal style -->
       <div class="intro__stamp">
         <span class="intro__stamp-from">Vladivostok, Russia</span>
         <span class="intro__stamp-arrow">→</span>
@@ -29,7 +29,7 @@ onMounted(() => {
       </div>
 
       <p class="intro__hook">
-        The first human to run across Asia and Europe.<br>
+        The first human to run across Asia and Europe.
         One woman. Seventeen countries. Pacific to Atlantic.
       </p>
 
@@ -183,22 +183,22 @@ onMounted(() => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: $terracotta-600;
-  color: #fff;
+  background: $terracotta-700;
+  color: $cream;
   padding: $space-4 $space-12;
   font-family: $font-mono;
   font-size: $text-sm;
   letter-spacing: $tracking-wide;
   text-transform: uppercase;
   text-decoration: none;
-  border: 2px solid $terracotta-600;
-  transition: background 0.2s ease, transform 0.2s ease;
+  border: 2px solid $terracotta-700;
+  transition: all 0.2s ease;
   min-height: 56px;
 
   &:hover {
-    background: $terracotta-700;
-    border-color: $terracotta-700;
-    transform: translateY(-2px);
+    background: $terracotta-800;
+    border-color: $terracotta-800;
+    transform: translateY(-1px);
   }
 }
 </style>

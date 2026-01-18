@@ -1,7 +1,49 @@
 <script setup lang="ts">
+import { ref, onMounted, watch } from 'vue'
+import { useTypewriter } from '~/composables/useScrollReveal'
+import { useSensoryMode } from '~/composables/useSensoryMode'
+
 useSeoMeta({
   title: 'Planetary Run Club | 20,000KM',
   description: 'Join the Planetary Run Club — a community of runners following Ria\'s 20,000km journey. Get weekly dispatches from training now, live updates once the run begins.'
+})
+
+const quoteRef = ref<HTMLElement | null>(null)
+const hasTypedQuote = ref(false)
+const { typewrite } = useTypewriter({ charDelay: 40, startDelay: 300 })
+const { motionAllowed } = useSensoryMode()
+
+const quoteText = '"Nowhere we can run to is too far,and everyone you meet is a neighbor"'
+
+const setupTypewriter = () => {
+  if (quoteRef.value) {
+    if (motionAllowed.value && !hasTypedQuote.value) {
+      typewrite(quoteRef.value, quoteText, () => { hasTypedQuote.value = true })
+    } else {
+      quoteRef.value.textContent = quoteText
+      quoteRef.value.classList.add('typing-complete')
+      hasTypedQuote.value = true
+    }
+  }
+}
+
+onMounted(() => {
+  setupTypewriter()
+})
+
+watch(motionAllowed, (allowed) => {
+  if (quoteRef.value) {
+    if (!allowed) {
+      quoteRef.value.textContent = quoteText
+      quoteRef.value.classList.add('typing-complete')
+      hasTypedQuote.value = true
+    } else if (allowed && !hasTypedQuote.value) {
+      quoteRef.value.textContent = ''
+      quoteRef.value.classList.remove('typing-complete')
+      hasTypedQuote.value = false
+      typewrite(quoteRef.value, quoteText, () => { hasTypedQuote.value = true })
+    }
+  }
 })
 </script>
 
@@ -21,7 +63,7 @@ useSeoMeta({
     <!-- Pull quote section -->
     <section class="quote-section">
       <blockquote class="quote-section__content">
-        <p>"Nowhere we can run to is too far,—and everyone you meet is a neighbor"</p>
+        <p><span ref="quoteRef" class="typewriter" :aria-label="quoteText"></span></p>
       </blockquote>
     </section>
 
@@ -67,10 +109,10 @@ useSeoMeta({
       </section>
     </div>
 
-    <!-- Team image - full width -->
+    <!-- Dune image - full width -->
     <figure class="team-image">
       <img
-        src="/Ria_team_horizontal.webp"
+        src="/images/Sand_Dune.webp"
         alt="Ria and team together"
         loading="lazy"
       >
@@ -84,13 +126,13 @@ useSeoMeta({
 // Hero section
 .hero-section {
   position: relative;
-  min-height: 50vh;
+  min-height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   overflow: hidden;
-  background-image: url('/Ria_teamrun_horizontal.webp');
+  background-image: url('/images/Ria_team_horizontal.webp');
   background-size: cover;
   background-position: center;
 
@@ -230,7 +272,7 @@ useSeoMeta({
 .team-image {
   margin: 0;
   width: 100%;
-  max-height: 60vh;
+  max-height: 70vh;
   overflow: hidden;
 
   img {

@@ -9,7 +9,7 @@
       <!-- Large feature image - dramatic low angle -->
       <figure class="editorial-gallery__item editorial-gallery__item--large">
         <img
-          src="/Ria_horizontal_fullbody_lowangle.webp"
+          src="/images/Ria_horizontal_fullbody_lowangle.webp"
           alt="Ria running at full stride, captured from a dramatic low angle against an expansive sky"
           loading="lazy"
         >
@@ -22,7 +22,7 @@
       <div class="editorial-gallery__stack">
         <figure class="editorial-gallery__item editorial-gallery__item--stacked">
           <img
-            src="/Ria_truck.webp"
+            src="/images/Ria_truck.webp"
             alt="Ria with the support vehicle, preparing for a day on the road"
             loading="lazy"
           >
@@ -33,7 +33,7 @@
 
         <figure class="editorial-gallery__item editorial-gallery__item--stacked">
           <img
-            src="/Ria_teamrun_horizontal.webp"
+            src="/images/Ria_teamrun_horizontal.webp"
             alt="Ria running alongside her support crew during an expedition"
             loading="lazy"
           >

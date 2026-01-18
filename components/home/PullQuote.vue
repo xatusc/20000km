@@ -14,31 +14,53 @@ const hasTyped = ref(false)
 onMounted(() => {
   if (!quoteRef.value) return
 
-  // If motion allowed, trigger typewriter when visible
-  if (motionAllowed.value && !hasTyped.value) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !hasTyped.value) {
-          hasTyped.value = true
-          typewrite(quoteRef.value, quoteText)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.5 }
-    )
-    observer.observe(quoteRef.value)
-  } else {
-    // Show immediately if motion not allowed
-    quoteRef.value.textContent = quoteText
-    quoteRef.value.classList.add('typing-complete')
+  const setupTypewriter = () => {
+    if (motionAllowed.value && !hasTyped.value) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting && !hasTyped.value) {
+            hasTyped.value = true
+            typewrite(quoteRef.value, quoteText)
+            observer.disconnect()
+          }
+        },
+        { threshold: 0.5 }
+      )
+      observer.observe(quoteRef.value)
+    } else {
+      // Show immediately if motion not allowed
+      quoteRef.value.textContent = quoteText
+      quoteRef.value.classList.add('typing-complete')
+    }
   }
+
+  setupTypewriter()
 })
 
 // Handle motion preference changes
 watch(motionAllowed, (allowed) => {
-  if (!allowed && quoteRef.value) {
-    quoteRef.value.textContent = quoteText
-    quoteRef.value.classList.add('typing-complete')
+  if (quoteRef.value) {
+    if (!allowed) {
+      quoteRef.value.textContent = quoteText
+      quoteRef.value.classList.add('typing-complete')
+    } else if (allowed && !hasTyped.value) {
+      // Reset and re-trigger typewriter effect if motion is enabled after mount
+      quoteRef.value.textContent = ''
+      quoteRef.value.classList.remove('typing-complete')
+      hasTyped.value = false
+      // Re-run observer/typewriter
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting && !hasTyped.value) {
+            hasTyped.value = true
+            typewrite(quoteRef.value, quoteText)
+            observer.disconnect()
+          }
+        },
+        { threshold: 0.5 }
+      )
+      observer.observe(quoteRef.value)
+    }
   }
 })
 </script>
