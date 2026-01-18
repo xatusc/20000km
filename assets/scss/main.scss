@@ -1,0 +1,102 @@
+// ============================================
+// MAIN STYLESHEET - 20,000KM Website
+// ============================================
+
+// Import partials in order
+@use 'variables' as *;
+@use 'base';
+@use 'typography';
+@use 'decorative';
+@use 'utilities';
+@use 'components';
+@use 'animations';
+
+// ============================================
+// PRINT STYLES
+// ============================================
+
+@media print {
+  // Reset backgrounds and colors for printing
+  *,
+  *::before,
+  *::after {
+    background: transparent !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  // Hide non-essential elements
+  .header,
+  .footer,
+  .skip-link,
+  .grain-overlay,
+  nav,
+  video,
+  .map-container,
+  .interactive-map,
+  .sensory-toggle,
+  .mobile-support-bar,
+  button:not([type="submit"]),
+  [aria-hidden="true"] {
+    display: none !important;
+  }
+
+  // Optimize typography for print
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+    font-family: Georgia, 'Times New Roman', serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  p, li, blockquote {
+    orphans: 3;
+    widows: 3;
+  }
+
+  // Show URLs for links
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666 !important;
+  }
+
+  // Don't show URL for internal or obvious links
+  a[href^="#"]::after,
+  a[href^="javascript:"]::after,
+  a[href^="mailto:"]::after,
+  a.nav-link::after,
+  a.logo::after {
+    content: "";
+  }
+
+  // Images
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  // Containers - full width on print
+  .container,
+  .container-narrow {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  // Page breaks
+  section {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  // Ensure proper margins for printing
+  @page {
+    margin: 2cm;
+  }
+}

@@ -1,0 +1,216 @@
+@use 'variables' as *;
+
+// ============================================
+// TYPOGRAPHY STYLES
+// ============================================
+
+// --------------------------------------------
+// HEADINGS
+// --------------------------------------------
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-serif;
+  font-weight: 700;
+  line-height: $leading-snug;
+}
+
+h1 {
+  font-size: clamp(#{$text-4xl}, 12vw, 9rem);
+  line-height: 0.9;
+  letter-spacing: $tracking-tighter;
+}
+
+h2 {
+  font-size: $text-3xl;
+}
+
+h3 {
+  font-size: $text-2xl;
+}
+
+h4 {
+  font-size: $text-xl;
+}
+
+h5 {
+  font-size: $text-lg;
+}
+
+h6 {
+  font-size: $text-base;
+}
+
+// --------------------------------------------
+// BODY TEXT
+// --------------------------------------------
+
+p {
+  line-height: $leading-relaxed;
+}
+
+// --------------------------------------------
+// UTILITY CLASSES
+// --------------------------------------------
+
+// Font families
+.font-serif {
+  font-family: $font-serif;
+}
+
+.font-sans {
+  font-family: $font-sans;
+}
+
+.font-mono {
+  font-family: $font-mono;
+}
+
+// Font styles
+.italic {
+  font-style: italic;
+}
+
+.not-italic {
+  font-style: normal;
+}
+
+// Font weights
+.font-normal {
+  font-weight: 400;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+// Text sizes
+.text-xs {
+  font-size: $text-xs;
+}
+
+.text-sm {
+  font-size: $text-sm;
+}
+
+.text-base {
+  font-size: $text-base;
+}
+
+.text-lg {
+  font-size: $text-lg;
+}
+
+.text-xl {
+  font-size: $text-xl;
+}
+
+.text-2xl {
+  font-size: $text-2xl;
+}
+
+.text-3xl {
+  font-size: $text-3xl;
+}
+
+// Letter spacing
+.tracking-tight {
+  letter-spacing: $tracking-tight;
+}
+
+.tracking-normal {
+  letter-spacing: $tracking-normal;
+}
+
+.tracking-wide {
+  letter-spacing: $tracking-wide;
+}
+
+.tracking-wider {
+  letter-spacing: $tracking-wider;
+}
+
+.tracking-widest {
+  letter-spacing: $tracking-widest;
+}
+
+.tracking-label {
+  letter-spacing: $tracking-label;
+}
+
+// Text transform
+.uppercase {
+  text-transform: uppercase;
+}
+
+.lowercase {
+  text-transform: lowercase;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+// Text alignment
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+// Line height
+.leading-none {
+  line-height: $leading-none;
+}
+
+.leading-tight {
+  line-height: $leading-tight;
+}
+
+.leading-snug {
+  line-height: $leading-snug;
+}
+
+.leading-normal {
+  line-height: $leading-normal;
+}
+
+.leading-relaxed {
+  line-height: $leading-relaxed;
+}
+
+// --------------------------------------------
+// SPECIAL TEXT STYLES
+// --------------------------------------------
+
+// Label text (small uppercase with tracking)
+.label {
+  font-size: $text-xs;
+  letter-spacing: $tracking-label;
+  text-transform: uppercase;
+}
+
+// Tagline (serif italic)
+.tagline {
+  font-family: $font-serif;
+  font-style: italic;
+}
+
+// Decorative/highlight text
+.highlight {
+  color: $terracotta-700;
+}
+
+// Muted text
+.text-muted {
+  opacity: 0.6;
+}
+
+.text-subtle {
+  opacity: 0.7;
+}

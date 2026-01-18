@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+  <!-- Circular terracotta background -->
+  <circle cx="90" cy="90" r="85" fill="#8B3328"/>
+
+  <!-- Primary flowing ribbon - the journey from East to West
+       Bold, sweeping curve suggesting forward motion and the Silk Road path -->
+  <path fill="#FAF7F2" d="
+    M28 113
+    C45 56, 90 34, 152 56
+    C124 68, 90 79, 68 101
+    C51 118, 34 124, 28 113
+    Z
+  "/>
+
+  <!-- Secondary ribbon - community following, the Planetary Run Club -->
+  <path fill="#E8AFA0" d="
+    M39 135
+    C68 101, 113 90, 158 101
+    C135 107, 101 113, 73 124
+    C56 135, 45 141, 39 135
+    Z
+  "/>
+</svg>

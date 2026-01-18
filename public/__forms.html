@@ -1,0 +1,23 @@
+<!--
+  Static form for Netlify Forms detection.
+  Netlify scans this during build to register the form.
+-->
+<!DOCTYPE html>
+<html>
+<head><title>Forms</title></head>
+<body>
+  <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input type="hidden" name="form-name" value="contact">
+    <input name="bot-field">
+    <input name="name" type="text">
+    <input name="email" type="email">
+    <select name="reason">
+      <option value="press">Press & Media</option>
+      <option value="sponsorship">Sponsorship</option>
+      <option value="land-crew">Land Crew</option>
+      <option value="other">Other</option>
+    </select>
+    <textarea name="message"></textarea>
+  </form>
+</body>
+</html>
