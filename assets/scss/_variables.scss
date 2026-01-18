@@ -72,8 +72,8 @@ $font-sans: 'Noto Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-seri
 $font-mono: 'Space Mono', ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace;
 
 // Font sizes (fluid typography)
-$text-xs: 0.65rem;      // 10.4px - labels
-$text-sm: 0.75rem;      // 12px - captions
+$text-xs: 0.75rem;      // 12px - labels (WCAG minimum)
+$text-sm: 0.8125rem;    // 13px - captions
 $text-base: 1rem;       // 16px - body
 $text-lg: 1.125rem;     // 18px - large body
 $text-xl: 1.25rem;      // 20px
@@ -140,6 +140,19 @@ $transition-fast: 0.15s ease;
 $transition-base: 0.2s ease;
 $transition-slow: 0.3s ease;
 $transition-slower: 0.5s ease;
+
+// --------------------------------------------
+// SCROLL ANIMATIONS
+// --------------------------------------------
+
+// Timing (slow, editorial, meditative)
+$reveal-duration: 2s; // Long, slow fade
+$reveal-easing: cubic-bezier(0.16, 1, 0.3, 1); // Slow ease-out
+$draw-duration: 2.2s;
+$typewriter-char-delay: 0.045s; // 45ms per character
+
+// Movement (minimal, almost imperceptible)
+$reveal-distance: 8px; // Very gentle rise
 
 // --------------------------------------------
 // BORDERS

@@ -1,65 +1,54 @@
 <script setup lang="ts">
-// Hero section with full-bleed video/image background
-// Video only plays when motion is enabled (respects sensory preferences)
-// Text directly on overlay - no floating card
+// Minimalist hero - full-screen video with just the number
+// Everything else below the fold to encourage scrolling
 const { motionAllowed } = useSensoryMode()
 </script>
 
 <template>
-  <section class="hero-section" :class="{ 'hero-section--motion': motionAllowed }">
+  <section class="hero" :class="{ 'hero--motion': motionAllowed }">
     <!-- Background -->
-    <div class="hero-background">
-      <!-- Video mode (motion enabled) -->
+    <div class="hero__background">
       <template v-if="motionAllowed">
         <video
-          class="hero-media"
+          class="hero__media"
           autoplay
           muted
           loop
           playsinline
           poster="/Ria_farawayrun_horizontal.webp"
+          aria-label="Ria running across a vast open landscape at sunset, silhouetted against the horizon"
         >
           <source src="/video/ria-run.mp4" type="video/mp4">
+          <track kind="descriptions" src="/video/ria-run-descriptions.vtt" srclang="en" label="English descriptions">
         </video>
-        <div class="hero-overlay hero-overlay--dark"></div>
+        <div class="hero__overlay hero__overlay--dark"></div>
       </template>
 
-      <!-- Static mode (motion disabled) -->
       <template v-else>
         <img
           src="/Ria_farawayrun_horizontal.webp"
-          alt=""
-          class="hero-media"
+          alt="Ria running alone across a vast open landscape, silhouetted against the horizon"
+          class="hero__media"
           loading="eager"
         >
-        <div class="hero-overlay hero-overlay--light"></div>
+        <div class="hero__overlay hero__overlay--light"></div>
       </template>
     </div>
 
-    <!-- Hero Content - directly on overlay, no card -->
-    <div class="hero-content">
-      <p class="hero-kicker">Retracing the Silk Road on foot</p>
-
-      <h1 class="hero-title">
-        <span class="hero-number">20,000</span>
-        <span class="hero-unit">kilometers</span>
+    <!-- Minimal Content -->
+    <div class="hero__content">
+      <h1 class="hero__title">
+        <span class="hero__number">20<span class="hero__comma">,</span>000</span>
+        <span class="hero__unit">kilometers</span>
       </h1>
 
-      <p class="hero-subtitle">
-        The first human to run across Asia and Europe.<br>
-        One woman. Seventeen countries. Pacific to Atlantic.
-      </p>
+      <p class="hero__tagline">"Only delusional until it's not"</p>
+    </div>
 
-      <a
-        href="https://gofund.me/8d624216"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="hero-cta"
-      >
-        Support the Journey
-      </a>
-
-      <p class="hero-tagline">"Only delusional until it's not"</p>
+    <!-- Scroll indicator -->
+    <div class="hero__scroll" aria-hidden="true">
+      <span class="hero__scroll-text">Scroll</span>
+      <span class="hero__scroll-line"></span>
     </div>
   </section>
 </template>
@@ -67,185 +56,164 @@ const { motionAllowed } = useSensoryMode()
 <style lang="scss" scoped>
 @use '~/assets/scss/_variables' as *;
 
-.hero-section {
+.hero {
   position: relative;
-  min-height: 70vh;
+  // Account for sticky header (approx 70px)
+  height: calc(100vh - 70px);
+  min-height: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
-  // Break out of container
+  // Full-width bleed
   margin: (-$space-12) calc(-50vw + 50%) 0;
   width: 100vw;
   overflow: hidden;
 }
 
-.hero-background {
+.hero__background {
   position: absolute;
   inset: 0;
   z-index: 0;
 }
 
-.hero-media {
+.hero__media {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center 30%;
 }
 
-.hero-overlay {
+.hero__overlay {
   position: absolute;
   inset: 0;
 
-  // Dark overlay for video - light text
   &--dark {
     background: linear-gradient(
       to bottom,
-      rgba($warm-black, 0.5) 0%,
-      rgba($warm-black, 0.35) 40%,
-      rgba($warm-black, 0.4) 70%,
+      rgba($warm-black, 0.55) 0%,
+      rgba($warm-black, 0.4) 50%,
       rgba($warm-black, 0.6) 100%
     );
   }
 
-  // Light overlay for static image - dark text
   &--light {
     background: linear-gradient(
       to bottom,
-      rgba($cream, 0.75) 0%,
-      rgba($cream, 0.6) 40%,
-      rgba($cream, 0.65) 70%,
-      rgba($cream, 0.8) 100%
+      rgba($cream, 0.6) 0%,
+      rgba($cream, 0.4) 50%,
+      rgba($cream, 0.7) 100%
     );
   }
 }
 
-.hero-content {
+.hero__content {
   position: relative;
   z-index: 1;
   text-align: center;
-  padding: $space-16 $space-8;
-  max-width: 700px;
+  padding: $space-8;
 }
 
-// Default: dark text for static/light overlay
-.hero-kicker {
+.hero__title {
+  margin: 0;
+}
+
+.hero__number {
+  display: block;
+  font-family: $font-serif;
+  font-size: clamp(5rem, 20vw, 14rem);
+  font-weight: 400;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: $warm-black;
+}
+
+.hero__comma {
+  font-size: 0.6em;
+}
+
+.hero__unit {
+  display: block;
+  font-family: $font-mono;
+  font-size: clamp($text-base, 4vw, $text-2xl);
+  letter-spacing: $tracking-widest;
+  text-transform: uppercase;
+  color: $terracotta-700;
+  margin-top: $space-4;
+}
+
+.hero__tagline {
+  font-family: $font-serif;
+  font-style: italic;
+  font-size: clamp($text-lg, 3vw, $text-2xl);
+  color: $earth-600;
+  margin-top: $space-8;
+}
+
+// Scroll indicator
+.hero__scroll {
+  position: absolute;
+  bottom: $space-8;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-2;
+  z-index: 1;
+}
+
+.hero__scroll-text {
   font-family: $font-mono;
   font-size: $text-xs;
   letter-spacing: $tracking-widest;
   text-transform: uppercase;
-  color: $earth-600;
-  margin-bottom: $space-6;
+  color: $earth-500;
 }
 
-.hero-title {
-  margin-bottom: $space-6;
+.hero__scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, $earth-300, transparent);
 }
 
-.hero-number {
-  display: block;
-  font-family: $font-serif;
-  font-size: clamp(4rem, 15vw, 8rem);
-  font-weight: 400;
-  line-height: 0.9;
-  letter-spacing: $tracking-tighter;
-  color: $warm-black;
-}
-
-.hero-unit {
-  display: block;
-  font-family: $font-mono;
-  font-size: clamp($text-sm, 3vw, $text-lg);
-  letter-spacing: $tracking-widest;
-  text-transform: uppercase;
-  color: $terracotta;
-  margin-top: $space-2;
-}
-
-.hero-subtitle {
-  font-size: clamp($text-base, 2.5vw, $text-lg);
-  line-height: $leading-relaxed;
-  color: $earth-700;
-  margin-bottom: $space-8;
-  max-width: 550px;
-  margin-inline: auto;
-}
-
-.hero-cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: $terracotta-700;
-  color: $cream;
-  padding: $space-4 $space-10;
-  font-family: $font-mono;
-  font-size: $text-sm;
-  letter-spacing: $tracking-wide;
-  text-transform: uppercase;
-  text-decoration: none;
-  border: 2px solid $terracotta-700;
-  transition: background 0.2s ease, transform 0.2s ease;
-  min-height: 52px;
-
-  &:hover {
-    background: $terracotta-800;
-    border-color: $terracotta-800;
-    transform: translateY(-2px);
-  }
-}
-
-.hero-tagline {
-  font-family: $font-serif;
-  font-style: italic;
-  font-size: $text-lg;
-  color: $terracotta;
-  margin-top: $space-8;
-}
-
-// Motion mode: light text on dark overlay
-.hero-section--motion {
-  .hero-kicker {
-    color: rgba($cream, 0.85);
-  }
-
-  .hero-number {
+// Motion mode: light text
+.hero--motion {
+  .hero__number {
     color: $cream;
-    text-shadow: 0 2px 20px rgba($warm-black, 0.3);
+    text-shadow: 0 4px 40px rgba($warm-black, 0.3);
   }
 
-  .hero-unit {
+  .hero__unit {
     color: $terracotta-300;
   }
 
-  .hero-subtitle {
+  .hero__tagline {
     color: rgba($cream, 0.9);
   }
 
-  .hero-tagline {
-    color: $terracotta-300;
+  .hero__scroll-text {
+    color: rgba($cream, 0.7);
+  }
+
+  .hero__scroll-line {
+    background: linear-gradient(to bottom, rgba($cream, 0.5), transparent);
   }
 }
 
-// Mobile adjustments
+// Mobile
 @media (max-width: $breakpoint-md) {
-  .hero-section {
-    min-height: 60vh;
+  .hero {
+    height: calc(100vh - 60px);
+    height: calc(100svh - 60px); // Modern browsers with svh support
+    min-height: 450px;
   }
 
-  .hero-content {
-    padding: $space-10 $space-4;
+  .hero__tagline {
+    margin-top: $space-6;
   }
 
-  .hero-cta {
-    width: 100%;
-    max-width: 280px;
-  }
-
-  .hero-subtitle br {
-    display: none;
-  }
-
-  .hero-tagline {
-    font-size: $text-base;
+  .hero__scroll {
+    bottom: $space-6;
   }
 }
 </style>

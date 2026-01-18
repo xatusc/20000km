@@ -1,50 +1,40 @@
 <script setup lang="ts">
+// Text-based motion toggle for header placement
 const { motionAllowed, toggleMotion } = useSensoryMode()
 </script>
 
 <template>
   <button
-    class="sensory-toggle transition-essential"
-    :class="{ 'motion-on': motionAllowed }"
+    class="motion-toggle"
     :aria-pressed="motionAllowed"
-    :aria-label="motionAllowed ? $t('sensory.disableMotion') : $t('sensory.enableMotion')"
+    :aria-label="motionAllowed ? $t('sensory.turnOffMotion') : $t('sensory.turnOnMotion')"
     @click="toggleMotion"
   >
-    <span v-if="motionAllowed" class="icon" aria-hidden="true">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M5 12h14"/>
-        <path d="m12 5 7 7-7 7"/>
-      </svg>
-    </span>
-    <span v-else class="icon" aria-hidden="true">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="3" y="3" width="18" height="18" rx="2"/>
-        <path d="M9 9h6v6H9z"/>
-      </svg>
-    </span>
+    <span class="motion-toggle__label">Motion:</span>
+    <span class="motion-toggle__state">{{ motionAllowed ? 'On' : 'Off' }}</span>
   </button>
 </template>
 
 <style lang="scss" scoped>
-.sensory-toggle {
-  position: fixed;
-  bottom: $space-4;
-  right: $space-4;
-  z-index: $z-fixed;
-  width: 48px;
-  height: 48px;
+.motion-toggle {
   display: flex;
   align-items: center;
-  justify-content: center;
-  background: $warm-black;
-  color: $cream;
+  gap: $space-1;
+  background: none;
   border: none;
-  border-radius: 50%;
   cursor: pointer;
-  box-shadow: $shadow-lg;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  letter-spacing: $tracking-wide;
+  text-transform: uppercase;
+  color: $earth-700;
+  padding: $space-1 $space-2;
+  border-radius: $border-radius-sm;
+  transition: color 0.2s ease, background 0.2s ease;
 
   &:hover {
-    background: $earth-800;
+    color: $warm-black;
+    background: rgba($warm-black, 0.05);
   }
 
   &:focus-visible {
@@ -52,18 +42,13 @@ const { motionAllowed, toggleMotion } = useSensoryMode()
     outline-offset: 2px;
   }
 
-  &.motion-on {
-    background: $terracotta;
-
-    &:hover {
-      background: $terracotta-600;
-    }
+  &__label {
+    color: $earth-600;
   }
-}
 
-.icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  &__state {
+    font-weight: 600;
+    color: inherit;
+  }
 }
 </style>

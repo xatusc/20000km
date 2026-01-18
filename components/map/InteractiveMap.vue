@@ -32,8 +32,10 @@ const waypoints: Waypoint[] = [
 // Props
 const props = withDefaults(defineProps<{
   animationDuration?: number
+  showMilestones?: boolean
 }>(), {
-  animationDuration: 2000
+  animationDuration: 2000,
+  showMilestones: true
 })
 
 // Fundraising data
@@ -45,6 +47,45 @@ const {
   progress,
   isLoading
 } = useFundraising()
+
+// Milestones (based on budget)
+interface Milestone {
+  id: string
+  name: string
+  amount: number
+  km: number // equivalent km at €5/km
+  description: string
+}
+
+const milestones: Milestone[] = [
+  { id: 'vehicle', name: 'Support Vehicle', amount: 32000, km: 6400, description: 'Van purchase & equipment' },
+  { id: 'logistics', name: 'Logistics', amount: 49000, km: 9800, description: 'Visas, permits & transport' },
+  { id: 'crew', name: 'Crew & Daily', amount: 86000, km: 17200, description: 'Crew support & daily costs' },
+  { id: 'full', name: 'Fully Funded', amount: 100000, km: 20000, description: 'Complete expedition support' }
+]
+
+// Current milestone
+const currentMilestone = computed(() => {
+  const funded = fundedKm.value * 5 // Convert km back to euros
+  for (let i = 0; i < milestones.length; i++) {
+    if (funded < milestones[i].amount) {
+      return {
+        milestone: milestones[i],
+        index: i,
+        progressToNext: i === 0
+          ? (funded / milestones[0].amount) * 100
+          : ((funded - milestones[i - 1].amount) / (milestones[i].amount - milestones[i - 1].amount)) * 100
+      }
+    }
+  }
+  return {
+    milestone: milestones[milestones.length - 1],
+    index: milestones.length - 1,
+    progressToNext: 100
+  }
+})
+
+const fundedAmount = computed(() => fundedKm.value * 5)
 
 // Sensory mode
 const { motionAllowed } = useSensoryMode()
@@ -210,6 +251,42 @@ onUnmounted(() => {
       </div>
     </div>
 
+    <!-- Milestones progress -->
+    <div v-if="showMilestones" class="interactive-map__milestones">
+      <div class="interactive-map__milestone-bar">
+        <div
+          class="interactive-map__milestone-progress"
+          :style="{ width: `${progress}%` }"
+        ></div>
+        <button
+          v-for="(ms, index) in milestones"
+          :key="ms.id"
+          type="button"
+          class="interactive-map__milestone-marker"
+          :class="{
+            'interactive-map__milestone-marker--reached': fundedAmount >= ms.amount,
+            'interactive-map__milestone-marker--current': currentMilestone.index === index
+          }"
+          :style="{ left: `${(ms.amount / 100000) * 100}%` }"
+          :aria-label="`${ms.name}: €${(ms.amount / 1000).toFixed(0)}k - ${ms.description}`"
+        >
+          <span class="interactive-map__milestone-dot"></span>
+          <!-- Hover tooltip -->
+          <span class="interactive-map__milestone-tooltip">
+            <span class="interactive-map__milestone-tooltip-name">{{ ms.name }}</span>
+            <span class="interactive-map__milestone-tooltip-amount">€{{ (ms.amount / 1000).toFixed(0) }}k</span>
+            <span class="interactive-map__milestone-tooltip-desc">{{ ms.description }}</span>
+          </span>
+        </button>
+      </div>
+      <p class="interactive-map__milestone-current">
+        <span class="interactive-map__milestone-next-label">Next:</span>
+        <strong>{{ currentMilestone.milestone.name }}</strong>
+        <span class="interactive-map__milestone-next-amount">(€{{ (currentMilestone.milestone.amount / 1000).toFixed(0) }}k)</span>
+        <span class="interactive-map__milestone-next-desc">— {{ currentMilestone.milestone.description }}</span>
+      </p>
+    </div>
+
     <div class="interactive-map__image-wrapper">
       <!-- Gray route (base layer) -->
       <img
@@ -319,7 +396,7 @@ onUnmounted(() => {
     </div>
 
     <!-- Accessible live region -->
-    <div class="visually-hidden" role="status" aria-live="polite">
+    <div class="sr-only" role="status" aria-live="polite">
       {{ liveRegionText }}
     </div>
   </div>
@@ -361,9 +438,7 @@ onUnmounted(() => {
   width: 100%;
 }
 
-.interactive-map__picture--gray {
-  position: relative;
-}
+// NOTE: Removed unused .interactive-map__picture--gray class
 
 .interactive-map__picture--red {
   position: absolute;
@@ -411,20 +486,24 @@ onUnmounted(() => {
   transform: translate(-50%, -50%);
   background: none;
   border: none;
-  padding: 16px;
+  padding: $space-6; // 24px - ensures 44px+ touch target
+  min-width: 44px;
+  min-height: 44px;
   cursor: pointer;
   pointer-events: auto;
   z-index: 10;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: $space-1;
 
-  &:focus {
-    outline: none;
+  &:focus-visible {
+    outline: 2px solid $terracotta;
+    outline-offset: 2px;
+    border-radius: $border-radius-sm;
   }
 
-  &:focus .interactive-map__waypoint-dot {
+  &:focus-visible .interactive-map__waypoint-dot {
     box-shadow: 0 0 0 3px $terracotta;
   }
 }
@@ -451,8 +530,8 @@ onUnmounted(() => {
 
 .interactive-map__waypoint-label {
   font-family: $font-mono;
-  font-size: $text-xs;
-  letter-spacing: 0.05em;
+  font-size: $text-sm;
+  letter-spacing: $tracking-wide;
   text-transform: uppercase;
   color: $warm-black;
   background: rgba($cream, 0.9);
@@ -668,6 +747,179 @@ onUnmounted(() => {
   margin-bottom: $space-4;
 }
 
+// Milestones
+.interactive-map__milestones {
+  margin-bottom: $space-6;
+  padding: $space-4 0;
+}
+
+.interactive-map__milestone-bar {
+  position: relative;
+  height: 8px;
+  background: $earth-200;
+  border-radius: 4px;
+  margin-bottom: $space-4;
+}
+
+.interactive-map__milestone-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: $terracotta;
+  border-radius: 4px;
+  transition: width 0.5s ease-out;
+}
+
+.interactive-map__milestone-marker {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  background: none;
+  border: none;
+  padding: $space-4; // 16px padding for 44px+ touch target
+  min-width: 44px;
+  min-height: 44px;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid $terracotta;
+    outline-offset: 2px;
+    border-radius: $border-radius-sm;
+  }
+
+  &:focus-visible .interactive-map__milestone-dot {
+    box-shadow: 0 0 0 3px $terracotta;
+  }
+
+  // Show tooltip on hover/focus
+  &:hover .interactive-map__milestone-tooltip,
+  &:focus .interactive-map__milestone-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+  }
+
+  &:hover .interactive-map__milestone-dot {
+    transform: scale(1.2);
+  }
+}
+
+.interactive-map__milestone-dot {
+  display: block;
+  width: 16px;
+  height: 16px;
+  background: $cream;
+  border: 3px solid $earth-300;
+  border-radius: 50%;
+  transition: border-color $transition-base, background $transition-base, transform $transition-base;
+}
+
+.interactive-map__milestone-marker--reached .interactive-map__milestone-dot {
+  border-color: $terracotta;
+  background: $terracotta;
+}
+
+.interactive-map__milestone-marker--current .interactive-map__milestone-dot {
+  border-color: $terracotta;
+  background: $cream;
+  box-shadow: 0 0 0 4px rgba($terracotta, 0.2);
+}
+
+// Milestone tooltip (shown on hover)
+.interactive-map__milestone-tooltip {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translate(-50%, -4px);
+  background: $warm-black;
+  color: $cream;
+  padding: $space-3;
+  border-radius: $border-radius-md;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity $transition-base, transform $transition-base, visibility $transition-base;
+  pointer-events: none;
+  z-index: 20;
+  text-align: center;
+  min-width: 120px;
+  box-shadow: $shadow-lg;
+
+  // Arrow pointing up
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid $warm-black;
+  }
+}
+
+.interactive-map__milestone-tooltip-name {
+  display: block;
+  font-family: $font-mono;
+  font-size: $text-xs;
+  letter-spacing: $tracking-wide;
+  text-transform: uppercase;
+  color: $terracotta;
+  margin-bottom: 2px;
+}
+
+.interactive-map__milestone-tooltip-amount {
+  display: block;
+  font-family: $font-mono;
+  font-size: $text-base;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.interactive-map__milestone-tooltip-desc {
+  display: block;
+  font-size: $text-xs;
+  color: rgba($cream, 0.7);
+}
+
+.interactive-map__milestone-current {
+  font-size: $text-sm;
+  color: $earth-500;
+  text-align: center;
+
+  strong {
+    color: $terracotta;
+    font-family: $font-mono;
+    letter-spacing: $tracking-wide;
+  }
+}
+
+.interactive-map__milestone-next-label {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  letter-spacing: $tracking-wide;
+  text-transform: uppercase;
+  margin-right: $space-1;
+}
+
+.interactive-map__milestone-next-amount {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  color: $earth-400;
+  margin-left: $space-1;
+}
+
+.interactive-map__milestone-next-desc {
+  color: $earth-400;
+  font-style: italic;
+
+  @media (max-width: $breakpoint-md) {
+    display: none;
+  }
+}
+
 .interactive-map__direction {
   font-family: $font-serif;
   font-style: italic;
@@ -702,21 +954,18 @@ onUnmounted(() => {
   margin-left: $space-2;
 }
 
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
+// NOTE: Using global .sr-only class from _utilities.scss instead of local .visually-hidden
 
-// Responsive
+// Responsive - Show simplified waypoints on mobile instead of hiding entirely
 @media (max-width: calc($breakpoint-lg - 1px)) {
   .interactive-map__waypoint {
+    padding: $space-4; // Smaller padding on mobile
+    min-width: 36px;
+    min-height: 36px;
+  }
+
+  // Only show start and end waypoints on mobile for clarity
+  .interactive-map__waypoint:not(.interactive-map__waypoint--endpoint) {
     display: none;
   }
 }
@@ -762,6 +1011,83 @@ onUnmounted(() => {
   .interactive-map__waypoint:focus .interactive-map__waypoint-label {
     display: block;
     opacity: 1;
+  }
+}
+
+// Loading skeleton
+.interactive-map__loading {
+  width: 100%;
+}
+
+.interactive-map__loading-stats {
+  display: flex;
+  justify-content: space-between;
+  padding: $space-4 0;
+  border-bottom: $border-width solid $earth-200;
+  margin-bottom: $space-4;
+}
+
+.interactive-map__loading-bar {
+  height: 16px;
+  width: 120px;
+  background: linear-gradient(
+    90deg,
+    $earth-100 25%,
+    $earth-200 50%,
+    $earth-100 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: $border-radius-sm;
+
+  &--short {
+    width: 80px;
+  }
+
+  &--full {
+    width: 100%;
+    height: 8px;
+  }
+}
+
+.interactive-map__loading-milestones {
+  margin-bottom: $space-6;
+  padding: $space-4 0;
+}
+
+.interactive-map__loading-map {
+  position: relative;
+}
+
+.interactive-map__loading-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(
+    90deg,
+    $earth-100 25%,
+    $earth-200 50%,
+    $earth-100 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: $border-radius-md;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+// Respect reduced motion for skeleton animation
+@media (prefers-reduced-motion: reduce) {
+  .interactive-map__loading-bar,
+  .interactive-map__loading-image {
+    animation: none;
+    background: $earth-200;
   }
 }
 </style>

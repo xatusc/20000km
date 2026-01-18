@@ -6,56 +6,97 @@
 @use 'variables' as *;
 @use 'base';
 @use 'typography';
+@use 'decorative';
 @use 'utilities';
 @use 'components';
+@use 'animations';
 
 // ============================================
-// ANIMATIONS (only active when motion allowed)
+// PRINT STYLES
 // ============================================
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
+@media print {
+  // Reset backgrounds and colors for printing
+  *,
+  *::before,
+  *::after {
+    background: transparent !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  // Hide non-essential elements
+  .header,
+  .footer,
+  .skip-link,
+  .grain-overlay,
+  nav,
+  video,
+  .map-container,
+  .interactive-map,
+  .sensory-toggle,
+  .mobile-support-bar,
+  button:not([type="submit"]),
+  [aria-hidden="true"] {
+    display: none !important;
   }
-}
 
-@keyframes pulseRing {
-  0% {
-    opacity: 0.4;
-    transform: translate(-50%, -50%) scale(0.5);
+  // Optimize typography for print
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+    font-family: Georgia, 'Times New Roman', serif;
   }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(1.5);
+
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    break-after: avoid;
   }
-}
 
-// Animation classes
-.animate-fade-in-up {
-  animation: fadeInUp 0.8s ease-out forwards;
-}
+  p, li, blockquote {
+    orphans: 3;
+    widows: 3;
+  }
 
-.animation-delay-1 {
-  animation-delay: 0.2s;
-}
+  // Show URLs for links
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666 !important;
+  }
 
-.animation-delay-2 {
-  animation-delay: 0.3s;
-}
+  // Don't show URL for internal or obvious links
+  a[href^="#"]::after,
+  a[href^="javascript:"]::after,
+  a[href^="mailto:"]::after,
+  a.nav-link::after,
+  a.logo::after {
+    content: "";
+  }
 
-.animation-delay-3 {
-  animation-delay: 0.4s;
-}
+  // Images
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
 
-.animation-delay-4 {
-  animation-delay: 0.5s;
-}
+  // Containers - full width on print
+  .container,
+  .container-narrow {
+    max-width: 100%;
+    padding: 0;
+  }
 
-.animation-delay-5 {
-  animation-delay: 0.6s;
+  // Page breaks
+  section {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  // Ensure proper margins for printing
+  @page {
+    margin: 2cm;
+  }
 }

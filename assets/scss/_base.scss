@@ -28,40 +28,41 @@ body {
   font-size: $text-base;
 }
 
-// Grain overlay (preserving existing design element)
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  opacity: 0.03;
-  pointer-events: none;
-  z-index: $z-grain;
+// Ultra-wide screen constraint - prevents content from becoming too wide
+// Centers content on very large displays (2K, 4K monitors)
+@media (min-width: 1800px) {
+  .page-wrapper,
+  main {
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
+
+// NOTE: Grain overlay is implemented in layouts/default.vue with the .grain-overlay class
+// This provides better control over reduced-motion preferences and mix-blend-mode
 
 // ============================================
 // TRAUMA-INFORMED MOTION DESIGN
 // Motion OFF by default
 // ============================================
 
-// Default: animations paused
+// Default: animations paused, but keep essential micro-transitions for UI feedback
 * {
   animation-play-state: paused !important;
-  transition-duration: 0s !important;
 }
 
-// Enable motion when user opts in
+// Allow short transitions for immediate UI feedback (hover, focus states)
+// This preserves accessibility while respecting motion preferences
+a, button, input, select, textarea,
+[role="button"], [tabindex] {
+  transition-duration: 0.1s !important; // Fast feedback for interactive elements
+}
+
+// Enable full motion when user opts in
 [data-motion-allowed="true"] * {
   animation-play-state: running !important;
   transition-duration: inherit !important;
-}
-
-// Essential transitions always allowed (for UI feedback)
-.transition-essential {
-  transition-duration: $transition-fast !important;
 }
 
 // Respect system preference if user hasn't made a choice
@@ -114,6 +115,24 @@ body::before {
 a {
   color: inherit;
   text-decoration: none;
+
+  // Provide visual affordance on hover for accessibility (WCAG 1.4.1)
+  &:hover {
+    text-decoration: underline;
+    text-decoration-color: $terracotta;
+    text-underline-offset: 2px;
+  }
+
+  // Links within navigation or buttons should not get underline
+  &.btn,
+  &.nav-link,
+  &.logo,
+  &[class*="cta"],
+  &[class*="btn"] {
+    &:hover {
+      text-decoration: none;
+    }
+  }
 }
 
 // ============================================

@@ -3,10 +3,10 @@
 // Manual control over which images appear, no API needed
 
 const images = [
-  { src: '/Ria_lookback.webp', alt: 'Ria looking back on the trail' },
-  { src: '/Ria_run_2.webp', alt: 'Ria running' },
-  { src: '/sinai-run.webp', alt: 'Running in Sinai' },
-  { src: '/Ria_truck.webp', alt: 'Ria with support vehicle' }
+  { src: '/Ria_lookback.webp', alt: 'Ria pausing to look back at the winding trail behind her, mountains in the distance' },
+  { src: '/Ria_run_2.webp', alt: 'Ria in motion during a training run, focused expression as she navigates the terrain' },
+  { src: '/sinai-run.webp', alt: 'Golden hour run through Egypt Sinai desert, with local guides running alongside' },
+  { src: '/Ria_truck.webp', alt: 'Ria standing beside the expedition support vehicle during a rest stop' }
 ]
 
 const instagramUrl = 'https://instagram.com/whereisriax'
@@ -66,7 +66,7 @@ const instagramUrl = 'https://instagram.com/whereisriax'
 @use '~/assets/scss/_variables' as *;
 
 .instagram-grid {
-  // Component styles
+  padding: $space-8 0;
 }
 
 .instagram-header {
@@ -87,7 +87,7 @@ const instagramUrl = 'https://instagram.com/whereisriax'
 .instagram-link {
   font-family: $font-mono;
   font-size: $text-sm;
-  color: $terracotta;
+  color: $terracotta-700;
   text-decoration: none;
 
   &:hover {
@@ -103,6 +103,11 @@ const instagramUrl = 'https://instagram.com/whereisriax'
 
   @media (max-width: $breakpoint-lg) {
     grid-template-columns: repeat(2, 1fr);
+    gap: $space-4; // Larger gap for larger images
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    gap: $space-3;
   }
 }
 

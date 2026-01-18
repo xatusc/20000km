@@ -1,179 +1,249 @@
 <script setup lang="ts">
-// Simplified support section with single CTA to GoFundMe
+// Simplified support section - progress bar + single CTA
+// Full details on /support page
+const { formattedFunded, formattedTotal, progress } = useFundraising()
 </script>
 
 <template>
   <section class="support-section">
-    <div class="support-content">
-      <h2 class="support-title">Sponsor the Road Ahead</h2>
+    <!-- Left: Content -->
+    <div class="support-section__content">
+      <span class="support-section__eyebrow">Running West</span>
+      <h2 class="support-section__title">Help Make<br>This Happen</h2>
 
-      <p class="support-desc">
-        From the Pacific to the Atlantic. 20,000 kilometers of ancient trade routes,
-        mountain passes, and human stories. Your contribution funds the support vehicle,
-        crew logistics, visas across 17 countries, and the documentary film capturing every step.
-      </p>
-
-      <div class="impact-grid">
-        <div class="impact-item">
-          <span class="impact-amount">€5</span>
-          <span class="impact-label">1 kilometer</span>
+      <!-- Progress indicator - prominent with black frame -->
+      <div class="support-section__progress">
+        <div class="support-section__progress-header">
+          <span class="support-section__progress-funded">{{ formattedFunded }} km funded</span>
+          <span class="support-section__progress-total">of {{ formattedTotal }} km</span>
         </div>
-        <div class="impact-item">
-          <span class="impact-amount">€50</span>
-          <span class="impact-label">a morning's run</span>
+        <div
+          class="support-section__progress-bar"
+          role="progressbar"
+          :aria-valuenow="Math.round(progress)"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          :aria-label="`Journey funding progress: ${Math.round(progress)}% complete, ${formattedFunded} of ${formattedTotal} kilometers funded`"
+        >
+          <div class="support-section__progress-fill" :style="{ width: `${Math.max(progress, 2)}%` }">
+            <span v-if="progress > 10" class="support-section__progress-runner" aria-hidden="true"></span>
+          </div>
         </div>
-        <div class="impact-item">
-          <span class="impact-amount">€250</span>
-          <span class="impact-label">a full day on the road</span>
-        </div>
-        <div class="impact-item">
-          <span class="impact-amount">€500</span>
-          <span class="impact-label">a week of progress</span>
+        <div class="support-section__progress-endpoints">
+          <span>Vladivostok</span>
+          <span>Cabo da Roca</span>
         </div>
       </div>
 
+      <!-- Single compelling line -->
+      <p class="support-section__hook">
+        Every €5 funds 1 kilometer. Every contribution gets her closer to supported.
+      </p>
+
+      <!-- Single CTA to GoFundMe -->
       <a
-        href="https://gofund.me/8d624216"
+        href="https://www.gofundme.com/rias-20000-km-run-across-asia-and-europe"
         target="_blank"
         rel="noopener noreferrer"
-        class="support-cta"
+        class="support-section__cta"
       >
-        Support on GoFundMe
+        Donate Now
       </a>
 
-      <p class="support-note">
-        All unused funds will be returned to supporters proportionally.
-      </p>
+      <NuxtLink to="/support" class="support-section__details">
+        See full breakdown & milestones →
+      </NuxtLink>
     </div>
 
-    <figure class="support-image">
-      <img src="/sinai-run.webp" alt="Running with friends in Sinai" loading="lazy">
-      <figcaption>
-        Photo by <a href="https://instagram.com/jack.lawes" target="_blank" rel="noopener noreferrer">Jack Lawes</a>
-      </figcaption>
+    <!-- Right: Large dramatic image -->
+    <figure class="support-section__image">
+      <img
+        src="/Ria_lookback.webp"
+        alt="Ria looking back over her shoulder while running through dramatic terrain"
+        loading="lazy"
+      >
     </figure>
   </section>
 </template>
 
 <style lang="scss" scoped>
 @use '~/assets/scss/_variables' as *;
+@use '~/assets/scss/_decorative' as *;
 
 .support-section {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: 1fr 1.2fr;
   gap: $space-12;
-  align-items: start;
-  padding: $space-8 0;
+  align-items: center;
+  padding: $space-16 0;
 
   @media (max-width: $breakpoint-xl) {
     grid-template-columns: 1fr;
     gap: $space-8;
   }
-}
 
-.support-title {
-  font-family: $font-serif;
-  font-size: $text-3xl;
-  margin-bottom: $space-4;
-}
-
-.support-desc {
-  font-size: $text-base;
-  line-height: $leading-loose;
-  color: $earth-600;
-  margin-bottom: $space-8;
-  max-width: 550px;
-}
-
-.impact-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: $space-4;
-  margin-bottom: $space-8;
-
-  @media (max-width: $breakpoint-lg) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-.impact-item {
-  text-align: center;
-  padding: $space-4;
-  border: $border-width solid $earth-200;
-  border-radius: $border-radius-md;
-}
-
-.impact-amount {
-  display: block;
-  font-family: $font-mono;
-  font-size: $text-xl;
-  color: $terracotta;
-  margin-bottom: $space-1;
-}
-
-.impact-label {
-  font-size: $text-xs;
-  color: $earth-500;
-  text-transform: uppercase;
-  letter-spacing: $tracking-wide;
-}
-
-.support-cta {
-  display: inline-block;
-  background: $terracotta-700;
-  color: $cream;
-  padding: $space-4 $space-8;
-  font-family: $font-mono;
-  font-size: $text-sm;
-  letter-spacing: $tracking-wide;
-  text-transform: uppercase;
-  text-decoration: none;
-  border: 2px solid $terracotta-700;
-  transition: background 0.2s ease, color 0.2s ease;
-  min-height: 48px;
-
-  &:hover {
-    background: $terracotta-800;
-    border-color: $terracotta-800;
-  }
-}
-
-.support-note {
-  margin-top: $space-4;
-  font-size: $text-sm;
-  color: $earth-400;
-  font-style: italic;
-}
-
-.support-image {
-  position: sticky;
-  top: $space-8;
-
-  img {
-    width: 100%;
-    border-radius: $border-radius-md;
-  }
-
-  figcaption {
-    margin-top: $space-3;
-    font-size: $text-sm;
-    color: $earth-400;
+  &__eyebrow {
+    display: block;
+    font-family: $font-serif;
     font-style: italic;
+    font-size: $text-lg;
+    color: $terracotta;
+    margin-bottom: $space-3;
+  }
 
-    a {
-      color: $earth-500;
-      text-decoration: none;
+  &__title {
+    font-family: $font-serif;
+    font-size: clamp($text-3xl, 6vw, $text-4xl);
+    line-height: $leading-tight;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin-bottom: $space-8;
+  }
 
-      &:hover {
-        text-decoration: underline;
-      }
+  // Progress section with paper texture and bold black frame
+  &__progress {
+    @include paper-texture($sand-50);
+    padding: $space-6;
+    border: 3px solid $warm-black;
+    margin-bottom: $space-6;
+  }
+
+  &__progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: $space-3;
+  }
+
+  &__progress-funded {
+    font-family: $font-mono;
+    font-size: $text-base;
+    font-weight: 600;
+    color: $terracotta-700;
+    letter-spacing: $tracking-wide;
+  }
+
+  &__progress-total {
+    font-family: $font-mono;
+    font-size: $text-sm;
+    color: $earth-500;
+    letter-spacing: $tracking-wide;
+  }
+
+  &__progress-bar {
+    height: 20px;
+    background: $earth-200;
+    overflow: hidden;
+    position: relative;
+  }
+
+  &__progress-fill {
+    height: 100%;
+    background: $terracotta;
+    transition: width 0.8s ease;
+    position: relative;
+    min-width: 2%;
+  }
+
+  &__progress-runner {
+    position: absolute;
+    right: -2px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    background: $warm-black;
+    border-radius: 50%;
+    border: 2px solid $cream;
+
+    &::after {
+      content: '→';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: $cream;
+      font-size: 8px;
     }
   }
 
-  @media (max-width: $breakpoint-xl) {
-    position: static;
-    max-width: 500px;
-    margin: 0 auto;
+  &__progress-endpoints {
+    display: flex;
+    justify-content: space-between;
+    margin-top: $space-2;
+    font-family: $font-mono;
+    font-size: $text-xs;
+    color: $earth-400;
+    letter-spacing: $tracking-wide;
+    text-transform: uppercase;
+  }
+
+  &__hook {
+    font-family: $font-mono;
+    font-size: $text-sm;
+    letter-spacing: $tracking-wide;
+    color: $earth-600;
+    margin-bottom: $space-6;
+    max-width: 400px;
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: $terracotta-600;
+    color: #fff;
+    padding: $space-4 $space-10;
+    font-family: $font-mono;
+    font-size: $text-sm;
+    letter-spacing: $tracking-wide;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 2px solid $terracotta-600;
+    transition: background 0.2s ease, transform 0.2s ease;
+    min-height: 56px;
+
+    &:hover {
+      background: $terracotta-700;
+      border-color: $terracotta-700;
+      transform: translateY(-2px);
+    }
+  }
+
+  &__details {
+    display: block;
+    margin-top: $space-4;
+    font-family: $font-mono;
+    font-size: $text-sm;
+    letter-spacing: $tracking-wide;
+    color: $earth-500;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $terracotta-700;
+    }
+  }
+
+  &__image {
+    position: relative;
+    margin: 0;
+
+    img {
+      width: 100%;
+      height: auto;
+      min-height: 450px;
+      object-fit: cover;
+      @include hand-drawn-border-subtle($warm-black, 3px);
+    }
+
+    @media (max-width: $breakpoint-xl) {
+      order: -1;
+
+      img {
+        min-height: 300px;
+      }
+    }
   }
 }
 </style>

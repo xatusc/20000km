@@ -33,25 +33,26 @@
     outline: 2px solid $terracotta;
     outline-offset: 2px;
   }
-}
 
-.btn-primary {
-  background-color: $warm-black;
-  color: $cream;
+  // Modifiers
+  &--primary {
+    background-color: $warm-black;
+    color: $cream;
 
-  &:hover {
-    background-color: $earth-800;
+    &:hover {
+      background-color: $earth-800;
+    }
   }
-}
 
-.btn-accent {
-  background-color: $terracotta;
-  color: $cream;
-  border-color: $terracotta;
-
-  &:hover {
+  &--accent {
     background-color: $terracotta-600;
+    color: #fff;
     border-color: $terracotta-600;
+
+    &:hover {
+      background-color: $terracotta-700;
+      border-color: $terracotta-700;
+    }
   }
 }
 
@@ -73,38 +74,38 @@
     background: $warm-black;
     color: $cream;
 
-    .link-arrow {
+    .link-card__arrow {
       transform: translate(4px, -4px);
     }
   }
-}
 
-.link-card-label {
-  font-size: $text-xs;
-  letter-spacing: $tracking-label;
-  text-transform: uppercase;
-  opacity: 0.6;
-  margin-bottom: $space-2;
-}
+  &__label {
+    font-size: $text-xs;
+    letter-spacing: $tracking-label;
+    text-transform: uppercase;
+    color: $earth-600;
+    margin-bottom: $space-2;
+  }
 
-.link-card-title {
-  font-family: $font-serif;
-  font-size: $text-2xl;
-  margin-bottom: $space-2;
-}
+  &__title {
+    font-family: $font-serif;
+    font-size: $text-2xl;
+    margin-bottom: $space-2;
+  }
 
-.link-card-desc {
-  font-size: $text-sm;
-  opacity: 0.8;
-  line-height: $leading-normal;
-}
+  &__desc {
+    font-size: $text-sm;
+    color: $earth-600;
+    line-height: $leading-normal;
+  }
 
-.link-arrow {
-  position: absolute;
-  top: $space-6;
-  right: $space-6;
-  font-size: $text-xl;
-  transition: transform $transition-slow;
+  &__arrow {
+    position: absolute;
+    top: $space-6;
+    right: $space-6;
+    font-size: $text-xl;
+    transition: transform $transition-slow;
+  }
 }
 
 // --------------------------------------------
@@ -132,13 +133,13 @@
       rgba(255, 255, 255, 0.1) 20px
     );
   }
-}
 
-.progress-fill {
-  height: 100%;
-  background: $terracotta;
-  width: 0%;
-  transition: width 1.5s ease-out;
+  &__fill {
+    height: 100%;
+    background: $terracotta;
+    width: 0%;
+    transition: width 1.5s ease-out;
+  }
 }
 
 // --------------------------------------------
@@ -160,85 +161,86 @@
     transform: translateX(-50%);
     background: $cream;
     padding: 0 $space-2;
-    color: $terracotta;
+    color: $terracotta-700;
+  }
+
+  &__title {
+    font-size: $text-xs;
+    letter-spacing: $tracking-label;
+    text-transform: uppercase;
+    margin-bottom: $space-2;
+  }
+
+  &__text {
+    font-family: $font-serif;
+    font-size: $text-xl;
+    line-height: $leading-snug;
   }
 }
 
-.badge-title {
-  font-size: $text-xs;
-  letter-spacing: $tracking-label;
-  text-transform: uppercase;
-  margin-bottom: $space-2;
-}
-
-.badge-text {
-  font-family: $font-serif;
-  font-size: $text-xl;
-  line-height: $leading-snug;
-}
-
 // --------------------------------------------
-// COUNTDOWN
+// COUNTDOWN (global utility)
+// Note: Component-specific countdown styles are in CountdownTimer.vue
 // --------------------------------------------
 
 .countdown {
   display: flex;
   justify-content: center;
   gap: $space-4;
-}
 
-.countdown-item {
-  background: $warm-black;
-  color: $cream;
-  padding: $space-6 $space-4;
-  min-width: 80px;
-  position: relative;
-  text-align: center;
+  &__item {
+    background: $warm-black;
+    color: $cream;
+    padding: $space-6 $space-4;
+    min-width: 80px;
+    position: relative;
+    text-align: center;
 
-  &::after {
-    content: '';
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    right: -4px;
-    bottom: -4px;
-    border: $border-width solid $terracotta;
-    z-index: -1;
+    &::after {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      right: -4px;
+      bottom: -4px;
+      border: $border-width solid $terracotta;
+      z-index: -1;
+    }
+
+    @media (max-width: $breakpoint-md) {
+      min-width: 65px;
+      padding: $space-4 $space-3;
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      min-width: 55px;
+      padding: $space-3 $space-2;
+    }
   }
 
-  @media (max-width: $breakpoint-md) {
-    min-width: 65px;
-    padding: $space-4 $space-3;
+  &__number {
+    font-size: $text-4xl;
+    font-weight: 700;
+    line-height: $leading-none;
+    display: block;
+
+    @media (max-width: $breakpoint-md) {
+      font-size: $text-3xl;
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      font-size: $text-2xl;
+    }
   }
 
-  @media (max-width: $breakpoint-sm) {
-    min-width: 55px;
-    padding: $space-3 $space-2;
+  &__unit {
+    font-size: $text-xs;
+    letter-spacing: $tracking-wider;
+    text-transform: uppercase;
+    margin-top: $space-2;
+    display: block;
+    opacity: 0.85;
   }
-}
-
-.countdown-number {
-  font-size: $text-4xl;
-  font-weight: 700;
-  line-height: $leading-none;
-  display: block;
-
-  @media (max-width: $breakpoint-md) {
-    font-size: $text-3xl;
-  }
-
-  @media (max-width: $breakpoint-sm) {
-    font-size: $text-2xl;
-  }
-}
-
-.countdown-unit {
-  font-size: $text-xs;
-  letter-spacing: $tracking-wider;
-  text-transform: uppercase;
-  margin-top: $space-2;
-  display: block;
-  opacity: 0.7;
 }
 
 // --------------------------------------------
@@ -250,46 +252,46 @@
   padding: $space-8;
   border: $border-width solid $warm-black;
   background: $cream;
-}
 
-.direct-support-label {
-  font-size: $text-sm;
-  letter-spacing: $tracking-label;
-  text-transform: uppercase;
-  text-align: center;
-  margin-bottom: $space-4;
-  opacity: 0.6;
-}
-
-.direct-links {
-  display: flex;
-  justify-content: center;
-  gap: $space-3;
-  flex-wrap: wrap;
-}
-
-.direct-link {
-  font-size: $text-sm;
-  letter-spacing: $tracking-wide;
-  text-transform: uppercase;
-  color: $warm-black;
-  text-decoration: none;
-  padding: $space-3 $space-6;
-  border: $border-width solid $warm-black;
-  background: $cream;
-  transition: all $transition-base;
-
-  &:hover {
-    background: $warm-black;
-    color: $cream;
+  &__label {
+    font-size: $text-sm;
+    letter-spacing: $tracking-label;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: $space-4;
+    color: $earth-600;
   }
 
-  .cc-note {
-    font-size: $text-xs;
-    opacity: 0.6;
-    margin-left: $space-1;
-    letter-spacing: 0.02em;
-    text-transform: none;
+  &__links {
+    display: flex;
+    justify-content: center;
+    gap: $space-3;
+    flex-wrap: wrap;
+  }
+
+  &__link {
+    font-size: $text-sm;
+    letter-spacing: $tracking-wide;
+    text-transform: uppercase;
+    color: $warm-black;
+    text-decoration: none;
+    padding: $space-3 $space-6;
+    border: $border-width solid $warm-black;
+    background: $cream;
+    transition: all $transition-base;
+
+    &:hover {
+      background: $warm-black;
+      color: $cream;
+    }
+
+    .cc-note {
+      font-size: $text-xs;
+      color: $earth-500;
+      margin-left: $space-1;
+      letter-spacing: 0.02em;
+      text-transform: none;
+    }
   }
 }
 
@@ -300,29 +302,29 @@
 .social-links {
   display: flex;
   gap: $space-8;
-}
 
-.social-link {
-  font-size: $text-sm;
-  letter-spacing: $tracking-wider;
-  text-transform: uppercase;
-  color: $warm-black;
-  text-decoration: none;
-  position: relative;
+  &__link {
+    font-size: $text-sm;
+    letter-spacing: $tracking-wider;
+    text-transform: uppercase;
+    color: $warm-black;
+    text-decoration: none;
+    position: relative;
 
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: $terracotta;
-    transition: width $transition-slow;
-  }
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: $terracotta;
+      transition: width $transition-slow;
+    }
 
-  &:hover::after {
-    width: 100%;
+    &:hover::after {
+      width: 100%;
+    }
   }
 }
 
@@ -358,7 +360,7 @@
   }
 
   &::placeholder {
-    opacity: 0.5;
+    opacity: 0.75;
   }
 }
 

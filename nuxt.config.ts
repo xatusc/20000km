@@ -1,7 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  compatibilityDate: '2025-01-16',
+
+  // Compatibility date locks Nuxt behavior to a specific version
+  // Update periodically to get latest features and fixes
+  // Last updated: January 17, 2026
+  compatibilityDate: '2026-01-17',
 
   modules: [
     '@nuxtjs/i18n',
@@ -11,6 +15,7 @@ export default defineNuxtConfig({
   // Component auto-import configuration
   components: {
     dirs: [
+      { path: '~/components', pathPrefix: false },
       { path: '~/components/global', pathPrefix: false },
       { path: '~/components/home', pathPrefix: false },
       { path: '~/components/map', pathPrefix: false },
@@ -61,9 +66,20 @@ export default defineNuxtConfig({
   },
 
   // Image optimization
+  // Automatically optimizes images, creates responsive sizes, and uses modern formats
   image: {
     quality: 80,
     formats: ['webp', 'avif', 'jpg'],
+    screens: {
+      xs: 320,
+      sm: 640,
+      md: 768,
+      lg: 1024,
+      xl: 1280,
+      xxl: 1536,
+    },
+    densities: [1, 2], // For retina displays
+    provider: 'ipx', // Built-in image processor
   },
 
   // App head configuration
@@ -79,6 +95,8 @@ export default defineNuxtConfig({
         { name: 'description', content: 'One woman. 20,000 kilometers. Vladivostok to Lisbon. A Planetary Neighborhood Run.' }
       ],
       link: [
+        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+        { rel: 'apple-touch-icon', href: '/apple-touch-icon.svg' },
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
         {
@@ -99,6 +117,6 @@ export default defineNuxtConfig({
 
   // Generate static routes
   generate: {
-    routes: ['/', '/live-updates', '/planetary-run-club', '/about', '/contact']
+    routes: ['/', '/journey', '/planetary-run-club', '/about', '/contact', '/support']
   }
 })

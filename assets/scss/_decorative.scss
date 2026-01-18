@@ -1,0 +1,113 @@
+@use 'variables' as *;
+
+// ============================================
+// DECORATIVE PATTERNS - Retro Design Elements
+// ============================================
+
+// --------------------------------------------
+// STRIPE DIVIDERS
+// --------------------------------------------
+
+// Diagonal stripe pattern for section dividers
+@mixin stripe-divider($color: $earth-200, $size: 4px) {
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent $size,
+    $color $size,
+    $color ($size * 2)
+  );
+}
+
+// Utility class for stripe dividers
+.stripe-divider {
+  @include stripe-divider;
+  height: 8px;
+  width: 100%;
+}
+
+.stripe-divider--subtle {
+  @include stripe-divider($sand-200, 3px);
+  height: 6px;
+}
+
+.stripe-divider--bold {
+  @include stripe-divider($earth-300, 5px);
+  height: 10px;
+}
+
+// --------------------------------------------
+// PAPER/PARCHMENT TEXTURE
+// --------------------------------------------
+
+// Paper texture using CSS gradients - visible parchment effect
+@mixin paper-texture($base-color: $sand-100) {
+  background-color: $base-color;
+  background-image:
+    // Visible grain and aging effect
+    radial-gradient(ellipse at 15% 25%, rgba(139, 122, 100, 0.12) 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 75%, rgba(139, 122, 100, 0.10) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 10%, rgba(139, 122, 100, 0.08) 0%, transparent 40%),
+    radial-gradient(ellipse at 35% 85%, rgba(139, 122, 100, 0.10) 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 35%, rgba(139, 122, 100, 0.06) 0%, transparent 35%),
+    // Edge darkening for aged paper feel
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 0%, transparent 10%, transparent 90%, rgba(0, 0, 0, 0.04) 100%);
+}
+
+// Utility class for paper texture backgrounds
+.paper-texture {
+  @include paper-texture;
+}
+
+.paper-texture--warm {
+  @include paper-texture($sand-50);
+}
+
+.paper-texture--darker {
+  @include paper-texture($sand-200);
+}
+
+// --------------------------------------------
+// HAND-DRAWN BORDERS
+// --------------------------------------------
+
+// Organic, imperfect border that looks hand-drawn
+@mixin hand-drawn-border($color: $warm-black, $width: 2px) {
+  border: $width solid $color;
+  // Asymmetric border-radius creates organic, hand-drawn feel
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+}
+
+// Alternative: more subtle hand-drawn effect
+@mixin hand-drawn-border-subtle($color: $earth-600, $width: 1px) {
+  border: $width solid $color;
+  border-radius: 40px 4px 30px 4px / 4px 30px 4px 40px;
+}
+
+// Utility classes for hand-drawn borders
+.hand-drawn-border {
+  @include hand-drawn-border;
+}
+
+.hand-drawn-border--subtle {
+  @include hand-drawn-border-subtle;
+}
+
+.hand-drawn-border--terracotta {
+  @include hand-drawn-border($terracotta, 2px);
+}
+
+// --------------------------------------------
+// COMBINED DECORATIVE CARD
+// --------------------------------------------
+
+// Card with paper texture and hand-drawn border
+@mixin decorative-card {
+  @include paper-texture;
+  @include hand-drawn-border;
+  padding: $space-6;
+}
+
+.decorative-card {
+  @include decorative-card;
+}

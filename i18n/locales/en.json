@@ -129,8 +129,8 @@
     "email": "hello{'@'}20000km.com"
   },
   "sensory": {
-    "enableMotion": "Turn on motion",
-    "disableMotion": "Motion is off"
+    "turnOnMotion": "Turn on motion",
+    "turnOffMotion": "Turn off motion"
   },
   "accessibility": {
     "skipToContent": "Skip to main content"
