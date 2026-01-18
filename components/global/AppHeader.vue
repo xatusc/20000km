@@ -316,7 +316,7 @@ watch(() => route.path, () => {
   &__nav-mobile {
     display: none;
     flex-direction: column;
-    padding: $space-4 0;
+    padding: $space-4 $space-6;
     border-top: $border-width solid rgba($warm-black, 0.1);
     margin-top: $space-4;
 
