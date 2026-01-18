@@ -32,8 +32,28 @@ export default defineNuxtConfig({
         scss: {
           additionalData: '@use "~/assets/scss/_variables" as *;'
         }
-      }
-    }
+      },
+    },
+    build: {
+      // Ensure sharp binaries are properly externalized for SSR
+      rollupOptions: {
+        external: ['sharp'],
+      },
+    },
+    optimizeDeps: {
+      exclude: ['sharp'],
+    },
+  },
+
+  // PostCSS configuration - disable SVGO optimization for data URIs
+  postcss: {
+    plugins: {
+      'cssnano': {
+        preset: ['default', {
+          svgo: false, // Disable SVGO to prevent data URI parsing errors
+        }],
+      },
+    },
   },
 
   // i18n Configuration (English only initially, ready for expansion)
@@ -110,10 +130,13 @@ export default defineNuxtConfig({
     },
   },
 
-  // Netlify deployment
+  // Netlify deployment (static for Netlify Forms support)
   nitro: {
-    preset: 'netlify'
+    preset: 'netlify_static'
   },
+
+  // Enable static site generation
+  ssr: true,
 
   // Generate static routes
   generate: {

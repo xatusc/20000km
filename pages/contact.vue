@@ -169,7 +169,7 @@ const handleSubmit = async (e: Event) => {
           class="contact-form"
           @submit="handleSubmit"
         >
-          <!-- Netlify form name (required for Netlify to detect the form) -->
+          <!-- Netlify form name (required for detection) -->
           <input type="hidden" name="form-name" value="contact">
 
           <!-- Honeypot field (spam protection) -->
