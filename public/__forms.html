@@ -1,0 +1,27 @@
+<!--
+  This file exists solely for Netlify Forms detection.
+  Netlify's build process scans static HTML files to register forms.
+  This file is not linked anywhere and won't be accessed by users.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Forms</title>
+</head>
+<body>
+  <form name="contact" data-netlify="true" netlify-honeypot="bot-field">
+    <input type="hidden" name="form-name" value="contact">
+    <input name="bot-field">
+    <input name="name" type="text">
+    <input name="email" type="email">
+    <select name="reason">
+      <option value="press">Press & Media</option>
+      <option value="sponsorship">Sponsorship</option>
+      <option value="land-crew">Land Crew</option>
+      <option value="other">Other</option>
+    </select>
+    <textarea name="message"></textarea>
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>
