@@ -60,54 +60,64 @@ watch(motionAllowed, (allowed) => {
       </div>
     </section>
 
+    <!-- Intro section - The Movement is Growing -->
+    <section class="intro-section">
+      <div class="container">
+        <div class="intro-section__grid">
+          <div class="intro-section__content">
+            <h2 class="intro-section__title">The Movement is Growing</h2>
+            <p class="intro-section__desc">
+              Planetary Run Club is a community of runners joining Ria's journey.
+              Right now, that means weekly dispatches from training. Once the run
+              begins, we'll be building virtual challenges, meetups, and more — together.
+            </p>
+            <p class="intro-section__location">
+              Whether you're in Tokyo or Toronto, Berlin or Buenos Aires—you're
+              part of this journey.
+            </p>
+
+            <div class="intro-section__social">
+              <a href="https://substack.com/@whereisriax" target="_blank" rel="noopener noreferrer" class="intro-section__social-link" aria-label="Follow on Substack (opens in new tab)">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/>
+                </svg>
+                <span>Substack</span>
+              </a>
+              <a href="https://instagram.com/whereisriax" target="_blank" rel="noopener noreferrer" class="intro-section__social-link" aria-label="Follow on Instagram (opens in new tab)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                </svg>
+                <span>Instagram</span>
+              </a>
+              <a href="https://strava.app.link/Ko6etEYp5Zb" target="_blank" rel="noopener noreferrer" class="intro-section__social-link" aria-label="Follow on Strava (opens in new tab)">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169"/>
+                </svg>
+                <span>Strava</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Strava Club Stats -->
+    <StravaClubStats />
+
+    <!-- Strava Events with Tabs -->
+    <StravaEventsTabs />
+
+    <!-- Strava Activity Feed -->
+    <StravaActivityFeed />
+
     <!-- Pull quote section -->
     <section class="quote-section">
       <blockquote class="quote-section__content">
         <p><span ref="quoteRef" class="typewriter" :aria-label="quoteText"></span></p>
       </blockquote>
     </section>
-
-    <!-- Community section -->
-    <div class="container">
-      <section class="community-section">
-        <div class="community-section__card">
-          <h2 class="community-section__title">The Movement is Growing</h2>
-          <p class="community-section__desc">
-            Planetary Run Club is a community of runners joining Ria's journey.
-            Right now, that means weekly dispatches from training. Once the run
-            begins, we'll be building virtual challenges, meetups, and more — together.
-          </p>
-          <p class="community-section__location">
-            Whether you're in Tokyo or Toronto, Berlin or Buenos Aires—you're
-            part of this journey.
-          </p>
-
-          <div class="community-section__social">
-            <a href="https://substack.com/@whereisriax" target="_blank" rel="noopener" class="community-section__social-link">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/>
-              </svg>
-              <span>Substack</span>
-            </a>
-            <a href="https://instagram.com/whereisriax" target="_blank" rel="noopener" class="community-section__social-link">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-              </svg>
-              <span>Instagram</span>
-            </a>
-            <a href="https://strava.app.link/B5t6CElN7Yb" target="_blank" rel="noopener" class="community-section__social-link">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M15.387 17.944l-2.089-4.116h-3.065L15.387 24l5.15-10.172h-3.066m-7.008-5.599l2.836 5.598h4.172L10.463 0l-7 13.828h4.169"/>
-              </svg>
-              <span>Strava</span>
-            </a>
-          </div>
-
-        </div>
-      </section>
-    </div>
 
     <!-- Dune image - full width -->
     <figure class="team-image">
@@ -167,49 +177,31 @@ watch(motionAllowed, (allowed) => {
   }
 }
 
-// Pull quote section
-.quote-section {
-  padding: $space-16 $space-4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: $sand-100;
+// Intro section - The Movement is Growing
+.intro-section {
+  padding: $space-12 $space-4;
+  background: $cream;
+  border-bottom: 1px solid $earth-200;
 
-  &__content {
-    max-width: 800px;
-    margin: 0;
-    text-align: center;
-
-    p {
-      font-family: $font-serif;
-      font-size: clamp($text-xl, 3vw, $text-3xl);
-      font-style: italic;
-      line-height: $leading-relaxed;
-      color: $warm-black;
-      margin: 0;
-    }
-  }
-}
-
-// Community section
-.community-section {
-  padding: $space-16 0;
-
-  &__card {
-    text-align: center;
-    max-width: 700px;
+  .container {
+    max-width: $max-width-narrow;
     margin: 0 auto;
+  }
+
+  &__grid {
+    text-align: center;
   }
 
   &__title {
     font-family: $font-serif;
     font-size: $text-2xl;
     margin-bottom: $space-4;
+    color: $warm-black;
   }
 
   &__desc {
     font-size: $text-base;
-    color: $earth-600;
+    color: $earth-700; // WCAG AA compliant
     line-height: $leading-relaxed;
     margin-bottom: $space-4;
   }
@@ -217,8 +209,8 @@ watch(motionAllowed, (allowed) => {
   &__location {
     font-size: $text-base;
     font-style: italic;
-    color: $earth-500;
-    margin-bottom: $space-8;
+    color: $earth-600;
+    margin-bottom: $space-6;
   }
 
   &__social {
@@ -234,7 +226,7 @@ watch(motionAllowed, (allowed) => {
     gap: $space-2;
     font-family: $font-mono;
     font-size: $text-sm;
-    color: $earth-600;
+    color: $earth-700; // WCAG AA compliant
     text-decoration: none;
     transition: color 0.2s ease;
     position: relative;
@@ -265,6 +257,35 @@ watch(motionAllowed, (allowed) => {
       span::after {
         width: 100%;
       }
+    }
+
+    &:focus-visible {
+      outline: 2px solid $terracotta-500;
+      outline-offset: 2px;
+    }
+  }
+}
+
+// Pull quote section
+.quote-section {
+  padding: $space-16 $space-4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $sand-100;
+
+  &__content {
+    max-width: 800px;
+    margin: 0;
+    text-align: center;
+
+    p {
+      font-family: $font-serif;
+      font-size: clamp($text-xl, 3vw, $text-3xl);
+      font-style: italic;
+      line-height: $leading-relaxed;
+      color: $warm-black;
+      margin: 0;
     }
   }
 }

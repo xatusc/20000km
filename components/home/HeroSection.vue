@@ -39,15 +39,15 @@ const { motionAllowed } = useSensoryMode()
     <div class="hero__content">
       <h1 class="hero__title">
         <span class="hero__number">20<span class="hero__comma">,</span>000</span>
-        <span class="hero__unit">kilometers</span>
+        <span class="hero__unit">{{ $t('hero.unit') }}</span>
       </h1>
 
-      <p class="hero__tagline">"Only delusional until it's not"</p>
+      <p class="hero__tagline">{{ $t('hero.tagline') }}</p>
     </div>
 
     <!-- Scroll indicator -->
     <div class="hero__scroll" aria-hidden="true">
-      <span class="hero__scroll-text">Scroll</span>
+      <span class="hero__scroll-text">{{ $t('hero.explore') }}</span>
       <span class="hero__scroll-line"></span>
     </div>
   </section>
@@ -64,9 +64,9 @@ const { motionAllowed } = useSensoryMode()
   display: flex;
   align-items: center;
   justify-content: center;
-  // Full-width bleed
-  margin: (-$space-12) calc(-50vw + 50%) 0;
-  width: 100vw;
+  // Full-width - no breakout needed since hero is not inside .container
+  margin-top: (-$space-12);
+  width: 100%;
   overflow: hidden;
 }
 

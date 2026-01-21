@@ -3,15 +3,14 @@
 // 1. Hero (minimalist - just number + tagline, full-screen)
 // 2. Intro Section (below fold - CTA, countdown, location stamp)
 // 3. Story Section (the personal narrative)
-// 4. Pull Quote (full-screen visual break)
-// 5. Route Map Banner (full-width with CTA to journey page)
-// 6. Editorial Gallery (dramatic imagery, asymmetrical layout)
-// 7. Media Coverage (social proof)
-// 8. Support Section (simplified: progress bar + CTA)
+// 4. Route Map Banner (full-width with CTA to journey page)
+// 5. Media Coverage (social proof)
+// 6. Support Section (simplified: progress bar + CTA)
+// 7. Voice Notes CTA (engagement)
 
 useSeoMeta({
   title: '20,000KM | The First Human to Run the Silk Road',
-  description: 'One woman. 20,000 kilometers. Seventeen countries. The first human to run across Asia and Europe, retracing the ancient Silk Road on foot.'
+  description: 'One woman. 20,000 kilometers. 17 countries. The first human to run across Asia and Europe on the silk road.'
 })
 </script>
 
@@ -28,26 +27,23 @@ useSeoMeta({
       <StorySection />
     </div>
 
-    <!-- 4. Pull Quote (full-screen) -->
-    <PullQuote />
-
-    <!-- 5. Route Map Banner (full-width with CTA) -->
+    <!-- 4. Route Map Banner (full-width with CTA) -->
     <RouteMapBanner />
 
-    <!-- 6. Editorial Gallery (full-width, asymmetrical) -->
-    <EditorialGallery />
-
-    <!-- 7. Media Coverage (social proof) -->
+    <!-- 5. Media Coverage (social proof) -->
     <div class="container">
       <MediaCoverage />
     </div>
 
-    <!-- 8. Support Section (simplified) -->
+    <!-- 6. Support Section (simplified) -->
     <section class="support-wrapper">
       <div class="container">
         <SupportSection />
       </div>
     </section>
+
+    <!-- 7. Voice Notes CTA -->
+    <VoiceNotesSection />
   </div>
 </template>
 

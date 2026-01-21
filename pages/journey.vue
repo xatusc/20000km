@@ -3,10 +3,9 @@
  * The Journey page - Vintage expedition documentary experience
  * Structure:
  * 1. Map Hero (dramatic countdown + full-width map)
- * 2. Dispatches (Substack)
+ * 2. Instagram Grid (full-bleed)
  * 3. Podcast Section
- * 4. Instagram Grid (full-bleed)
- * 5. Voice Notes CTA (after investment)
+ * 4. Voice Notes CTA (after investment)
  */
 
 useHead({
@@ -17,7 +16,7 @@ useHead({
 
 useSeoMeta({
   title: 'The Journey | 20,000KM',
-  description: 'Follow the live progress of the 20,000km run from Vladivostok to Lisbon. Stories, podcast, and updates from the Silk Road.'
+  description: 'Follow the progress of the 20,000km run from Vladivostok to Lisbon. Updates from the Silk Road.'
 })
 
 </script>
@@ -34,14 +33,14 @@ useSeoMeta({
       <div class="container">
         <!-- Page title - dramatic -->
         <header class="hero-header">
-          <span class="hero-eyebrow">Expedition Log</span>
-          <h1 class="hero-title">The Journey</h1>
-          <p class="hero-tagline">20,000 kilometers · 17 countries · One step at a time</p>
+          <span class="hero-eyebrow">{{ $t('journey.eyebrow') }}</span>
+          <h1 class="hero-title">{{ $t('journey.title') }}</h1>
+          <p class="hero-tagline">{{ $t('journey.tagline') }}</p>
         </header>
 
         <!-- Countdown -->
         <div class="hero-countdown">
-          <CountdownTimer />
+          <CountdownTimer :show-date="false" />
         </div>
 
         <!-- Full-width Interactive Map (milestones now on Support page) -->
@@ -52,34 +51,13 @@ useSeoMeta({
     </section>
 
     <!-- ============================================
-         DISPATCHES (Substack)
-         ============================================ -->
-    <section class="dispatches-section">
-      <div class="container">
-        <header class="section-header">
-          <span class="section-eyebrow">Field Notes</span>
-          <h2 class="section-heading">Dispatches</h2>
-          <p class="section-subhead">Stories from the Long Run Letters</p>
-        </header>
-        <div class="dispatches-content">
-          <SubstackFeed />
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================
-         PODCAST SECTION
-         ============================================ -->
-    <PodcastSection />
-
-    <!-- ============================================
-         INSTAGRAM GRID - FULL BLEED
+         INSTAGRAM GRID - FULL BLEED (moved to first)
          ============================================ -->
     <section class="instagram-section">
       <div class="container">
         <header class="section-header">
-          <span class="section-eyebrow">From the Field</span>
-          <h2 class="section-heading">Training & Prep</h2>
+          <span class="section-eyebrow">{{ $t('journey.instagram.eyebrow') }}</span>
+          <h2 class="section-heading">{{ $t('journey.instagram.title') }}</h2>
           <a
             href="https://instagram.com/whereisriax"
             target="_blank"
@@ -102,6 +80,11 @@ useSeoMeta({
         ></iframe>
       </div>
     </section>
+
+    <!-- ============================================
+         PODCAST SECTION
+         ============================================ -->
+    <PodcastSection />
 
     <!-- ============================================
          VOICE NOTES CTA (After content investment)
@@ -176,26 +159,7 @@ useSeoMeta({
 
 .hero-countdown {
   margin: 0 auto $space-12;
-  max-width: 600px;
-  background: $warm-black;
-  padding: $space-8 $space-10;
-  border: 2px solid $warm-black;
   text-align: center;
-
-  // Invert countdown colors for dark background
-  :deep(.countdown) {
-    .countdown__label {
-      color: $terracotta-400;
-    }
-
-    .countdown__number {
-      color: $cream;
-    }
-
-    .countdown__unit {
-      color: rgba($cream, 0.85);
-    }
-  }
 }
 
 // ============================================
@@ -251,20 +215,6 @@ useSeoMeta({
   &:hover {
     color: $terracotta-800;
   }
-}
-
-// ============================================
-// DISPATCHES SECTION
-// ============================================
-
-.dispatches-section {
-  padding: $space-20 0;
-  background: $cream; // Flat
-}
-
-.dispatches-content {
-  max-width: 700px;
-  margin: 0 auto;
 }
 
 // ============================================

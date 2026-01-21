@@ -3,9 +3,12 @@
  * VoiceNotesSection - CTA for supporters to send voice messages to Ria
  * Bold, attention-grabbing design to encourage engagement
  */
+const { t } = useI18n()
 
 const voiceNoteEmail = 'hello@20000km.com'
-const voiceNoteLink = `mailto:${voiceNoteEmail}?subject=Voice Note for Ria&body=Hi Ria! Here's my message of encouragement for your journey...`
+const voiceNoteLink = computed(() =>
+  `mailto:${voiceNoteEmail}?subject=${encodeURIComponent(t('voiceNotes.emailSubject'))}&body=${encodeURIComponent(t('voiceNotes.emailBody'))}`
+)
 </script>
 
 <template>
@@ -22,11 +25,9 @@ const voiceNoteLink = `mailto:${voiceNoteEmail}?subject=Voice Note for Ria&body=
         </div>
 
         <div class="voice-notes__content">
-          <span class="voice-notes__label">Cheer Her On</span>
-          <h2 class="voice-notes__title">Send Ria a Voice Note</h2>
-          <p class="voice-notes__desc">
-            Record a message of encouragement. Your voice will fuel the kilometers ahead.
-          </p>
+          <span class="voice-notes__label">{{ $t('voiceNotes.label') }}</span>
+          <h2 class="voice-notes__title">{{ $t('voiceNotes.title') }}</h2>
+          <p class="voice-notes__desc">{{ $t('voiceNotes.desc') }}</p>
         </div>
 
         <a
@@ -38,7 +39,7 @@ const voiceNoteLink = `mailto:${voiceNoteEmail}?subject=Voice Note for Ria&body=
               <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
             </svg>
           </span>
-          Send a Message
+          {{ $t('voiceNotes.cta') }}
         </a>
       </div>
     </div>

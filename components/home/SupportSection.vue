@@ -8,14 +8,14 @@ const { formattedFunded, formattedTotal, progress } = useFundraising()
   <section class="support-section">
     <!-- Left: Content -->
     <div class="support-section__content">
-      <span class="support-section__eyebrow">Running West</span>
-      <h2 class="support-section__title">Help Make<br>This Happen</h2>
+      <span class="support-section__eyebrow">{{ $t('supportSection.eyebrow') }}</span>
+      <h2 class="support-section__title" v-html="$t('supportSection.title').replace(' ', '<br>')"></h2>
 
       <!-- Progress indicator - prominent with black frame -->
       <div class="support-section__progress">
         <div class="support-section__progress-header">
-          <span class="support-section__progress-funded">{{ formattedFunded }} km funded</span>
-          <span class="support-section__progress-total">of {{ formattedTotal }} km</span>
+          <span class="support-section__progress-funded">{{ formattedFunded }} {{ $t('supportSection.kmFunded') }}</span>
+          <span class="support-section__progress-total">{{ $t('supportSection.of') }} {{ formattedTotal }} km</span>
         </div>
         <div
           class="support-section__progress-bar"
@@ -30,15 +30,13 @@ const { formattedFunded, formattedTotal, progress } = useFundraising()
           </div>
         </div>
         <div class="support-section__progress-endpoints">
-          <span>Vladivostok</span>
-          <span>Cabo da Roca</span>
+          <span>{{ $t('locations.vladivostok') }}</span>
+          <span>{{ $t('locations.lisbon') }}</span>
         </div>
       </div>
 
       <!-- Single compelling line -->
-      <p class="support-section__hook">
-        Every €5 funds 1 kilometer. Every contribution gets her closer to supported.
-      </p>
+      <p class="support-section__hook">{{ $t('supportSection.hook') }}</p>
 
       <!-- Single CTA to GoFundMe -->
       <a
@@ -47,12 +45,13 @@ const { formattedFunded, formattedTotal, progress } = useFundraising()
         rel="noopener noreferrer"
         class="support-section__cta"
       >
-        Donate Now
+        {{ $t('supportSection.cta') }}
       </a>
 
-      <NuxtLink to="/support" class="support-section__details">
-        See full breakdown & milestones →
-      </NuxtLink>
+      <!-- Sponsorship contact -->
+      <p class="support-section__sponsor">
+        <a href="mailto:hello@20000km.com">hello@20000km.com</a> {{ $t('supportSection.sponsorText') }}
+      </p>
     </div>
 
     <!-- Right: Large dramatic image -->
@@ -207,6 +206,22 @@ const { formattedFunded, formattedTotal, progress } = useFundraising()
       background: $terracotta-800;
       border-color: $terracotta-800;
       transform: translateY(-1px);
+    }
+  }
+
+  &__sponsor {
+    margin-top: $space-4;
+    font-family: $font-mono;
+    font-size: $text-sm;
+    color: $earth-500;
+
+    a {
+      color: $terracotta-700;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 

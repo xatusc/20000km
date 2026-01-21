@@ -84,9 +84,9 @@ const coverImage = '/images/Ria_lookback.webp'
   <section class="podcast-section">
     <div class="container">
       <header class="podcast-header">
-        <span class="podcast-eyebrow">Audio Dispatches</span>
-        <h2 class="podcast-title">The Podcast</h2>
-        <p class="podcast-subhead">Conversations from the road</p>
+        <span class="podcast-eyebrow">{{ $t('podcast.eyebrow') }}</span>
+        <h2 class="podcast-title">{{ $t('podcast.title') }}</h2>
+        <p class="podcast-subhead">{{ $t('podcast.subhead') }}</p>
       </header>
 
       <!-- Loading State -->
@@ -98,7 +98,7 @@ const coverImage = '/images/Ria_lookback.webp'
       <div v-else-if="error" class="podcast-error">
         <p>{{ error }}</p>
         <a :href="podcastUrl" target="_blank" rel="noopener noreferrer" class="podcast-cta">
-          Listen on Spotify
+          {{ $t('podcast.listenOn') }}
         </a>
       </div>
 
@@ -112,7 +112,7 @@ const coverImage = '/images/Ria_lookback.webp'
 
           <div class="podcast-featured__content">
             <span class="podcast-featured__badge">
-              Latest Episode
+              {{ $t('podcast.latestEpisode') }}
               <span v-if="latestEpisode.duration"> · {{ latestEpisode.duration }}</span>
             </span>
 
@@ -125,7 +125,7 @@ const coverImage = '/images/Ria_lookback.webp'
               <button
                 type="button"
                 class="audio-player__btn"
-                :aria-label="isPlaying ? 'Pause' : 'Play'"
+                :aria-label="isPlaying ? $t('podcast.pause') : $t('podcast.play')"
                 @click="togglePlay"
               >
                 <!-- Play Icon -->
@@ -193,7 +193,7 @@ const coverImage = '/images/Ria_lookback.webp'
 
         <!-- More Episodes -->
         <div v-if="moreEpisodes.length > 0" class="podcast-more">
-          <h4 class="podcast-more__title">More Episodes</h4>
+          <h4 class="podcast-more__title">{{ $t('podcast.moreEpisodes') }}</h4>
 
           <div class="podcast-episodes">
             <a

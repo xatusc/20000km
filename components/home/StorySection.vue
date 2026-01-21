@@ -15,27 +15,17 @@ onMounted(() => {
 <template>
   <section ref="sectionRef" class="story-section">
     <div class="story-section__content reveal">
-      <span class="story-section__eyebrow">The Beginning</span>
-      <h2 class="story-section__title">The Story</h2>
+      <span class="story-section__eyebrow">{{ $t('story.eyebrow') }}</span>
+      <h2 class="story-section__title">{{ $t('story.title') }}</h2>
 
       <div class="story-section__text">
-        <p>
-          Two years ago, Ria Xi couldn't get out of bed. Burned out from her tech career
-          in Silicon Valley, she started running as a 30-day challenge after a breakup.
-        </p>
-        <p>
-          Within a year, she went from struggling to finish a half marathon to setting
-          Fastest Known Times on world-renowned routes. The Via Francigena: 1,014 km in
-          21 days. The Camino de Santiago: 780 km in 12 days.
-        </p>
-        <p class="story-section__highlight">
-          Now she's attempting the impossible: running 20,000 kilometers from Vladivostok
-          to Lisbon, retracing the ancient Silk Road on foot.
-        </p>
+        <p>{{ $t('story.paragraph1') }}</p>
+        <p>{{ $t('story.paragraph2') }}</p>
+        <p class="story-section__highlight">{{ $t('story.highlight') }}</p>
       </div>
 
-      <NuxtLink to="/about" class="story-section__link">
-        Read the full story →
+      <NuxtLink to="/who" class="story-section__link">
+        {{ $t('story.link') }}
       </NuxtLink>
     </div>
 

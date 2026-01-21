@@ -1,39 +1,38 @@
 <script setup lang="ts">
 // Footer component with sitemap navigation and social links
+const { t } = useI18n()
 
 // Sitemap navigation - deduplicated, SEO-optimized labels
-const siteLinks = [
-  { to: '/about', label: 'About' },
-  { to: '/journey', label: 'The Journey' },
-  { to: '/planetary-run-club', label: 'Run Club' }
-]
+const siteLinks = computed(() => [
+  { to: '/who', labelKey: 'footer.links.who' },
+  { to: '/journey', labelKey: 'footer.links.theJourney' },
+  { to: '/planetary-run-club', labelKey: 'footer.links.runClub' }
+])
 
-const socialLinks = [
-  { href: 'https://instagram.com/whereisriax', label: 'Instagram' },
-  { href: 'https://strava.app.link/B5t6CElN7Yb', label: 'Strava' },
-  { href: 'https://substack.com/@whereisriax', label: 'Substack' }
-]
+const socialLinks = computed(() => [
+  { href: 'https://instagram.com/whereisriax', labelKey: 'footer.links.instagram' },
+  { href: 'https://strava.app.link/B5t6CElN7Yb', labelKey: 'footer.links.strava' },
+  { href: 'https://tiktok.com/@whereisriax', labelKey: 'footer.links.tiktok' }
+])
 </script>
 
 <template>
   <footer class="footer">
     <div class="container">
-      <!-- Newsletter CTA row -->
+      <!-- Follow CTA row -->
       <div class="footer__newsletter">
         <div class="footer__newsletter-content">
-          <h3 class="footer__newsletter-title">Long Run Letters</h3>
-          <p class="footer__newsletter-desc">
-            Weekly stories from the road. Training updates now, live dispatches from 17 countries starting May 2026.
-          </p>
+          <h3 class="footer__newsletter-title">{{ $t('footer.followTitle') }}</h3>
+          <p class="footer__newsletter-desc">{{ $t('footer.followDesc') }}</p>
         </div>
 
         <a
-          href="https://substack.com/@whereisriax"
+          href="https://instagram.com/whereisriax"
           target="_blank"
           rel="noopener noreferrer"
           class="footer__newsletter-link"
         >
-          Subscribe on Substack &rarr;
+          {{ $t('footer.followCta') }}
         </a>
       </div>
 
@@ -41,21 +40,21 @@ const socialLinks = [
       <nav class="footer__sitemap" aria-label="Footer navigation">
         <!-- Column 1: The Run -->
         <div class="footer__sitemap-col">
-          <h4 class="footer__sitemap-heading">The Run</h4>
+          <h4 class="footer__sitemap-heading">{{ $t('footer.columns.theRun') }}</h4>
           <ul class="footer__sitemap-links">
             <li v-for="link in siteLinks" :key="link.to">
-              <NuxtLink :to="link.to">{{ link.label }}</NuxtLink>
+              <NuxtLink :to="link.to">{{ $t(link.labelKey) }}</NuxtLink>
             </li>
           </ul>
         </div>
 
         <!-- Column 2: Follow -->
         <div class="footer__sitemap-col">
-          <h4 class="footer__sitemap-heading">Follow</h4>
+          <h4 class="footer__sitemap-heading">{{ $t('footer.columns.follow') }}</h4>
           <ul class="footer__sitemap-links">
             <li v-for="link in socialLinks" :key="link.href">
               <a :href="link.href" target="_blank" rel="noopener noreferrer">
-                {{ link.label }}
+                {{ $t(link.labelKey) }}
               </a>
             </li>
           </ul>
@@ -63,23 +62,23 @@ const socialLinks = [
 
         <!-- Column 3: Support -->
         <div class="footer__sitemap-col">
-          <h4 class="footer__sitemap-heading">Support</h4>
+          <h4 class="footer__sitemap-heading">{{ $t('footer.columns.support') }}</h4>
           <ul class="footer__sitemap-links">
             <li>
-              <NuxtLink to="/support">Support the Journey</NuxtLink>
+              <NuxtLink to="/support">{{ $t('footer.links.supportTheJourney') }}</NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/contact?reason=sponsorship">Become a Sponsor</NuxtLink>
+              <NuxtLink to="/contact">{{ $t('footer.links.becomeSponsor') }}</NuxtLink>
             </li>
           </ul>
         </div>
 
         <!-- Column 4: Connect -->
         <div class="footer__sitemap-col">
-          <h4 class="footer__sitemap-heading">Connect</h4>
+          <h4 class="footer__sitemap-heading">{{ $t('footer.columns.connect') }}</h4>
           <ul class="footer__sitemap-links">
             <li>
-              <NuxtLink to="/contact?reason=press">Press & Media</NuxtLink>
+              <NuxtLink to="/contact">{{ $t('footer.links.pressMedia') }}</NuxtLink>
             </li>
             <li>
               <a href="mailto:hello@20000km.com">hello@20000km.com</a>
@@ -90,17 +89,13 @@ const socialLinks = [
 
       <!-- Brand Statement (SEO keyword targeting) -->
       <div class="footer__brand-statement">
-        <p>
-          20,000KM is the first human attempt to run across Asia and Europe,
-          retracing the ancient Silk Road on foot. One woman. Seventeen countries.
-          From Vladivostok to Cabo da Roca.
-        </p>
+        <p>{{ $t('footer.brandStatement') }}</p>
       </div>
 
       <!-- Bottom row -->
       <div class="footer__bottom">
-        <span class="footer__copyright">&copy; 2026-2027 20,000KM Expedition</span>
-        <NuxtLink to="/contact" class="footer__contact-link">Contact</NuxtLink>
+        <span class="footer__copyright">{{ $t('footer.copyright') }}</span>
+        <NuxtLink to="/contact" class="footer__contact-link">{{ $t('footer.contact') }}</NuxtLink>
       </div>
     </div>
   </footer>

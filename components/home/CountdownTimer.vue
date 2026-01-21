@@ -1,11 +1,13 @@
 <script setup lang="ts">
 /**
- * CountdownTimer - Bold, dramatic countdown display
+ * CountdownTimer - Retro style with offset border
  */
 const props = withDefaults(defineProps<{
   targetDate?: string
+  showDate?: boolean
 }>(), {
-  targetDate: 'May 1, 2026 00:00:00'
+  targetDate: 'May 1, 2026 00:00:00',
+  showDate: true
 })
 
 const { formatted } = useCountdown(props.targetDate)
@@ -19,8 +21,8 @@ const units = [
 </script>
 
 <template>
-  <div class="countdown">
-    <p class="countdown__label">{{ $t('countdown.label') }}</p>
+  <div class="countdown" role="region" aria-labelledby="countdown-label">
+    <h2 id="countdown-label" class="countdown__label">{{ $t('countdown.label') }}</h2>
     <div
       class="countdown__grid"
       role="timer"
@@ -31,6 +33,7 @@ const units = [
         <span class="countdown__unit">{{ $t(unit.label) }}</span>
       </div>
     </div>
+    <p v-if="showDate" class="countdown__date">{{ $t('countdown.startDate') }}</p>
   </div>
 </template>
 
@@ -38,25 +41,27 @@ const units = [
 @use '~/assets/scss/_variables' as *;
 
 .countdown {
-  text-align: center;
+  display: flex;
   flex-direction: column;
+  align-items: center;
 
   &__label {
     font-family: $font-mono;
     font-size: $text-xs;
-    letter-spacing: $tracking-widest;
+    font-weight: 400;
+    letter-spacing: $tracking-label;
     text-transform: uppercase;
-    margin-bottom: $space-6;
-    color: $terracotta-700;
+    margin: 0 0 $space-8 0;
+    color: $earth-600;
   }
 
   &__grid {
     display: flex;
     justify-content: center;
-    gap: $space-6;
+    gap: $space-4;
 
-    @media (max-width: $breakpoint-md) {
-      gap: $space-4;
+    @media (max-width: $breakpoint-sm) {
+      gap: $space-3;
     }
   }
 
@@ -64,40 +69,83 @@ const units = [
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 80px;
-
-    @media (max-width: $breakpoint-md) {
-      min-width: 60px;
-    }
   }
 
   &__number {
-    font-family: $font-serif;
-    font-size: $text-5xl;
+    display: block;
+    position: relative;
+    isolation: isolate; // Creates stacking context for ::after
+    background: $warm-black;
+    color: $cream;
+    font-family: $font-mono;
+    font-size: 2.5rem;
     font-weight: 400;
     line-height: 1;
-    color: $warm-black;
+    padding: 1rem 0.75rem;
+    min-width: 70px;
+    text-align: center;
+
+    // Terracotta border offset (surround box, shifted to bottom-right)
+    &::after {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: -8px;
+      right: -8px;
+      bottom: -8px;
+      border: 1px solid $terracotta;
+      z-index: -1;
+      transform: translate(6px, 6px);
+      pointer-events: none;
+      box-sizing: border-box;
+    }
 
     @media (max-width: $breakpoint-md) {
-      font-size: $text-4xl;
+      font-size: 2rem;
+      padding: 0.875rem 0.625rem;
+      min-width: 60px;
+
+      &::after {
+        top: -6px;
+        left: -6px;
+        right: -6px;
+        bottom: -6px;
+        transform: translate(4px, 4px);
+      }
     }
 
     @media (max-width: $breakpoint-sm) {
-      font-size: $text-3xl;
+      font-size: 1.5rem;
+      padding: 0.75rem 0.5rem;
+      min-width: 50px;
     }
   }
 
   &__unit {
     font-family: $font-mono;
-    font-size: $text-xs;
-    letter-spacing: $tracking-wide;
+    font-size: $text-sm;
+    letter-spacing: $tracking-widest;
     text-transform: uppercase;
-    color: $earth-500;
-    margin-top: $space-2;
-  }
-}
+    color: $earth-600;
+    margin-top: $space-3;
 
-.support-page .countdown {
-  flex-direction: row;
+    @media (max-width: $breakpoint-sm) {
+      font-size: $text-xs;
+      margin-top: $space-2;
+    }
+  }
+
+  &__date {
+    font-family: $font-serif;
+    font-style: italic;
+    font-size: $text-2xl;
+    color: $terracotta-700;
+    margin-top: $space-12;
+
+    @media (max-width: $breakpoint-sm) {
+      font-size: $text-xl;
+      margin-top: $space-8;
+    }
+  }
 }
 </style>

@@ -7,12 +7,16 @@ const route = useRoute()
 const MOBILE_BREAKPOINT = 480
 const isVisible = ref(false)
 const isMobile = ref(false)
+// Cache viewport height to avoid jitter from dynamic address bar
+const cachedViewportHeight = ref(0)
 
 // Don't show on support page - user is already there
 const isOnSupportPage = computed(() => route.path === '/support')
 
 const checkMobile = () => {
   isMobile.value = window.innerWidth <= MOBILE_BREAKPOINT
+  // Update cached height on resize (orientation change, etc.)
+  cachedViewportHeight.value = document.documentElement.clientHeight
 }
 
 const handleScroll = () => {
@@ -21,10 +25,13 @@ const handleScroll = () => {
     return
   }
   // Show after scrolling past 100% of viewport height
-  isVisible.value = window.scrollY > window.innerHeight
+  // Use cached value to prevent jitter from mobile address bar animation
+  isVisible.value = window.scrollY > cachedViewportHeight.value
 }
 
 onMounted(() => {
+  // Capture stable viewport height before any address bar animation
+  cachedViewportHeight.value = document.documentElement.clientHeight
   checkMobile()
   handleScroll()
   window.addEventListener('scroll', handleScroll, { passive: true })
@@ -77,6 +84,8 @@ watch(() => route.path, () => {
   background: $warm-black;
   z-index: $z-fixed;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.15);
+  // GPU acceleration - prevents scroll jitter on mobile
+  transform: translateZ(0);
 
   // Safe area for notched devices
   padding-bottom: max($space-3, env(safe-area-inset-bottom));

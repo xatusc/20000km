@@ -1,7 +1,7 @@
 <script setup lang="ts">
 useSeoMeta({
-  title: 'About | 20,000KM',
-  description: 'The story of Ria Xi and her journey from burnout to attempting the first human run across Asia and Europe.'
+  title: 'Who | 20,000KM',
+  description: 'Meet Ria Xi - from burnout in Silicon Valley to the first human attempt to run across Asia and Europe on the Silk Road.'
 })
 
 // Typewriter for pull quote
@@ -76,15 +76,10 @@ watch(motionAllowed, (allowed) => {
         <div class="story-content">
           <div class="story-block">
             <p class="story-lede">
-              Two years ago, Ria couldn't get out of bed.
+              Two years ago, I was burnt out from my tech career in Silicon Valley, coming out of a difficult relationship, and struggling with mental health issues.
             </p>
             <p>
-              After years in Silicon Valley, her body finally said <em>enough</em>.
-              The 80-hour weeks. The constant optimization. The quiet erosion of meaning.
-            </p>
-            <p>
-              Burnout doesn't announce itself. It accumulates. One day you're fine,
-              the next you're staring at a ceiling wondering where you went.
+              I felt like a failure. I lost my career, my relationship, network of friends, a sense of meaning, and I felt powerless to change my circumstances. I was at the lowest point of my life.
             </p>
           </div>
 
@@ -92,33 +87,20 @@ watch(motionAllowed, (allowed) => {
 
           <div class="story-block">
             <p>
-              It started as a 30-day challenge after a breakup. Just run. Every day.
-              No goals, no metrics, no optimization. Just one foot in front of the other.
-            </p>
-            <p>
-              Something shifted. The runs got longer. The noise got quieter. For the first
-              time in years, she could hear herself think.
-            </p>
-          </div>
-
-          <div class="story-divider" aria-hidden="true"></div>
-
-          <div class="story-block">
-            <p>
-              Within twelve months, Ria went from struggling to finish a half marathon
-              to completing a 1,000-kilometer ultramarathon.
+              Running became my way out. It initially started as a 30 day challenge to run everyday after a breakup. Within a year, I went from struggling to finish a half marathon in 2024 to setting ultramarathon records on world-renowned routes.
             </p>
             <div class="records-callout">
               <div class="record">
                 <span class="record-distance">1,014 km</span>
                 <span class="record-time">21 days</span>
                 <span class="record-name">Via Francigena</span>
+                <span class="record-note">Overall FKT</span>
               </div>
               <div class="record">
                 <span class="record-distance">780 km</span>
                 <span class="record-time">12 days</span>
                 <span class="record-name">Camino de Santiago</span>
-                <span class="record-note">Female self-supported record</span>
+                <span class="record-note">Female self-supported FKT</span>
               </div>
               <div class="record">
                 <span class="record-distance">539 km</span>
@@ -126,9 +108,16 @@ watch(motionAllowed, (allowed) => {
                 <span class="record-name">Sinai Trail</span>
               </div>
             </div>
+          </div>
+
+          <div class="story-divider" aria-hidden="true"></div>
+
+          <div class="story-block">
             <p>
-              But the records were never the point. The point was what running revealed:
-              that the most "delusional" goals are often just the ones no one's tried yet.
+              I asked myself: what is the most impossible thing I could attempt?
+            </p>
+            <p>
+              The answer came to me one day after just finishing my first ever ultramarathon: running across the entire Eurasian continent, 20,000 kilometers from Vladivostok to Lisbon, retracing the ancient Silk Road.
             </p>
           </div>
         </div>
@@ -162,17 +151,12 @@ watch(motionAllowed, (allowed) => {
         <div class="vision-content">
           <div class="story-block">
             <p class="story-lede">
-              On May 1st, 2026, Ria will begin running from Vladivostok to Cabo da Roca.
+              And here is why:
             </p>
-            <p>
-              Twenty thousand kilometers. Seventeen countries. The ancient Silk Road, on foot.
-            </p>
-            <p>
-              No one has ever done this. The first human attempt to run across Asia and Europe on the ancient Silk Road.
-            </p>
-            <p>
-              But this isn't about being first. It's about something bigger.
-            </p>
+            <ol class="why-list">
+              <li>to prove to myself and the world that we can rewrite the narratives that define our personal lives, because it's only delusional until it's not;</li>
+              <li>to rewrite the narratives of division in our world with one of connection. Communities from around the world are coming together to make something big happen, and the east and the west are once again connected with footsteps.</li>
+            </ol>
           </div>
 
           <!-- Stats band -->
@@ -197,17 +181,7 @@ watch(motionAllowed, (allowed) => {
 
           <div class="story-block">
             <p>
-              We live in a world that's forgetting how to be slow. How to be present.
-              How to trust strangers. Ria wants to prove that at human speed, 50 kilometers
-              a day, the world opens up differently.
-            </p>
-            <p>
-              Headlines become handshakes. Strangers become hosts. Borders become
-              just lines on a map.
-            </p>
-            <p>
-              This run is an experiment in collective power. Proof that when enough
-              people believe in something "delusional," it becomes possible.
+              This is no longer just one woman's journey of transformation. In the past year, the 20000km experiment has evolved into a collective project, a "neighborhood run" of the Planetary Run Club. Because at the end of the day, nowhere we can run to is too far to be our neighborhood, and no one we meet on the run is too foreign to be our neighbor.
             </p>
           </div>
         </div>
@@ -262,23 +236,6 @@ watch(motionAllowed, (allowed) => {
       </div>
     </section>
 
-    <!-- ============================================
-         COVER IMAGE with EXPEDITION BADGE overlay
-         ============================================ -->
-    <section class="cover-image-section">
-      <img
-        src="/images/Mountain.webp"
-        alt="Mountain landscape"
-        class="cover-image"
-      >
-      <div class="badge-overlay">
-        <div class="expedition-badge">
-          <span class="badge-label">Official Expedition</span>
-          <span class="badge-year">2026–2027</span>
-          <span class="badge-route">Vladivostok → Cabo da Roca</span>
-        </div>
-      </div>
-    </section>
   </div>
 </template>
 
@@ -440,6 +397,23 @@ watch(motionAllowed, (allowed) => {
   height: 2px;
   background: $terracotta-300;
   margin: $space-10 0;
+}
+
+// Why list (numbered reasons)
+.why-list {
+  margin: $space-4 0 0 0;
+  padding-left: $space-6;
+
+  li {
+    font-size: $text-lg;
+    line-height: $leading-loose;
+    color: $earth-700;
+    margin-bottom: $space-4;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 }
 
 // Records callout

@@ -12,6 +12,18 @@ export default defineNuxtConfig({
     '@nuxt/image',
   ],
 
+  // Runtime config for environment variables
+  runtimeConfig: {
+    // Private keys (server-side only)
+    stravaClientId: process.env.STRAVA_CLIENT_ID,
+    stravaClientSecret: process.env.STRAVA_CLIENT_SECRET,
+    stravaAccessToken: process.env.STRAVA_ACCESS_TOKEN,
+    // Public keys (available client-side)
+    public: {
+      stravaClubId: process.env.STRAVA_CLUB_ID || '1930624',
+    }
+  },
+
   // Component auto-import configuration
   components: {
     dirs: [
@@ -20,6 +32,7 @@ export default defineNuxtConfig({
       { path: '~/components/home', pathPrefix: false },
       { path: '~/components/map', pathPrefix: false },
       { path: '~/components/ui', pathPrefix: false },
+      { path: '~/components/strava', pathPrefix: false },
     ]
   },
 
@@ -130,9 +143,9 @@ export default defineNuxtConfig({
     },
   },
 
-  // Netlify deployment (static for Netlify Forms support)
+  // Netlify deployment with serverless functions for API routes
   nitro: {
-    preset: 'netlify_static'
+    preset: 'netlify'
   },
 
   // Enable static site generation

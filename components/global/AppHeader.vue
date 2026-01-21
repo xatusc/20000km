@@ -6,7 +6,7 @@ const mobileMenuOpen = ref(false)
 // Navigation order: Story first (builds emotional investment), then Journey, then Connect
 // Note: Home removed from nav - logo serves as home link
 const navItems = [
-  { path: '/about', label: 'nav.about' },
+  { path: '/who', label: 'nav.who' },
   { path: '/journey', label: 'nav.theJourney' },
   { path: '/planetary-run-club', label: 'nav.runClub' },
   { path: '/contact', label: 'nav.connect' },
@@ -50,12 +50,17 @@ watch(() => route.path, () => {
 
         <!-- Support CTA Button -->
         <NuxtLink to="/support" class="header__support-btn">
-          Support
+          {{ $t('nav.support') }}
         </NuxtLink>
 
         <!-- Utilities (motion toggle, future: language switcher) -->
         <div class="header__utilities">
-          <SensoryModeToggle />
+          <ClientOnly>
+            <SensoryModeToggle />
+            <template #fallback>
+              <span class="motion-toggle-placeholder">Motion: ...</span>
+            </template>
+          </ClientOnly>
         </div>
       </div>
 
@@ -64,7 +69,7 @@ watch(() => route.path, () => {
         class="header__menu-btn"
         :aria-expanded="mobileMenuOpen"
         aria-controls="mobile-nav"
-        aria-label="Toggle navigation menu"
+        :aria-label="$t('nav.toggleMenu')"
         @click="toggleMobileMenu"
       >
         <span class="header__hamburger" :class="{ 'header__hamburger--open': mobileMenuOpen }">
@@ -93,12 +98,17 @@ watch(() => route.path, () => {
 
       <!-- Mobile Support CTA -->
       <NuxtLink to="/support" class="header__nav-link--mobile header__nav-link--support">
-        Support the Journey
+        {{ $t('nav.supportTheJourney') }}
       </NuxtLink>
 
       <!-- Mobile utilities -->
       <div class="header__mobile-utilities">
-        <SensoryModeToggle />
+        <ClientOnly>
+          <SensoryModeToggle />
+          <template #fallback>
+            <span class="motion-toggle-placeholder">Motion: ...</span>
+          </template>
+        </ClientOnly>
       </div>
     </nav>
   </header>
@@ -114,6 +124,8 @@ watch(() => route.path, () => {
   position: sticky;
   top: 0;
   z-index: $z-sticky;
+  // GPU acceleration - prevents scroll jitter on mobile
+  transform: translateZ(0);
 
   // Elements
   &__inner {
@@ -333,5 +345,17 @@ watch(() => route.path, () => {
     margin-top: $space-2;
     border-top: $border-width solid rgba($warm-black, 0.1);
   }
+}
+
+// Placeholder for motion toggle during SSR/hydration
+.motion-toggle-placeholder {
+  display: flex;
+  align-items: center;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  letter-spacing: $tracking-wide;
+  text-transform: uppercase;
+  color: $earth-600;
+  padding: $space-1 $space-2;
 }
 </style>

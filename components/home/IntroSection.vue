@@ -9,50 +9,47 @@ const { observeAll } = useScrollReveal({ threshold: 0.2 })
 onMounted(() => {
   if (sectionRef.value) {
     observeAll('.reveal', sectionRef.value)
-    observeAll('.draw-line-center', sectionRef.value)
   }
 })
 </script>
 
 <template>
   <section ref="sectionRef" class="intro">
-    <!-- Decorative line that draws in -->
-    <hr class="intro__divider draw-line-center" aria-hidden="true">
-
     <!-- All content fades in together, slowly -->
     <div class="intro__content reveal">
       <!-- Location stamps - expedition journal style -->
       <div class="intro__stamp">
-        <span class="intro__stamp-from">Vladivostok, Russia</span>
+        <span class="intro__stamp-from">{{ $t('intro.from') }}</span>
         <span class="intro__stamp-arrow">→</span>
-        <span class="intro__stamp-to">Cabo da Roca, Portugal</span>
+        <span class="intro__stamp-to">{{ $t('intro.to') }}</span>
       </div>
 
       <p class="intro__hook">
-        The first human to run across Asia and Europe.
-        One woman. Seventeen countries. Pacific to Atlantic.
+        {{ $t('intro.hook') }}<br>
+        <span class="intro__hook-silk-road">{{ $t('intro.hookSilkRoad') }}</span>
       </p>
+      <p class="intro__subhook">{{ $t('intro.subhook') }}</p>
 
       <!-- Countdown -->
-      <div class="intro__countdown" role="timer" :aria-label="`${formatted.days} days until departure`">
+      <div class="intro__countdown" role="timer" :aria-label="`${formatted.days} ${$t('accessibility.daysUntilDeparture')}`">
         <div class="intro__countdown-item">
           <span class="intro__countdown-number">{{ formatted.days }}</span>
-          <span class="intro__countdown-label">Days</span>
+          <span class="intro__countdown-label">{{ $t('intro.days') }}</span>
         </div>
         <div class="intro__countdown-item">
           <span class="intro__countdown-number">{{ formatted.hours }}</span>
-          <span class="intro__countdown-label">Hours</span>
+          <span class="intro__countdown-label">{{ $t('intro.hours') }}</span>
         </div>
         <div class="intro__countdown-item">
           <span class="intro__countdown-number">{{ formatted.minutes }}</span>
-          <span class="intro__countdown-label">Min</span>
+          <span class="intro__countdown-label">{{ $t('intro.min') }}</span>
         </div>
-        <span class="intro__countdown-text">until departure</span>
+        <span class="intro__countdown-text">{{ $t('intro.untilDeparture') }}</span>
       </div>
 
       <!-- CTA -->
       <NuxtLink to="/support" class="intro__cta">
-        Fund the Road
+        {{ $t('intro.cta') }}
       </NuxtLink>
     </div>
   </section>
@@ -67,15 +64,6 @@ onMounted(() => {
   padding: $space-16 $space-4;
   background: $cream;
   border-bottom: 3px solid $warm-black;
-}
-
-// Decorative divider that draws in from center
-.intro__divider {
-  width: 200px;
-  height: 3px;
-  background: $warm-black;
-  border: none;
-  margin: 0 auto $space-12;
 }
 
 // Content wrapper for single reveal
@@ -112,17 +100,26 @@ onMounted(() => {
 
 .intro__hook {
   font-family: $font-serif;
-  font-size: clamp($text-lg, 3vw, $text-2xl);
-  line-height: $leading-relaxed;
-  color: $earth-700;
-  max-width: 600px;
-  margin: 0 auto $space-10;
+  font-size: clamp($text-xl, 4vw, $text-3xl);
+  line-height: $leading-snug;
+  color: $warm-black;
+  max-width: 700px;
+  margin: 0 auto $space-4;
+}
 
-  @media (max-width: $breakpoint-md) {
-    br {
-      display: none;
-    }
-  }
+.intro__hook-silk-road {
+  display: block;
+  font-style: italic;
+  color: $terracotta-700;
+}
+
+.intro__subhook {
+  font-family: $font-mono;
+  font-size: $text-sm;
+  letter-spacing: $tracking-wide;
+  text-transform: uppercase;
+  color: $earth-500;
+  margin: 0 auto $space-10;
 }
 
 // Countdown

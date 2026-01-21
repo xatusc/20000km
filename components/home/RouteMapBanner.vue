@@ -8,16 +8,16 @@
     <div class="route-map__wrapper">
       <img
         src="/images/route-map.webp"
-        alt="Map showing the 20,000km route across Asia and Europe, from Vladivostok on the Pacific coast through China, Central Asia, Iran, Turkey, and Europe to Cabo da Roca on the Atlantic"
+        :alt="$t('routeMap.alt')"
         loading="lazy"
         class="route-map__image"
       >
       <div class="route-map__overlay">
         <div class="route-map__content">
-          <p class="route-map__label">Pacific to Atlantic</p>
-          <h3 class="route-map__title">The Route</h3>
+          <p class="route-map__label">{{ $t('routeMap.label') }}</p>
+          <h3 class="route-map__title">{{ $t('routeMap.title') }}</h3>
           <NuxtLink to="/journey" class="route-map__cta">
-            Follow in real-time
+            {{ $t('routeMap.cta') }}
           </NuxtLink>
         </div>
       </div>

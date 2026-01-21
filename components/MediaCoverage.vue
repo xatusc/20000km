@@ -3,6 +3,7 @@ import { ref, onMounted, watch } from 'vue'
 import { useTypewriter } from '~/composables/useScrollReveal'
 import { useSensoryMode } from '~/composables/useSensoryMode'
 
+const { t } = useI18n()
 const quoteRef = ref<HTMLElement | null>(null)
 const hasTypedQuote = ref(false)
 const { typewrite } = useTypewriter({ charDelay: 35, startDelay: 400 })
@@ -11,37 +12,26 @@ const { motionAllowed } = useSensoryMode()
 interface MediaMention {
   name: string
   url: string
-  quote?: string
   logo: string
   logoHeight?: number // Custom height in px for visual balance
 }
 
 const mentions: MediaMention[] = [
   {
-    name: 'South China Morning Post',
-    url: 'https://www.scmp.com/lifestyle/health-wellness/article/3331773/after-break-beijing-born-tech-turned-ultrarunner-plans-ai-backed-silk-road-trek',
-    quote: 'After a break-up, Beijing-born tech-turned-ultrarunner plans AI-backed Silk Road trek',
-    logo: '/SCMP_logo.svg',
-    logoHeight: 40
-  },
-  {
     name: 'The Independent',
     url: 'https://www.independent.co.uk/',
-    quote: 'How this 26-year-old ran 550km through Egypt\'s Sinai desert',
     logo: '/the-independent-clean.svg',
     logoHeight: 80
   },
-
   {
-    name: 'The Paths Podcast',
-    url: 'https://open.spotify.com/episode/4sfSmzCptQ1SurfaCXZVTO',
-    quote: 'Ria Xi on Agency, Pilgrimage, and the Long Road',
-    logo: '/Paths.jpeg',
+    name: 'South China Morning Post',
+    url: 'https://www.scmp.com/lifestyle/health-wellness/article/3331773/after-break-beijing-born-tech-turned-ultrarunner-plans-ai-backed-silk-road-trek',
+    logo: '/SCMP_logo.svg',
     logoHeight: 40
   }
 ]
 
-const quoteText = mentions[0]?.quote || ''
+const quoteText = t('media.quote')
 
 const setupTypewriter = () => {
   if (quoteRef.value) {
@@ -78,7 +68,7 @@ watch(motionAllowed, (allowed) => {
 
 <template>
   <section class="media-coverage">
-    <span class="media-coverage__label">As Seen In</span>
+    <span class="media-coverage__label">{{ $t('media.label') }}</span>
 
     <div class="media-coverage__logos">
       <a
@@ -98,11 +88,11 @@ watch(motionAllowed, (allowed) => {
       </a>
     </div>
 
-    <blockquote v-if="mentions[0].quote" class="media-coverage__quote">
+    <blockquote class="media-coverage__quote">
       <p>
         <span ref="quoteRef" class="typewriter" :aria-label="quoteText"></span>
       </p>
-      <cite>— {{ mentions[0].name }}</cite>
+      <cite>— {{ $t('media.quoteSource') }}</cite>
     </blockquote>
   </section>
 </template>

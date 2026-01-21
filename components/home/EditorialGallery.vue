@@ -62,8 +62,9 @@
   position: relative;
   padding: $space-16 0;
   background: $sand-100;
-  // Full-width bleed
+  // Full-width bleed with overflow protection for mobile
   width: 100vw;
+  max-width: 100%; // Prevents horizontal overflow on mobile
   margin-left: calc(-50vw + 50%);
 }
 

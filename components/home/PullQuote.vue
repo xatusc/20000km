@@ -85,6 +85,7 @@ watch(motionAllowed, (allowed) => {
 .pull-quote {
   // Full-width bleed + full-screen height
   width: 100vw;
+  max-width: 100%; // Prevents horizontal overflow on mobile
   margin-left: calc(-50vw + 50%);
   min-height: 100vh;
   display: flex;
