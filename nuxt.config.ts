@@ -153,6 +153,6 @@ export default defineNuxtConfig({
 
   // Generate static routes
   generate: {
-    routes: ['/', '/journey', '/planetary-run-club', '/about', '/contact', '/support']
+    routes: ['/', '/journey', '/planetary-run-club', '/who', '/contact', '/support']
   }
 })
