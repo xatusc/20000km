@@ -487,61 +487,13 @@
             text-transform: none;
         }
 
-        /* Runner Section */
-        .runner-section {
-            margin-top: 3rem;
-            padding-top: 3rem;
-            margin-bottom: 3rem;
-        }
-
-        /* Instagram Updates Section */
-        .instagram-section {
-            margin-top: 3rem;
-            padding-top: 3rem;
-            border-top: 1px solid var(--warm-black);
-        }
-
-        .instagram-header {
+        /* Runner Image */
+        .runner-image {
+            margin-top: 5rem;
+            padding-top: 5rem;
+            border-top: 1px solid var(--black);
             text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .instagram-title {
-            font-size: 0.7rem;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-        }
-
-        .instagram-subtitle {
-            font-family: 'Instrument Serif', serif;
-            font-size: 1.2rem;
-            color: var(--terracotta);
-        }
-
-        .instagram-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .instagram-embed {
-            width: 100%;
-            min-height: 400px;
-        }
-
-        @media (max-width: 900px) {
-            .instagram-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 600px) {
-            .instagram-grid {
-                grid-template-columns: 1fr;
-                gap: 0.5rem;
-            }
+            margin-bottom: 3rem;
         }
 
         /* Footer */
@@ -783,41 +735,13 @@
                 </div>
             </div>
 
-            <div class="instagram-section">
-                <div class="instagram-header">
-                    <p class="instagram-title">Project Updates</p>
-                    <p class="instagram-subtitle">Follow the journey on Instagram</p>
-                </div>
-                <div class="instagram-grid">
-                    <!-- Post 1: 5 month -->
-                    <div class="instagram-embed">
-                        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DRpxJ9LiL8Y/" data-instgrm-version="14">
-                            <a href="https://www.instagram.com/reel/DRpxJ9LiL8Y/">View this post on Instagram</a>
-                        </blockquote>
-                    </div>
-
-                    <!-- Post 2: Crew call -->
-                    <div class="instagram-embed">
-                        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DSM8ScaiGNH/" data-instgrm-version="14">
-                            <a href="https://www.instagram.com/reel/DSM8ScaiGNH/">View this post on Instagram</a>
-                        </blockquote>
-                    </div>
-
-                    <!-- Post 3: 7 months -->
-                    <div class="instagram-embed">
-                        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DQugpThCOVd/" data-instgrm-version="14">
-                            <a href="https://www.instagram.com/reel/DQugpThCOVd/">View this post on Instagram</a>
-                        </blockquote>
-                    </div>
-
-                    <!-- Post 4: Who am I -->
-                    <div class="instagram-embed">
-                        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DMyk5i2oJy-/" data-instgrm-version="14">
-                            <a href="https://www.instagram.com/p/DMyk5i2oJy-/">View this post on Instagram</a>
-                        </blockquote>
-                    </div>
-                </div>
-            </div>
+            <figure class="runner-image">
+                <picture>
+                    <source srcset="sinai-run.webp" type="image/webp">
+                    <img src="sinai-run.jpg" alt="Running with friends in Sinai" loading="lazy">
+                </picture>
+                <figcaption>Photo by <a href="https://instagram.com/jack.lawes" target="_blank">Jack Lawes (@jack.lawes)</a></figcaption>
+            </figure>
         </section>
 
         <section class="links-section">
@@ -843,16 +767,6 @@
                     <p class="link-card-desc">Live updates, behind-the-scenes, and visual stories from the preparation and the road.</p>
                 </a>
             </div>
-        </section>
-
-        <section class="runner-section">
-            <figure class="runner-image">
-                <picture>
-                    <source srcset="sinai-run.webp" type="image/webp">
-                    <img src="sinai-run.jpg" alt="Running with friends in Sinai" loading="lazy">
-                </picture>
-                <figcaption>Photo by <a href="https://instagram.com/jack.lawes" target="_blank">Jack Lawes (@jack.lawes)</a></figcaption>
-            </figure>
         </section>
 
         <footer>
@@ -924,8 +838,5 @@
 
         loadFundraisingData();
     </script>
-
-    <!-- Instagram Embed Script -->
-    <script async src="//www.instagram.com/embed.js"></script>
 </body>
 </html>
