@@ -870,8 +870,9 @@
     <script>
         // Countdown Timer
         function updateCountdown() {
-            const targetDate = new Date('May 1, 2026 00:00:00').getTime();
+            // Temporary: Set to 100 days from now for screenshot
             const now = new Date().getTime();
+            const targetDate = now + (100 * 24 * 60 * 60 * 1000);
             const distance = targetDate - now;
 
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
