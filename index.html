@@ -473,6 +473,15 @@
             text-transform: none;
         }
 
+        /* Runner Image */
+        .runner-image {
+            margin-top: 5rem;
+            padding-top: 5rem;
+            border-top: 1px solid var(--black);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
         /* Footer */
         footer {
             padding: 3rem 0;
@@ -747,8 +756,9 @@
     <script>
         // Countdown Timer
         function updateCountdown() {
-            const targetDate = new Date('May 1, 2026 00:00:00').getTime();
+            // Temporary: Set to 100 days from now for screenshot
             const now = new Date().getTime();
+            const targetDate = now + (100 * 24 * 60 * 60 * 1000);
             const distance = targetDate - now;
 
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
