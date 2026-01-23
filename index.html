@@ -754,26 +754,21 @@
     </div>
 
     <script>
-        // Countdown Timer - Fixed at 100 days with 3 min countdown on seconds
-        let secondsRemaining = 180; // Start at 3 minutes (180 seconds)
-
+        // Countdown Timer
         function updateCountdown() {
-            // Fixed values
-            const days = 100;
-            const hours = 0;
-            const mins = 0;
-            const secs = secondsRemaining;
+            const targetDate = new Date('May 1, 2026 00:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const secs = Math.floor((distance % (1000 * 60)) / 1000);
 
             document.getElementById('days').textContent = days;
             document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
             document.getElementById('mins').textContent = mins.toString().padStart(2, '0');
             document.getElementById('secs').textContent = secs.toString().padStart(2, '0');
-
-            // Countdown seconds
-            secondsRemaining--;
-            if (secondsRemaining < 0) {
-                secondsRemaining = 180; // Reset to 3 minutes
-            }
         }
 
         updateCountdown();
