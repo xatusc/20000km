@@ -1,0 +1,135 @@
+@use 'variables' as *;
+
+// ============================================
+// SCROLL-TRIGGERED ANIMATIONS
+// ============================================
+// Accessible, trauma-informed scroll animations
+// All animations respect prefers-reduced-motion
+
+// --------------------------------------------
+// KEYFRAMES
+// --------------------------------------------
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+// --------------------------------------------
+// SCROLL REVEAL
+// --------------------------------------------
+// Pure opacity fade - no movement, ultra smooth
+// Usage: Add .reveal class, JS adds .is-visible when in viewport
+
+.reveal {
+  opacity: 0;
+  transition: opacity 3s ease; // Long, smooth fade
+
+  &.is-visible {
+    opacity: 1;
+  }
+}
+
+// --------------------------------------------
+// LINE DRAW
+// --------------------------------------------
+// Usage: Add to hr or divider elements
+
+.draw-line {
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 5s ease; // Smooth, slow draw
+
+  &.is-visible {
+    transform: scaleX(1);
+  }
+}
+
+// Alternative: draw from center
+.draw-line-center {
+  transform: scaleX(0);
+  transform-origin: center center;
+  transition: transform 5s ease; // Smooth, slow draw
+
+  &.is-visible {
+    transform: scaleX(1);
+  }
+}
+
+// --------------------------------------------
+// TYPEWRITER
+// --------------------------------------------
+// Usage: Add .typewriter class, JS handles character reveal
+// The element should have aria-label with full text for a11y
+
+.typewriter {
+  font-family: $font-mono;
+
+  // Blinking cursor
+  &::after {
+    content: '|';
+    display: inline-block;
+    animation: cursorBlink 2s step-end infinite;
+    margin-left: 2px;
+    color: $terracotta;
+  }
+
+  // Hide cursor when done typing
+  &.typing-complete::after {
+    display: none;
+  }
+}
+
+// For reduced motion: show cursor but no blink
+@media (prefers-reduced-motion: reduce) {
+  .typewriter::after {
+    animation: none;
+    opacity: 0.5;
+  }
+}
+
+// --------------------------------------------
+// REDUCED MOTION: DISABLE ALL ANIMATIONS
+// --------------------------------------------
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transition: none;
+  }
+
+  .draw-line,
+  .draw-line-center {
+    transform: scaleX(1);
+    transition: none;
+  }
+}
+
+// --------------------------------------------
+// SENSORY MODE INTEGRATION
+// --------------------------------------------
+// Animations only run when motion is explicitly allowed
+// This inverts the logic: animations are OPT-IN
+
+// Default state: no animations (safe default)
+html:not([data-motion-allowed="true"]) {
+  .reveal:not(.is-visible) {
+    opacity: 1;
+  }
+
+  .draw-line:not(.is-visible),
+  .draw-line-center:not(.is-visible) {
+    transform: scaleX(1);
+  }
+
+  .reveal,
+  .draw-line,
+  .draw-line-center {
+    transition: none;
+  }
+
+  .typewriter::after {
+    animation: none;
+    display: none;
+  }
+}

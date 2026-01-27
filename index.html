@@ -242,6 +242,7 @@
         /* Route Map Banner */
         .route-map-banner {
             width: 100vw;
+            max-width: 100%; /* Prevents horizontal overflow on mobile */
             margin-left: calc(-50vw + 50%);
             height: 160px;
             overflow: hidden;
@@ -689,7 +690,7 @@
         <div class="route-map-banner">
             <picture>
                 <source srcset="route-map.webp" type="image/webp">
-                <img src="route-map.png" alt="Route from Vladivostok to Cabo da Roca" loading="lazy">
+                <img src="route-map.png" alt="Route from Vladivostok to Lisbon" loading="lazy">
             </picture>
         </div>
 
