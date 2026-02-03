@@ -1,4 +1,4 @@
-import { defineEventHandler, createError, getQuery } from 'h3'
+import { defineEventHandler, getQuery } from 'h3'
 
 interface StravaClubActivity {
   athlete: {
@@ -70,31 +70,16 @@ export default defineEventHandler(async (event): Promise<ActivitiesResponse> => 
     }
   }
 
-  // If no access token, return mock data for development
+  // If no access token, return empty data
   if (!accessToken || accessToken === 'your_access_token_here') {
-    const mockActivities: ActivityResponse[] = [
-      { athleteName: 'Sarah M.', name: 'Morning Run', distance: 8200, distanceKm: '8.20', movingTime: 2732, movingTimeFormatted: '45:32', elevationGain: 45, type: 'Run' },
-      { athleteName: 'John D.', name: 'Trail Adventure', distance: 12400, distanceKm: '12.40', movingTime: 4325, movingTimeFormatted: '1:12:05', elevationGain: 234, type: 'Run' },
-      { athleteName: 'Ria X.', name: 'Long Run Sunday', distance: 21100, distanceKm: '21.10', movingTime: 7275, movingTimeFormatted: '2:01:15', elevationGain: 156, type: 'Run' },
-      { athleteName: 'Team', name: 'Recovery Jog', distance: 5000, distanceKm: '5.00', movingTime: 1720, movingTimeFormatted: '28:40', elevationGain: 12, type: 'Run' },
-      { athleteName: 'Maria K.', name: 'Tempo Run', distance: 10000, distanceKm: '10.00', movingTime: 2940, movingTimeFormatted: '49:00', elevationGain: 78, type: 'Run' },
-      { athleteName: 'Alex P.', name: 'Easy Miles', distance: 6500, distanceKm: '6.50', movingTime: 2280, movingTimeFormatted: '38:00', elevationGain: 32, type: 'Run' },
-      { athleteName: 'Chris T.', name: 'Hill Repeats', distance: 7800, distanceKm: '7.80', movingTime: 2880, movingTimeFormatted: '48:00', elevationGain: 189, type: 'Run' },
-      { athleteName: 'Emma L.', name: 'Sunrise Run', distance: 5200, distanceKm: '5.20', movingTime: 1800, movingTimeFormatted: '30:00', elevationGain: 24, type: 'Run' },
-      { athleteName: 'David R.', name: 'Fartlek Friday', distance: 8000, distanceKm: '8.00', movingTime: 2520, movingTimeFormatted: '42:00', elevationGain: 56, type: 'Run' },
-      { athleteName: 'Lisa W.', name: 'Park Loop', distance: 4200, distanceKm: '4.20', movingTime: 1500, movingTimeFormatted: '25:00', elevationGain: 18, type: 'Run' }
-    ]
-
-    const mockTotalDistance = mockActivities.reduce((sum, a) => sum + a.distance, 0)
-    const mockTotalElevation = mockActivities.reduce((sum, a) => sum + a.elevationGain, 0)
-    const mockTotalTime = mockActivities.reduce((sum, a) => sum + a.movingTime, 0)
+    console.error('Strava API error: No valid access token')
     return {
-      activities: mockActivities.slice(0, limit),
-      totalCount: mockActivities.length,
-      totalDistanceKm: Math.round(mockTotalDistance / 1000),
-      totalElevationGain: mockTotalElevation,
-      totalMovingTimeSeconds: mockTotalTime,
-      totalMovingTimeFormatted: formatTime(mockTotalTime)
+      activities: [],
+      totalCount: 0,
+      totalDistanceKm: 0,
+      totalElevationGain: 0,
+      totalMovingTimeSeconds: 0,
+      totalMovingTimeFormatted: '0:00'
     }
   }
 
@@ -108,17 +93,17 @@ export default defineEventHandler(async (event): Promise<ActivitiesResponse> => 
       }
     )
 
+    // Return empty response for any API failure (auth or otherwise)
     if (!response.ok) {
-      if (response.status === 401) {
-        throw createError({
-          statusCode: 401,
-          message: 'Strava access token expired or invalid'
-        })
+      console.error('Strava API error: HTTP', response.status)
+      return {
+        activities: [],
+        totalCount: 0,
+        totalDistanceKm: 0,
+        totalElevationGain: 0,
+        totalMovingTimeSeconds: 0,
+        totalMovingTimeFormatted: '0:00'
       }
-      throw createError({
-        statusCode: response.status,
-        message: 'Failed to fetch activities from Strava'
-      })
     }
 
     const activities: StravaClubActivity[] = await response.json()
@@ -155,8 +140,6 @@ export default defineEventHandler(async (event): Promise<ActivitiesResponse> => 
       activities: cachedActivities.activities.slice(0, limit)
     }
   } catch (error: any) {
-    if (error.statusCode) throw error
-
     console.error('Strava API error:', error)
     return {
       activities: [],

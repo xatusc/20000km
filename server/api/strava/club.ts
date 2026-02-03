@@ -1,4 +1,4 @@
-import { defineEventHandler, createError } from 'h3'
+import { defineEventHandler } from 'h3'
 
 interface StravaClub {
   id: number
@@ -41,18 +41,19 @@ export default defineEventHandler(async (): Promise<ClubResponse> => {
     return cachedClub
   }
 
-  // If no access token, return mock data for development
+  // If no access token, return empty data
   if (!accessToken || accessToken === 'your_access_token_here') {
+    console.error('Strava API error: No valid access token')
     return {
-      id: parseInt(clubId),
-      name: '20,000KM Planetary Run Club',
-      description: 'A global community of runners following Ria\'s 20,000km journey from Vladivostok to Lisbon.',
-      memberCount: 147,
-      city: 'Global',
-      country: 'Worldwide',
-      profileImage: '/images/run-club-profile.webp',
-      coverImage: '/images/Ria_team_horizontal.webp',
-      stravaUrl: `https://www.strava.com/clubs/${clubId}`
+      id: 0,
+      name: '',
+      description: '',
+      memberCount: 0,
+      city: '',
+      country: '',
+      profileImage: '',
+      coverImage: '',
+      stravaUrl: ''
     }
   }
 
@@ -66,17 +67,20 @@ export default defineEventHandler(async (): Promise<ClubResponse> => {
       }
     )
 
+    // Return empty response for any API failure (auth or otherwise)
     if (!response.ok) {
-      if (response.status === 401) {
-        throw createError({
-          statusCode: 401,
-          message: 'Strava access token expired or invalid'
-        })
+      console.error('Strava API error: HTTP', response.status)
+      return {
+        id: 0,
+        name: '',
+        description: '',
+        memberCount: 0,
+        city: '',
+        country: '',
+        profileImage: '',
+        coverImage: '',
+        stravaUrl: ''
       }
-      throw createError({
-        statusCode: response.status,
-        message: 'Failed to fetch club data from Strava'
-      })
     }
 
     const club: StravaClub = await response.json()
@@ -97,20 +101,17 @@ export default defineEventHandler(async (): Promise<ClubResponse> => {
 
     return cachedClub
   } catch (error: any) {
-    // If fetch fails, return mock data as fallback
-    if (error.statusCode) throw error
-
     console.error('Strava API error:', error)
     return {
-      id: parseInt(clubId),
-      name: '20,000KM Planetary Run Club',
-      description: 'A global community of runners following Ria\'s 20,000km journey from Vladivostok to Lisbon.',
-      memberCount: 147,
-      city: 'Global',
-      country: 'Worldwide',
-      profileImage: '/images/run-club-profile.webp',
-      coverImage: '/images/Ria_team_horizontal.webp',
-      stravaUrl: `https://www.strava.com/clubs/${clubId}`
+      id: 0,
+      name: '',
+      description: '',
+      memberCount: 0,
+      city: '',
+      country: '',
+      profileImage: '',
+      coverImage: '',
+      stravaUrl: ''
     }
   }
 })

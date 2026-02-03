@@ -1,4 +1,4 @@
-import { defineEventHandler, createError } from 'h3'
+import { defineEventHandler } from 'h3'
 
 interface StravaEvent {
   id: number
@@ -46,47 +46,12 @@ export default defineEventHandler(async (event): Promise<EventsResponse> => {
     return cachedEvents
   }
 
-  // If no access token, return mock data for development
+  // If no access token, return empty data
   if (!accessToken || accessToken === 'your_access_token_here') {
-    const now = new Date()
+    console.error('Strava API error: No valid access token')
     return {
-      upcoming: [
-        {
-          id: 1,
-          title: 'Saturday Morning Group Run',
-          description: 'Join us for our weekly long run through the park.',
-          activityType: 'Run',
-          startDate: new Date(now.getTime() + 2 * 24 * 60 * 60 * 1000).toISOString(),
-          startDateLocal: new Date(now.getTime() + 2 * 24 * 60 * 60 * 1000).toISOString(),
-          address: 'Central Park, New York',
-          stravaUrl: `https://www.strava.com/clubs/${clubId}/group_events`,
-          isPast: false
-        },
-        {
-          id: 2,
-          title: 'Midweek Recovery Run',
-          description: 'Easy-paced recovery run. All levels welcome.',
-          activityType: 'Run',
-          startDate: new Date(now.getTime() + 5 * 24 * 60 * 60 * 1000).toISOString(),
-          startDateLocal: new Date(now.getTime() + 5 * 24 * 60 * 60 * 1000).toISOString(),
-          address: 'Riverside Trail',
-          stravaUrl: `https://www.strava.com/clubs/${clubId}/group_events`,
-          isPast: false
-        }
-      ],
-      past: [
-        {
-          id: 3,
-          title: 'New Year Kickoff Run',
-          description: 'Starting the year strong with a community run.',
-          activityType: 'Run',
-          startDate: new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString(),
-          startDateLocal: new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString(),
-          address: 'Downtown Loop',
-          stravaUrl: `https://www.strava.com/clubs/${clubId}/group_events`,
-          isPast: true
-        }
-      ]
+      upcoming: [],
+      past: []
     }
   }
 
@@ -100,17 +65,13 @@ export default defineEventHandler(async (event): Promise<EventsResponse> => {
       }
     )
 
+    // Return empty response for any API failure (auth or otherwise)
     if (!response.ok) {
-      if (response.status === 401) {
-        throw createError({
-          statusCode: 401,
-          message: 'Strava access token expired or invalid'
-        })
+      console.error('Strava API error: HTTP', response.status)
+      return {
+        upcoming: [],
+        past: []
       }
-      throw createError({
-        statusCode: response.status,
-        message: 'Failed to fetch events from Strava'
-      })
     }
 
     const events: StravaEvent[] = await response.json()
@@ -141,10 +102,7 @@ export default defineEventHandler(async (event): Promise<EventsResponse> => {
 
     return cachedEvents
   } catch (error: any) {
-    if (error.statusCode) throw error
-
     console.error('Strava API error:', error)
-    // Return empty arrays as fallback
     return {
       upcoming: [],
       past: []
