@@ -7,8 +7,7 @@ useSeoMeta({
 const socialLinks = [
   { name: 'Instagram', handle: '@whereisriax', url: 'https://instagram.com/whereisriax' },
   { name: 'Strava', handle: 'Ria Xi', url: 'https://strava.app.link/qeKK5Sw4OZb' },
-  { name: 'TikTok', handle: '@whereisriax', url: 'https://tiktok.com/@whereisriax' },
-  { name: 'X / Twitter', handle: '@whereisriax', url: 'https://x.com/whereisriax' }
+  { name: 'TikTok', handle: '@whereisriax', url: 'https://tiktok.com/@whereisriax' }
 ]
 </script>
 
@@ -48,27 +47,27 @@ const socialLinks = [
         <section class="contact-inquiries">
           <h2 class="section-label">{{ $t('contact.inquiriesLabel') }}</h2>
           <div class="inquiry-cards">
-            <div class="inquiry-card">
+            <a href="mailto:hello@20000km.com?subject=Press Inquiry" class="inquiry-card">
+              <svg class="external-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
+              </svg>
               <h3>{{ $t('contact.inquiries.press.title') }}</h3>
               <p>{{ $t('contact.inquiries.press.desc') }}</p>
-              <a href="mailto:hello@20000km.com?subject=Press Inquiry" class="inquiry-link">
-                hello@20000km.com
-              </a>
-            </div>
-            <div class="inquiry-card">
+            </a>
+            <a href="mailto:hello@20000km.com?subject=Sponsorship Inquiry" class="inquiry-card">
+              <svg class="external-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
+              </svg>
               <h3>{{ $t('contact.inquiries.sponsorship.title') }}</h3>
               <p>{{ $t('contact.inquiries.sponsorship.desc') }}</p>
-              <a href="mailto:hello@20000km.com?subject=Sponsorship Inquiry" class="inquiry-link">
-                hello@20000km.com
-              </a>
-            </div>
-            <div class="inquiry-card">
+            </a>
+            <a href="mailto:hello@20000km.com?subject=Land Crew Application" class="inquiry-card">
+              <svg class="external-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
+              </svg>
               <h3>{{ $t('contact.inquiries.landCrew.title') }}</h3>
               <p>{{ $t('contact.inquiries.landCrew.desc') }}</p>
-              <a href="mailto:hello@20000km.com?subject=Land Crew Application" class="inquiry-link">
-                hello@20000km.com
-              </a>
-            </div>
+            </a>
           </div>
         </section>
       </div>
@@ -222,10 +221,26 @@ const socialLinks = [
 }
 
 .inquiry-card {
+  position: relative;
+  display: block;
   padding: $space-6;
   background: $cream;
   border: 2px solid $earth-300;
   text-align: left;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+
+  &:hover {
+    border-color: $terracotta-700;
+    background: lighten($cream, 2%);
+
+    .external-icon {
+      color: $terracotta-700;
+      transform: translate(2px, -2px);
+    }
+  }
 
   h3 {
     font-family: $font-mono;
@@ -233,24 +248,22 @@ const socialLinks = [
     letter-spacing: $tracking-wide;
     text-transform: uppercase;
     margin-bottom: $space-2;
+    color: $warm-black;
   }
 
   p {
     font-size: $text-sm;
     color: $earth-600;
     line-height: $leading-relaxed;
-    margin-bottom: $space-3;
+    margin-bottom: 0;
   }
 }
 
-.inquiry-link {
-  font-family: $font-mono;
-  font-size: $text-xs;
-  color: $terracotta-700;
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-  }
+.external-icon {
+  position: absolute;
+  top: $space-4;
+  right: $space-4;
+  color: $earth-400;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 </style>

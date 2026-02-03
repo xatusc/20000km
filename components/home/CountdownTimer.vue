@@ -22,7 +22,6 @@ const units = [
 
 <template>
   <div class="countdown" role="region" aria-labelledby="countdown-label">
-    <h2 id="countdown-label" class="countdown__label">{{ $t('countdown.label') }}</h2>
     <div
       class="countdown__grid"
       role="timer"
@@ -33,6 +32,7 @@ const units = [
         <span class="countdown__unit">{{ $t(unit.label) }}</span>
       </div>
     </div>
+    <h2 id="countdown-label" class="countdown__label">{{ $t('countdown.label') }}</h2>
     <p v-if="showDate" class="countdown__date">{{ $t('countdown.startDate') }}</p>
   </div>
 </template>
@@ -51,7 +51,7 @@ const units = [
     font-weight: 400;
     letter-spacing: $tracking-label;
     text-transform: uppercase;
-    margin: 0 0 $space-8 0;
+    margin: $space-8 0 0 0;
     color: $earth-600;
   }
 
@@ -69,69 +69,80 @@ const units = [
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-
-  &__number {
-    display: block;
     position: relative;
     isolation: isolate; // Creates stacking context for ::after
     background: $warm-black;
     color: $cream;
-    font-family: $font-mono;
-    font-size: 2.5rem;
-    font-weight: 400;
-    line-height: 1;
-    padding: 1rem 0.75rem;
-    min-width: 70px;
-    text-align: center;
+    padding: 1.5rem 1rem;
+    min-width: 80px;
 
     // Terracotta border offset (surround box, shifted to bottom-right)
     &::after {
       content: '';
       position: absolute;
-      top: -8px;
-      left: -8px;
-      right: -8px;
-      bottom: -8px;
+      top: 4px;
+      left: 4px;
+      right: -4px;
+      bottom: -4px;
       border: 1px solid $terracotta;
       z-index: -1;
-      transform: translate(6px, 6px);
       pointer-events: none;
       box-sizing: border-box;
     }
 
     @media (max-width: $breakpoint-md) {
-      font-size: 2rem;
-      padding: 0.875rem 0.625rem;
-      min-width: 60px;
+      padding: 1.25rem 0.875rem;
+      min-width: 70px;
 
       &::after {
-        top: -6px;
-        left: -6px;
-        right: -6px;
-        bottom: -6px;
-        transform: translate(4px, 4px);
+        top: 3px;
+        left: 3px;
+        right: -3px;
+        bottom: -3px;
       }
     }
 
     @media (max-width: $breakpoint-sm) {
+      padding: 1rem 0.75rem;
+      min-width: 60px;
+
+      &::after {
+        top: 2px;
+        left: 2px;
+        right: -2px;
+        bottom: -2px;
+      }
+    }
+  }
+
+  &__number {
+    display: block;
+    font-family: $font-mono;
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+
+    @media (max-width: $breakpoint-md) {
+      font-size: 2rem;
+    }
+
+    @media (max-width: $breakpoint-sm) {
       font-size: 1.5rem;
-      padding: 0.75rem 0.5rem;
-      min-width: 50px;
     }
   }
 
   &__unit {
     font-family: $font-mono;
-    font-size: $text-sm;
-    letter-spacing: $tracking-widest;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: $earth-600;
-    margin-top: $space-3;
+    margin-top: 0.5rem;
+    opacity: 0.7;
 
     @media (max-width: $breakpoint-sm) {
-      font-size: $text-xs;
-      margin-top: $space-2;
+      font-size: 0.55rem;
+      margin-top: 0.375rem;
     }
   }
 

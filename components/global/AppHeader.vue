@@ -28,11 +28,8 @@ watch(() => route.path, () => {
     <div class="container header__inner">
       <div class="header__left">
         <NuxtLink to="/" class="header__logo">
-          {{ $t('site.title') }}
-        </NuxtLink>
-        <span class="header__tagline">
           {{ $t('site.tagline') }}
-        </span>
+        </NuxtLink>
       </div>
 
       <!-- Desktop Navigation + Support CTA + Utilities -->
