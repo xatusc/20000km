@@ -23,7 +23,8 @@ body {
   background-color: $cream;
   color: $warm-black;
   min-height: 100vh;
-  overflow-x: hidden;
+  width: 100%;
+  overflow-x: clip;
   line-height: $leading-relaxed;
   font-size: $text-base;
 }
@@ -77,7 +78,7 @@ a, button, input, select, textarea,
 // ACCESSIBILITY
 // ============================================
 
-// Skip link
+// Skip link - WCAG AAA compliant
 .skip-link {
   position: absolute;
   top: -100%;
@@ -91,15 +92,19 @@ a, button, input, select, textarea,
   font-size: $text-sm;
   letter-spacing: $tracking-wide;
   text-transform: uppercase;
+  border: 3px solid $cream;
+  font-weight: 600;
 
   &:focus {
     top: $space-4;
+    outline: 3px solid $terracotta;
+    outline-offset: 2px;
   }
 }
 
-// Focus styles
+// Focus styles - WCAG AAA compliant (3px for better visibility)
 :focus-visible {
-  outline: 2px solid $terracotta;
+  outline: 3px solid $terracotta;
   outline-offset: 2px;
 }
 

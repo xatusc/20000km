@@ -31,13 +31,19 @@ const socialLinks = [
         </section>
 
         <!-- Social Links -->
-        <section class="contact-social">
-          <h2 class="section-label">{{ $t('contact.followLabel') }}</h2>
+        <section class="contact-social" aria-labelledby="social-heading">
+          <h2 id="social-heading" class="section-label">{{ $t('contact.followLabel') }}</h2>
           <ul class="social-list">
             <li v-for="link in socialLinks" :key="link.name">
-              <a :href="link.url" target="_blank" rel="noopener noreferrer" class="social-link">
-                <span class="social-name">{{ link.name }}</span>
-                <span class="social-handle">{{ link.handle }}</span>
+              <a
+                :href="link.url"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-link"
+                :aria-label="`Follow on ${link.name} at ${link.handle} (opens in new tab)`"
+              >
+                <span class="social-name" aria-hidden="true">{{ link.name }}</span>
+                <span class="social-handle" aria-hidden="true">{{ link.handle }}</span>
               </a>
             </li>
           </ul>
@@ -117,7 +123,7 @@ const socialLinks = [
   font-family: $font-serif;
   font-style: italic;
   font-size: $text-lg;
-  color: $earth-600;
+  color: $a11y-text-secondary; // WCAG AAA compliant
   margin: 0;
 }
 
@@ -202,7 +208,7 @@ const socialLinks = [
 
 .social-handle {
   font-size: $text-sm;
-  color: $earth-500;
+  color: $a11y-text-secondary; // WCAG AAA compliant
 }
 
 // Inquiry Cards
@@ -253,7 +259,7 @@ const socialLinks = [
 
   p {
     font-size: $text-sm;
-    color: $earth-600;
+    color: $a11y-text-secondary; // WCAG AAA compliant
     line-height: $leading-relaxed;
     margin-bottom: 0;
   }
@@ -263,7 +269,7 @@ const socialLinks = [
   position: absolute;
   top: $space-4;
   right: $space-4;
-  color: $earth-400;
+  color: $a11y-text-secondary; // WCAG AAA compliant
   transition: color 0.2s ease, transform 0.2s ease;
 }
 </style>

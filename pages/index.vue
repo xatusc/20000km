@@ -4,9 +4,16 @@
 // 2. Intro Section (below fold - CTA, countdown, location stamp)
 // 3. Story Section (the personal narrative)
 // 4. Route Map Banner (full-width with CTA to journey page)
-// 5. Media Coverage (social proof)
-// 6. Support Section (simplified: progress bar + CTA)
-// 7. Voice Notes CTA (engagement)
+// 5. Instagram Gallery (social proof / engagement)
+// 6. Media Coverage (social proof)
+// 7. Support Section (simplified: progress bar + CTA)
+// 8. Voice Notes CTA (engagement)
+
+useHead({
+  script: [
+    { src: 'https://cdn.lightwidget.com/widgets/lightwidget.js', async: true }
+  ]
+})
 
 useSeoMeta({
   title: '20,000KM | The First Human to Run the Silk Road',
@@ -30,20 +37,27 @@ useSeoMeta({
     <!-- 4. Route Map Banner (full-width with CTA) -->
     <RouteMapBanner />
 
-    <!-- 5. Media Coverage (social proof) -->
+    <!-- 6. Media Coverage (social proof) -->
     <div class="container">
       <MediaCoverage />
     </div>
 
-    <!-- 6. Support Section (simplified) -->
+    <!-- 7. Support Section -->
     <section class="support-wrapper">
       <div class="container">
         <SupportSection />
       </div>
     </section>
 
-    <!-- 7. Voice Notes CTA -->
-    <VoiceNotesSection />
+
+    <!-- 5. Instagram Gallery -->
+    <InstagramGallery
+      :eyebrow="$t('home.instagram.eyebrow')"
+      :title="$t('home.instagram.title')"
+    />
+
+    <!-- 8. Voice Notes CTA -->
+    <!-- <VoiceNotesSection /> -->
   </div>
 </template>
 

@@ -4,6 +4,7 @@
 const { formattedFunded, progress } = useFundraising()
 const route = useRoute()
 
+// Matches $breakpoint-sm in _variables.scss - keep in sync
 const MOBILE_BREAKPOINT = 480
 const isVisible = ref(false)
 const isMobile = ref(false)
@@ -76,6 +77,7 @@ watch(() => route.path, () => {
   bottom: 0;
   left: 0;
   right: 0;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: space-between;

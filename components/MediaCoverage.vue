@@ -78,6 +78,7 @@ watch(motionAllowed, (allowed) => {
         target="_blank"
         rel="noopener noreferrer"
         class="media-coverage__logo"
+        :aria-label="`Read coverage on ${mention.name} (opens in new tab)`"
       >
         <img
           :src="mention.logo"
@@ -114,7 +115,7 @@ watch(motionAllowed, (allowed) => {
   font-size: $text-xs;
   letter-spacing: $tracking-widest;
   text-transform: uppercase;
-  color: $earth-400;
+  color: $a11y-text-secondary; // WCAG AAA compliant
   margin-bottom: $space-6;
 }
 
@@ -161,7 +162,7 @@ watch(motionAllowed, (allowed) => {
     font-family: $font-serif;
     font-style: italic;
     font-size: $text-base;
-    color: $earth-600;
+    color: $a11y-text-secondary; // WCAG AAA compliant
     margin-bottom: $space-2;
   }
 
@@ -170,7 +171,7 @@ watch(motionAllowed, (allowed) => {
     font-style: normal;
     font-size: $text-xs;
     letter-spacing: $tracking-wide;
-    color: $earth-400;
+    color: $a11y-text-secondary; // WCAG AAA compliant
   }
 }
 </style>

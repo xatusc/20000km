@@ -22,20 +22,30 @@
   "intro": {
     "from": "Vladivostok, Russia",
     "to": "Lisbon, Portugal",
-    "hook": "The first human to run across Asia and Europe",
+    "hook1": "The first human to run",
+    "hook2": "the length of Asia and Europe",
     "hookSilkRoad": "on the silk road",
     "subhook": "One woman. 17 countries. Pacific to Atlantic.",
     "days": "Days",
     "hours": "Hours",
     "min": "Min",
+    "sec": "Secs",
     "untilDeparture": "until departure",
     "cta": "Fund the Road"
+  },
+  "home": {
+    "instagram": {
+      "eyebrow": "Follow Along",
+      "title": "From the Road"
+    }
   },
   "story": {
     "eyebrow": "The Beginning",
     "title": "The Story",
-    "paragraph1": "Two years ago, Ria was burnt out from her tech career in Silicon Valley, coming out of a difficult relationship, and struggling with mental health issues. Running became her way out. It started as a 30 day challenge to run everyday after a breakup.",
-    "paragraph2": "Within a year, she went from struggling to finish a half marathon to setting ultramarathon records on world-renowned routes. The Via Francigena: 1,014 km in 21 days. The Camino de Santiago: 780 km in 12 days.",
+    "paragraph1": "Two years ago, Ria was burnt out from her tech career in Silicon Valley, coming out of a difficult relationship, and struggling with mental health issues. Running became her way out.",
+    "paragraph2": "Within a year, she went from struggling to finish a half marathon to setting ultramarathon records on world-renowned routes.",
+    "bullet1": "The Via Francigena: 1,014 km in 21 days",
+    "bullet2": "The Camino de Santiago: 780 km in 12 days",
     "highlight": "She asked herself: what is the most impossible thing I could attempt? The answer: running 20,000 kilometers from Vladivostok to Lisbon, retracing the ancient Silk Road.",
     "link": "Read the full story →",
     "themes": {
@@ -71,7 +81,7 @@
     "of": "of",
     "hook": "Every €5 funds 1 kilometer. Every contribution gets her closer to supported.",
     "cta": "Donate Now",
-    "sponsorText": "for brand partnership"
+    "sponsorText": "Brand partnerships"
   },
   "voiceNotes": {
     "label": "Cheer Her On",
@@ -90,6 +100,13 @@
     "moreEpisodes": "More Episodes",
     "play": "Play",
     "pause": "Pause"
+  },
+  "substack": {
+    "label": "Dispatches",
+    "title": "Long Run Letters",
+    "desc": "Stories and lessons from spending the end of my twenties running across countries and continents.",
+    "readOnSubstack": "Read on Substack",
+    "subscribe": "Subscribe to Long Run Letters"
   },
   "journey": {
     "eyebrow": "Expedition Log",
@@ -253,6 +270,30 @@
   "badge": {
     "title": "Planetary Run Club",
     "text": "Nowhere we run is too far to call neighborhood. No one we meet is too foreign to call neighbor."
+  },
+  "runClub": {
+    "twoWays": {
+      "title": "Two Ways to Join",
+      "virtual": {
+        "title": "Virtual",
+        "desc": "Planetary Run Club is a community of runners joining Ria's journey. Right now, that means weekly dispatches from training. Once the run begins, we'll be building virtual challenges, meetups, and more.",
+        "note": "Whether you're in Tokyo or Toronto, Berlin or Buenos Aires—you're part of this journey."
+      },
+      "inPerson": {
+        "title": "In Person",
+        "desc": "Run alongside Ria during the journey. There are two ways to join in person:",
+        "flagship": {
+          "title": "Flagship Runs",
+          "desc": "Major group runs in select cities along the route. These will be announced via the Strava Run Club.",
+          "cta": "Join the Run Club"
+        },
+        "local": {
+          "title": "Local Runs",
+          "desc": "Live along the route? Run with Ria when she passes through your area.",
+          "cta": "Sign Up to Run"
+        }
+      }
+    }
   },
   "sensory": {
     "turnOnMotion": "Turn on motion",

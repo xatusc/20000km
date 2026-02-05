@@ -352,7 +352,7 @@ watch(() => route.path, () => {
   font-size: $text-sm;
   letter-spacing: $tracking-wide;
   text-transform: uppercase;
-  color: $earth-600;
+  color: $a11y-text-secondary; // WCAG AAA compliant
   padding: $space-1 $space-2;
 }
 </style>

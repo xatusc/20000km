@@ -25,24 +25,30 @@ onMounted(() => {
       </div>
 
       <p class="intro__hook">
-        {{ $t('intro.hook') }}<br>
+        {{ $t('intro.hook1') }}<br>{{ $t('intro.hook2') }}<br>
         <span class="intro__hook-silk-road">{{ $t('intro.hookSilkRoad') }}</span>
       </p>
       <p class="intro__subhook">{{ $t('intro.subhook') }}</p>
 
       <!-- Countdown -->
-      <div class="intro__countdown" role="timer" :aria-label="`${formatted.days} ${$t('accessibility.daysUntilDeparture')}`">
-        <div class="intro__countdown-item">
-          <span class="intro__countdown-number">{{ formatted.days }}</span>
-          <span class="intro__countdown-label">{{ $t('intro.days') }}</span>
-        </div>
-        <div class="intro__countdown-item">
-          <span class="intro__countdown-number">{{ formatted.hours }}</span>
-          <span class="intro__countdown-label">{{ $t('intro.hours') }}</span>
-        </div>
-        <div class="intro__countdown-item">
-          <span class="intro__countdown-number">{{ formatted.minutes }}</span>
-          <span class="intro__countdown-label">{{ $t('intro.min') }}</span>
+      <div class="intro__countdown-wrapper">
+        <div class="intro__countdown" role="timer" :aria-label="`${formatted.days} ${$t('accessibility.daysUntilDeparture')}`">
+          <div class="intro__countdown-item">
+            <span class="intro__countdown-number">{{ formatted.days }}</span>
+            <span class="intro__countdown-label">{{ $t('intro.days') }}</span>
+          </div>
+          <div class="intro__countdown-item">
+            <span class="intro__countdown-number">{{ formatted.hours }}</span>
+            <span class="intro__countdown-label">{{ $t('intro.hours') }}</span>
+          </div>
+          <div class="intro__countdown-item">
+            <span class="intro__countdown-number">{{ formatted.minutes }}</span>
+            <span class="intro__countdown-label">{{ $t('intro.min') }}</span>
+          </div>
+          <div class="intro__countdown-item">
+            <span class="intro__countdown-number">{{ formatted.seconds }}</span>
+            <span class="intro__countdown-label">{{ $t('intro.sec') }}</span>
+          </div>
         </div>
         <span class="intro__countdown-text">{{ $t('intro.untilDeparture') }}</span>
       </div>
@@ -118,61 +124,86 @@ onMounted(() => {
   font-size: $text-sm;
   letter-spacing: $tracking-wide;
   text-transform: uppercase;
-  color: $earth-500;
+  color: $a11y-text-secondary; // WCAG AAA compliant
   margin: 0 auto $space-10;
 }
 
 // Countdown
+.intro__countdown-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-6;
+  margin-bottom: $space-10;
+}
+
 .intro__countdown {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: center;
   gap: $space-4;
-  margin-bottom: $space-10;
   flex-wrap: wrap;
+
+  @media (max-width: $breakpoint-sm) {
+    gap: $space-3;
+  }
 }
 
 .intro__countdown-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 60px;
+  background: $warm-black;
+  color: $cream;
+  padding: 1.5rem 1rem;
+  min-width: 80px;
+  box-shadow: 6px 6px 0 $terracotta;
+
+  @media (max-width: $breakpoint-md) {
+    padding: 1.25rem 0.875rem;
+    min-width: 70px;
+    box-shadow: 5px 5px 0 $terracotta;
+  }
 }
 
 .intro__countdown-number {
-  font-family: $font-serif;
-  font-size: $text-4xl;
-  font-weight: 400;
+  display: block;
+  font-family: $font-mono;
+  font-size: 2.5rem;
+  font-weight: 700;
   line-height: 1;
-  color: $warm-black;
+  text-align: center;
 
   @media (max-width: $breakpoint-md) {
-    font-size: $text-3xl;
+    font-size: 2rem;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    font-size: 1.5rem;
   }
 }
 
 .intro__countdown-label {
   font-family: $font-mono;
-  font-size: $text-xs;
-  letter-spacing: $tracking-wide;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: $earth-400;
-  margin-top: $space-1;
+  margin-top: 0.5rem;
+  opacity: 0.7;
+
+  @media (max-width: $breakpoint-sm) {
+    font-size: 0.55rem;
+    margin-top: 0.375rem;
+  }
 }
 
 .intro__countdown-text {
   font-family: $font-mono;
-  font-size: $text-sm;
-  letter-spacing: $tracking-wide;
+  font-size: $text-xs;
+  font-weight: 400;
+  letter-spacing: $tracking-label;
   text-transform: uppercase;
-  color: $terracotta;
-  margin-left: $space-2;
-
-  @media (max-width: $breakpoint-md) {
-    width: 100%;
-    margin-left: 0;
-    margin-top: $space-2;
-  }
+  color: $a11y-text-secondary; // WCAG AAA compliant
 }
 
 // CTA

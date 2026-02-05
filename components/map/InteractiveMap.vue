@@ -102,6 +102,7 @@ const activeTooltip = ref<Waypoint | null>(null)
 const runnerPosition = ref({ x: 95, y: 28 })
 const runnerVisible = ref(false)
 const displayedFundedKm = ref(0)
+const animationFrameId = ref<number | null>(null)
 
 // Computed
 const liveRegionText = computed(() => {
@@ -200,11 +201,13 @@ const animateRunner = (targetProgress: number) => {
     displayedFundedKm.value = Math.round(startKm + (targetKm - startKm) * eased)
 
     if (t < 1) {
-      requestAnimationFrame(animate)
+      animationFrameId.value = requestAnimationFrame(animate)
+    } else {
+      animationFrameId.value = null
     }
   }
 
-  requestAnimationFrame(animate)
+  animationFrameId.value = requestAnimationFrame(animate)
 }
 
 // Watch for data changes
@@ -228,6 +231,11 @@ onMounted(() => {
 
 onUnmounted(() => {
   document.removeEventListener('click', handleDocumentClick)
+  // Cancel any pending animation frame to prevent memory leaks
+  if (animationFrameId.value !== null) {
+    cancelAnimationFrame(animationFrameId.value)
+    animationFrameId.value = null
+  }
 })
 </script>
 

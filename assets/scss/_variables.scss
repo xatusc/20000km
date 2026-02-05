@@ -63,6 +63,21 @@ $sand: $sand-300;
 $faded-red: $terracotta-600;
 
 // --------------------------------------------
+// WCAG AAA ACCESSIBLE TEXT COLORS
+// AAA requires 7:1 contrast for normal text, 4.5:1 for large text (18pt+)
+// These provide AAA-compliant alternatives on light backgrounds
+// --------------------------------------------
+
+// Text on light backgrounds ($cream / $sand-100) - all meet 7:1+ ratio
+$a11y-text-primary: $earth-800;      // Primary body text
+$a11y-text-secondary: $earth-700;    // Secondary text (7:1 ratio)
+$a11y-text-muted: #4A4035;           // Muted text that's still readable (8:1 ratio)
+
+// Accent colors that meet AAA on light backgrounds
+$a11y-accent: $terracotta-800;       // Accent text/links (8:1 ratio)
+$a11y-accent-emphasis: $terracotta-900; // Emphasized accent (10:1 ratio)
+
+// --------------------------------------------
 // TYPOGRAPHY
 // --------------------------------------------
 

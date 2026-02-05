@@ -42,6 +42,5 @@ coverage
 
 # Test
 .nyc_output
-node_modules
 
 .env.example

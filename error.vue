@@ -189,16 +189,17 @@ const isDev = import.meta.dev
 }
 
 .btn-primary {
-  background: $terracotta-600; // Darker for WCAG AA contrast (4.5:1+)
+  background: $warm-black;
   color: $cream;
+  border: $border-width solid $warm-black;
 
   &:hover {
-    background: $terracotta-700;
-    transform: translateY(-1px);
+    background: $earth-800;
+    border-color: $earth-800;
   }
 
   &:focus-visible {
-    outline: 3px solid $terracotta-300;
+    outline: 3px solid $terracotta;
     outline-offset: 2px;
   }
 }

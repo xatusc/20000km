@@ -11,12 +11,14 @@ const { formattedFunded, formattedTotal, progress } = useFundraising()
 
 // Top supporters (donations over €100)
 const topSupporters = [
-  { name: 'Calcifer Computing', url: 'https://www.calcifercomputing.com' },
-  { name: 'Julien Heller' },
-  { name: 'Kai Markus Xiong' },
-  { name: 'Liam Thompson' },
-  { name: 'Martial Widemann' },
-  { name: 'Paige Amundson' }
+  { name: 'Giles Rozier' },
+  { name: 'Sophie Qu' },
+  { name: 'Jady Tsao' },
+  { name: 'Yuka Toda' },
+  { name: 'Mads Soegaard' },
+  { name: 'Daniel Nickerson' },
+  { name: 'Sheila Nussbaumer' },
+  { name: 'Cormac O Bric' }
 ]
 
 // FAQ data - using translation keys
@@ -86,6 +88,7 @@ const toggleFaq = (index: number) => {
           target="_blank"
           rel="noopener noreferrer"
           class="cta-primary"
+          aria-label="Donate now on GoFundMe (opens in new tab)"
         >
           {{ $t('supportPage.donateCta') }}
         </a>
@@ -108,7 +111,13 @@ const toggleFaq = (index: number) => {
           <h3 class="supporters-heading">{{ $t('supportPage.supportersHeading') }}</h3>
           <ul class="supporters-names">
             <li v-for="supporter in topSupporters" :key="supporter.name">
-              <a v-if="supporter.url" :href="supporter.url" target="_blank" rel="noopener noreferrer">
+              <a
+                v-if="supporter.url"
+                :href="supporter.url"
+                target="_blank"
+                rel="noopener noreferrer"
+                :aria-label="`Visit ${supporter.name} (opens in new tab)`"
+              >
                 {{ supporter.name }}
               </a>
               <span v-else>{{ supporter.name }}</span>
@@ -121,6 +130,7 @@ const toggleFaq = (index: number) => {
           target="_blank"
           rel="noopener noreferrer"
           class="community-cta"
+          aria-label="See all supporters on GoFundMe (opens in new tab)"
         >
           {{ $t('supportPage.seeAllSupporters') }}
         </a>
@@ -200,7 +210,7 @@ const toggleFaq = (index: number) => {
   font-size: $text-sm;
   letter-spacing: $tracking-wide;
   text-transform: uppercase;
-  color: $earth-500;
+  color: $a11y-text-secondary; // WCAG AAA compliant
 
   strong {
     color: $terracotta-700;
@@ -232,7 +242,7 @@ const toggleFaq = (index: number) => {
   font-size: $text-xs;
   letter-spacing: $tracking-wide;
   text-transform: uppercase;
-  color: $earth-500;
+  color: $a11y-text-secondary; // WCAG AAA compliant
   margin-top: $space-2;
 
   small {
@@ -301,7 +311,7 @@ const toggleFaq = (index: number) => {
   font-size: $text-xs;
   letter-spacing: $tracking-wide;
   text-transform: uppercase;
-  color: $earth-500;
+  color: $a11y-text-secondary; // WCAG AAA compliant
   margin-top: $space-2;
 }
 
@@ -364,7 +374,7 @@ const toggleFaq = (index: number) => {
   font-family: $font-serif;
   font-style: italic;
   font-size: $text-lg;
-  color: $earth-600;
+  color: $a11y-text-secondary; // WCAG AAA compliant
   margin-bottom: $space-8;
 }
 
@@ -483,7 +493,7 @@ const toggleFaq = (index: number) => {
 
   p {
     font-size: $text-base;
-    color: $earth-600;
+    color: $a11y-text-secondary; // WCAG AAA compliant
     line-height: $leading-relaxed;
     margin: 0;
   }

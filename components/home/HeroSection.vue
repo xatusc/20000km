@@ -18,8 +18,12 @@ const { motionAllowed } = useSensoryMode()
           poster="/images/Ria_farawayrun_horizontal.webp"
           aria-label="Ria running across a vast open landscape at sunset, silhouetted against the horizon"
         >
-          <source src="/video/ria-run.mp4" type="video/mp4">
+          <!-- WebM for better compression, MP4 as fallback -->
+          <source src="/video/ria-run-clip.webm" type="video/webm">
+          <source src="/video/ria-run-clip.mp4" type="video/mp4">
           <track kind="descriptions" src="/video/ria-run-descriptions.vtt" srclang="en" label="English descriptions">
+          <!-- Fallback for browsers that don't support video -->
+          <img src="/images/Ria_farawayrun_horizontal.webp" alt="Ria running alone across a vast open landscape, silhouetted against the horizon">
         </video>
         <div class="hero__overlay hero__overlay--dark"></div>
       </template>
@@ -145,7 +149,7 @@ const { motionAllowed } = useSensoryMode()
   font-family: $font-serif;
   font-style: italic;
   font-size: clamp($text-lg, 3vw, $text-2xl);
-  color: $earth-600;
+  color: $a11y-text-secondary; // WCAG AAA compliant
   margin-top: $space-8;
 }
 
@@ -167,7 +171,7 @@ const { motionAllowed } = useSensoryMode()
   font-size: $text-xs;
   letter-spacing: $tracking-widest;
   text-transform: uppercase;
-  color: $earth-500;
+  color: $a11y-text-secondary; // WCAG AAA compliant
 }
 
 .hero__scroll-line {

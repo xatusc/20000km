@@ -69,49 +69,22 @@ const units = [
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative;
-    isolation: isolate; // Creates stacking context for ::after
     background: $warm-black;
     color: $cream;
     padding: 1.5rem 1rem;
     min-width: 80px;
-
-    // Terracotta border offset (surround box, shifted to bottom-right)
-    &::after {
-      content: '';
-      position: absolute;
-      top: 4px;
-      left: 4px;
-      right: -4px;
-      bottom: -4px;
-      border: 1px solid $terracotta;
-      z-index: -1;
-      pointer-events: none;
-      box-sizing: border-box;
-    }
+    box-shadow: 6px 6px 0 $terracotta;
 
     @media (max-width: $breakpoint-md) {
       padding: 1.25rem 0.875rem;
       min-width: 70px;
-
-      &::after {
-        top: 3px;
-        left: 3px;
-        right: -3px;
-        bottom: -3px;
-      }
+      box-shadow: 5px 5px 0 $terracotta;
     }
 
     @media (max-width: $breakpoint-sm) {
       padding: 1rem 0.75rem;
       min-width: 60px;
-
-      &::after {
-        top: 2px;
-        left: 2px;
-        right: -2px;
-        bottom: -2px;
-      }
+      box-shadow: 4px 4px 0 $terracotta;
     }
   }
 

@@ -91,19 +91,19 @@ watch(motionAllowed, (allowed) => {
             </p>
             <div class="records-callout">
               <div class="record">
-                <span class="record-distance">1,014 km</span>
+                <span class="record-distance">1,014 <abbr title="kilometers">km</abbr></span>
                 <span class="record-time">21 days</span>
                 <span class="record-name">Via Francigena</span>
-                <span class="record-note">Overall FKT</span>
+                <span class="record-note">Overall <abbr title="Fastest Known Time">FKT</abbr></span>
               </div>
               <div class="record">
-                <span class="record-distance">780 km</span>
+                <span class="record-distance">780 <abbr title="kilometers">km</abbr></span>
                 <span class="record-time">12 days</span>
                 <span class="record-name">Camino de Santiago</span>
-                <span class="record-note">Female self-supported FKT</span>
+                <span class="record-note">Female self-supported <abbr title="Fastest Known Time">FKT</abbr></span>
               </div>
               <div class="record">
-                <span class="record-distance">539 km</span>
+                <span class="record-distance">539 <abbr title="kilometers">km</abbr></span>
                 <span class="record-time">World first</span>
                 <span class="record-name">Sinai Trail</span>
               </div>
@@ -300,7 +300,7 @@ watch(motionAllowed, (allowed) => {
   font-size: $text-xl;
   font-style: italic;
   line-height: $leading-relaxed;
-  color: $earth-600;
+  color: $a11y-text-secondary; // WCAG AAA compliant
   max-width: 400px;
   margin: 0;
 
@@ -336,7 +336,7 @@ watch(motionAllowed, (allowed) => {
     font-family: $font-serif;
     font-style: italic;
     font-size: $text-sm;
-    color: $earth-500;
+    color: $a11y-text-secondary; // WCAG AAA compliant
     text-align: right;
 
     @media (max-width: $breakpoint-xl) {
@@ -450,7 +450,7 @@ watch(motionAllowed, (allowed) => {
 .record-time {
   font-family: $font-mono;
   font-size: $text-sm;
-  color: $earth-500;
+  color: $a11y-text-secondary; // WCAG AAA compliant
   letter-spacing: $tracking-wide;
   margin-bottom: $space-1;
 }
@@ -459,7 +459,7 @@ watch(motionAllowed, (allowed) => {
   font-family: $font-serif;
   font-style: italic;
   font-size: $text-base;
-  color: $earth-600;
+  color: $a11y-text-secondary; // WCAG AAA compliant
 }
 
 .record-note {
@@ -556,7 +556,7 @@ watch(motionAllowed, (allowed) => {
   font-size: $text-xs;
   letter-spacing: $tracking-widest;
   text-transform: uppercase;
-  color: $earth-500;
+  color: $a11y-text-secondary; // WCAG AAA compliant
   margin-top: $space-2;
 }
 
@@ -585,7 +585,7 @@ watch(motionAllowed, (allowed) => {
   font-family: $font-serif;
   font-size: $text-lg;
   font-style: italic;
-  color: $earth-600;
+  color: $a11y-text-secondary; // WCAG AAA compliant
   margin-bottom: $space-10;
 }
 
@@ -597,7 +597,7 @@ watch(motionAllowed, (allowed) => {
   p {
     font-family: $font-mono;
     font-size: $text-sm;
-    color: $earth-400;
+    color: $a11y-text-secondary; // WCAG AAA compliant
     text-transform: uppercase;
     letter-spacing: $tracking-wide;
     margin: 0;
@@ -780,7 +780,7 @@ watch(motionAllowed, (allowed) => {
   display: block;
   font-family: $font-mono;
   font-size: $text-xs;
-  color: $earth-500;
+  color: $a11y-text-secondary; // WCAG AAA compliant
   letter-spacing: $tracking-wide;
 }
 </style>

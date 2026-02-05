@@ -9,11 +9,9 @@ const { posts, isLoading, error, substackUrl } = useSubstackFeed()
 <template>
   <section class="substack-feed">
     <div class="substack-feed__header">
-      <span class="substack-feed__label">Dispatches</span>
-      <h3 class="substack-feed__title">Long Run Letters</h3>
-      <p class="substack-feed__desc">
-        Stories and lessons from spending the end of my twenties running across countries and continents.
-      </p>
+      <span class="substack-feed__label">{{ $t('substack.label') }}</span>
+      <h3 class="substack-feed__title">{{ $t('substack.title') }}</h3>
+      <p class="substack-feed__desc">{{ $t('substack.desc') }}</p>
     </div>
 
     <!-- Loading state -->
@@ -26,7 +24,7 @@ const { posts, isLoading, error, substackUrl } = useSubstackFeed()
     <!-- Error state -->
     <div v-else-if="error" class="substack-feed__error">
       <a :href="substackUrl" target="_blank" rel="noopener noreferrer" class="substack-feed__cta">
-        Read on Substack
+        {{ $t('substack.readOnSubstack') }}
       </a>
     </div>
 
@@ -42,7 +40,7 @@ const { posts, isLoading, error, substackUrl } = useSubstackFeed()
     </div>
 
     <a :href="substackUrl" target="_blank" rel="noopener noreferrer" class="substack-feed__cta">
-      Subscribe to Long Run Letters
+      {{ $t('substack.subscribe') }}
     </a>
   </section>
 </template>

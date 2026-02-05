@@ -16,7 +16,7 @@
     <AppHeader />
 
     <!-- Main content -->
-    <main id="main-content" class="flex-1">
+    <main id="main-content" class="site-main">
       <slot />
     </main>
 
@@ -33,9 +33,15 @@
 
 .site-wrapper {
   min-height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   position: relative;
+}
+
+.site-main {
+  flex: 1;
+  overflow-x: clip;
 }
 
 // Film grain overlay - subtle vintage texture

@@ -21,6 +21,10 @@ onMounted(() => {
       <div class="story-section__text">
         <p>{{ $t('story.paragraph1') }}</p>
         <p>{{ $t('story.paragraph2') }}</p>
+        <ul class="story-section__list">
+          <li class="story-section__list-item">{{ $t('story.bullet1') }}</li>
+          <li class="story-section__list-item">{{ $t('story.bullet2') }}</li>
+        </ul>
         <p class="story-section__highlight">{{ $t('story.highlight') }}</p>
       </div>
 
@@ -90,6 +94,24 @@ onMounted(() => {
       &:last-child {
         margin-bottom: 0;
       }
+    }
+
+  }
+
+  &__list {
+    margin: $space-4 0;
+    padding-left: $space-6;
+    list-style: disc;
+  }
+
+  &__list-item {
+    font-size: $text-base;
+    line-height: $leading-loose;
+    color: $earth-700;
+    margin-bottom: $space-2;
+
+    &::marker {
+      color: $terracotta;
     }
   }
 

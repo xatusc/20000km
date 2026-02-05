@@ -35,23 +35,21 @@ const { formattedFunded, formattedTotal, progress } = useFundraising()
         </div>
       </div>
 
-      <!-- Single compelling line -->
-      <p class="support-section__hook">{{ $t('supportSection.hook') }}</p>
-
-      <!-- Single CTA to GoFundMe -->
-      <a
-        href="https://www.gofundme.com/rias-20000-km-run-across-asia-and-europe"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="support-section__cta"
-      >
-        {{ $t('supportSection.cta') }}
-      </a>
-
-      <!-- Sponsorship contact -->
-      <p class="support-section__sponsor">
-        <a href="mailto:hello@20000km.com">hello@20000km.com</a> {{ $t('supportSection.sponsorText') }}
-      </p>
+      <!-- Actions row -->
+      <div class="support-section__actions">
+        <a href="mailto:hello@20000km.com" class="support-section__sponsor">
+          {{ $t('supportSection.sponsorText') }}
+        </a>
+        <a
+          href="https://www.gofundme.com/rias-20000-km-run-across-asia-and-europe"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="support-section__cta"
+          aria-label="Donate now on GoFundMe (opens in new tab)"
+        >
+          {{ $t('supportSection.cta') }}
+        </a>
+      </div>
     </div>
 
     <!-- Right: Large dramatic image -->
@@ -86,7 +84,7 @@ const { formattedFunded, formattedTotal, progress } = useFundraising()
     font-family: $font-serif;
     font-style: italic;
     font-size: $text-lg;
-    color: $terracotta;
+    color: $terracotta-700; // WCAG AA compliant
     margin-bottom: $space-3;
   }
 
@@ -125,7 +123,7 @@ const { formattedFunded, formattedTotal, progress } = useFundraising()
   &__progress-total {
     font-family: $font-mono;
     font-size: $text-sm;
-    color: $earth-500;
+    color: $a11y-text-secondary; // WCAG AAA compliant
     letter-spacing: $tracking-wide;
   }
 
@@ -172,7 +170,7 @@ const { formattedFunded, formattedTotal, progress } = useFundraising()
     margin-top: $space-2;
     font-family: $font-mono;
     font-size: $text-xs;
-    color: $earth-400;
+    color: $a11y-text-secondary; // WCAG AAA compliant
     letter-spacing: $tracking-wide;
     text-transform: uppercase;
   }
@@ -181,9 +179,27 @@ const { formattedFunded, formattedTotal, progress } = useFundraising()
     font-family: $font-mono;
     font-size: $text-sm;
     letter-spacing: $tracking-wide;
-    color: $earth-600;
+    color: $a11y-text-secondary; // WCAG AAA compliant
     margin-bottom: $space-6;
     max-width: 400px;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $space-4;
+  }
+
+  &__sponsor {
+    font-family: $font-mono;
+    font-size: $text-base;
+    color: $terracotta-700;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   &__cta {
@@ -209,34 +225,18 @@ const { formattedFunded, formattedTotal, progress } = useFundraising()
     }
   }
 
-  &__sponsor {
-    margin-top: $space-4;
-    font-family: $font-mono;
-    font-size: $text-sm;
-    color: $earth-500;
-
-    a {
-      color: $terracotta-700;
-      text-decoration: none;
-
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-  }
-
   &__details {
     display: block;
     margin-top: $space-4;
     font-family: $font-mono;
     font-size: $text-sm;
     letter-spacing: $tracking-wide;
-    color: $earth-500;
+    color: $a11y-text-secondary; // WCAG AAA compliant
     text-decoration: none;
     transition: color 0.2s ease;
 
     &:hover {
-      color: $terracotta-700;
+      color: $a11y-accent;
     }
   }
 

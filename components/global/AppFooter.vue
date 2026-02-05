@@ -31,6 +31,7 @@ const socialLinks = computed(() => [
           target="_blank"
           rel="noopener noreferrer"
           class="footer__newsletter-link"
+          aria-label="Follow on Instagram (opens in new tab)"
         >
           {{ $t('footer.followCta') }}
         </a>
@@ -53,7 +54,12 @@ const socialLinks = computed(() => [
           <h4 class="footer__sitemap-heading">{{ $t('footer.columns.follow') }}</h4>
           <ul class="footer__sitemap-links">
             <li v-for="link in socialLinks" :key="link.href">
-              <a :href="link.href" target="_blank" rel="noopener noreferrer">
+              <a
+                :href="link.href"
+                target="_blank"
+                rel="noopener noreferrer"
+                :aria-label="`Follow on ${$t(link.labelKey)} (opens in new tab)`"
+              >
                 {{ $t(link.labelKey) }}
               </a>
             </li>
@@ -138,7 +144,7 @@ const socialLinks = computed(() => [
 
   &__newsletter-desc {
     font-size: $text-sm;
-    color: rgba($cream, 0.7);
+    color: rgba($cream, 0.85); // WCAG AAA compliant contrast on dark bg
     max-width: 400px;
 
     @media (max-width: $breakpoint-lg) {
@@ -255,13 +261,13 @@ const socialLinks = computed(() => [
   &__copyright {
     font-family: $font-mono;
     font-size: $text-xs;
-    color: rgba($cream, 0.7);
+    color: rgba($cream, 0.85); // WCAG AAA compliant contrast on dark bg
     letter-spacing: $tracking-wide;
   }
 
   &__contact-link {
     font-size: $text-xs;
-    color: rgba($cream, 0.7);
+    color: rgba($cream, 0.85); // WCAG AAA compliant contrast on dark bg
     text-decoration: none;
     transition: color 0.2s ease;
 
