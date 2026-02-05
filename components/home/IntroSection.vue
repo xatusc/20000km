@@ -72,11 +72,6 @@ onMounted(() => {
   border-bottom: 3px solid $warm-black;
 }
 
-// Content wrapper for single reveal
-.intro__content {
-  // inherits reveal animation
-}
-
 // Location stamp - typewriter/expedition style
 .intro__stamp {
   display: flex;
