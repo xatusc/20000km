@@ -64,10 +64,6 @@ useSeoMeta({
 <style lang="scss" scoped>
 @use '~/assets/scss/_variables' as *;
 
-.home {
-  // Home page wrapper
-}
-
 .support-wrapper {
   background: $cream;
   border-top: 3px solid $warm-black;
