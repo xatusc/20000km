@@ -82,6 +82,7 @@ const socialLinks = [
 </template>
 
 <style lang="scss" scoped>
+@use 'sass:color';
 @use '~/assets/scss/_variables' as *;
 
 .contact-page {
@@ -240,7 +241,7 @@ const socialLinks = [
 
   &:hover {
     border-color: $terracotta-700;
-    background: lighten($cream, 2%);
+    background: color.adjust($cream, $lightness: 2%);
 
     .external-icon {
       color: $terracotta-700;
