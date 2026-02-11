@@ -1,0 +1,306 @@
+{
+  "nav": {
+    "home": "Home",
+    "theJourney": "The Journey",
+    "runClub": "Run Club",
+    "who": "Who",
+    "connect": "Connect",
+    "support": "Support",
+    "supportTheJourney": "Support the Journey",
+    "toggleMenu": "Toggle navigation menu"
+  },
+  "site": {
+    "title": "20,000KM",
+    "tagline": "Planetary Neighborhood Run"
+  },
+  "hero": {
+    "number": "20,000",
+    "unit": "kilometers",
+    "tagline": "\"Only delusional until it's not\"",
+    "explore": "Explore"
+  },
+  "intro": {
+    "from": "Vladivostok, Russia",
+    "to": "Lisbon, Portugal",
+    "hook1": "The first human to run",
+    "hook2": "the length of Asia and Europe",
+    "hookSilkRoad": "on the silk road",
+    "subhook": "One woman. 17 countries. Pacific to Atlantic.",
+    "days": "Days",
+    "hours": "Hours",
+    "min": "Min",
+    "sec": "Secs",
+    "untilDeparture": "until departure",
+    "cta": "Fund the Road"
+  },
+  "home": {
+    "instagram": {
+      "eyebrow": "Follow Along",
+      "title": "From the Road"
+    }
+  },
+  "story": {
+    "eyebrow": "The Beginning",
+    "title": "The Story",
+    "paragraph1": "Two years ago, Ria was burnt out from her tech career in Silicon Valley, coming out of a difficult relationship, and struggling with mental health issues. Running became her way out.",
+    "paragraph2": "Within a year, she went from struggling to finish a half marathon to setting ultramarathon records on world-renowned routes.",
+    "bullet1": "The Via Francigena: 1,014 km in 21 days",
+    "bullet2": "The Camino de Santiago: 780 km in 12 days",
+    "highlight": "She asked herself: what is the most impossible thing I could attempt? The answer: running 20,000 kilometers from Vladivostok to Lisbon, retracing the ancient Silk Road.",
+    "link": "Read the full story →",
+    "themes": {
+      "empowerment": {
+        "title": "Women's Empowerment",
+        "desc": "The first woman-led ultra-distance crossing of the Eurasian continent."
+      },
+      "mentalHealth": {
+        "title": "Mental Health",
+        "desc": "Proof that movement and ambitious goals can rebuild a sense of meaning."
+      },
+      "connection": {
+        "title": "Connection",
+        "desc": "Communities from around the world coming together to make something big happen."
+      }
+    }
+  },
+  "routeMap": {
+    "label": "Pacific to Atlantic",
+    "title": "The Route",
+    "cta": "Learn More",
+    "alt": "Map showing the 20,000km route across Asia and Europe, from Vladivostok on the Pacific coast through China, Central Asia, Iran, Turkey, and Europe to Lisbon on the Atlantic"
+  },
+  "media": {
+    "label": "As Seen In",
+    "quote": "It was a very transformative experience, from being heartbroken and not feeling very accomplished to doing something a lot of people thought was impossible.",
+    "quoteSource": "South China Morning Post"
+  },
+  "supportSection": {
+    "eyebrow": "Running West",
+    "title": "Help Make This Happen",
+    "kmFunded": "km funded",
+    "of": "of",
+    "hook": "Every €5 funds 1 kilometer. Every contribution gets her closer to supported.",
+    "cta": "Donate Now",
+    "sponsorText": "Brand partnerships"
+  },
+  "voiceNotes": {
+    "label": "Cheer Her On",
+    "title": "Send Ria a Voice Note",
+    "desc": "Record a message of encouragement. Your voice will fuel the kilometers ahead.",
+    "cta": "Send a Message",
+    "emailSubject": "Voice Note for Ria",
+    "emailBody": "Hi Ria! Here's my message of encouragement for your journey..."
+  },
+  "podcast": {
+    "eyebrow": "Audio Dispatches",
+    "title": "The Podcast",
+    "subhead": "Conversations from the road",
+    "listenOn": "Listen on Spotify",
+    "latestEpisode": "Latest Episode",
+    "moreEpisodes": "More Episodes",
+    "play": "Play",
+    "pause": "Pause"
+  },
+  "substack": {
+    "label": "Dispatches",
+    "title": "Long Run Letters",
+    "desc": "Stories and lessons from spending the end of my twenties running across countries and continents.",
+    "readOnSubstack": "Read on Substack",
+    "subscribe": "Subscribe to Long Run Letters"
+  },
+  "journey": {
+    "eyebrow": "Expedition Log",
+    "title": "The Journey",
+    "tagline": "The Silk Road on Foot",
+    "description": "Stories from the ground. Conversations with runners joining the route. Dispatches from seventeen countries and the communities along the way.",
+    "cta": "See the Route & Stories",
+    "instagram": {
+      "eyebrow": "From the Field",
+      "title": "Training & Prep"
+    }
+  },
+  "countdown": {
+    "label": "Departure Countdown",
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Mins",
+    "seconds": "Secs",
+    "startDate": "May 1st, 2026"
+  },
+  "locations": {
+    "vladivostok": "Vladivostok",
+    "lisbon": "Lisbon"
+  },
+  "supportPage": {
+    "pathDirection": "Running West",
+    "kmFunded": "km funded",
+    "goal": "€100K goal",
+    "impactTitle": "Your Impact",
+    "impact": {
+      "1km": { "amount": "€5", "label": "1 kilometer" },
+      "morning": { "amount": "€50", "label": "A morning's run" },
+      "day": { "amount": "€250", "label": "A full day" },
+      "week": { "amount": "€1,750", "label": "1 week of progress" }
+    },
+    "donateCta": "Donate Now",
+    "sponsorCta": "Sponsor the Mission",
+    "communityTitle": "Join the Community",
+    "communitySubtitle": "100+ people have already joined the journey",
+    "supportersHeading": "Thank You to Our Top Supporters",
+    "seeAllSupporters": "See All Supporters on GoFundMe",
+    "faqTitle": "Questions",
+    "faqs": {
+      "cost": {
+        "question": "How much does it cost?",
+        "answer": "The full expedition budget is approximately €250,000. This breaks down into: Vehicle (~€35K), Logistics & visas (~€50K), Day-to-day expenses (~€55K), Crew support (~€60K), Gear (~€5K), Documentary (~€35K), and Miscellaneous (~€10K). The minimum viable budget with 1 vehicle and 2 crew is ~€95K."
+      },
+      "perKm": {
+        "question": "How is €5 per kilometer calculated?",
+        "answer": "€100K is the bare minimum of what it costs to make the project happen. It would not include compensation for the crew that spends time on this project. Everybody would be pure volunteers."
+      },
+      "goalNotMet": {
+        "question": "What if the goal isn't met?",
+        "answer": "The run starts May 1st, 2026 regardless. If fully funded, Ria runs with a support crew and vehicle. If not, she runs solo and unsupported until enough funds have been raised."
+      },
+      "unusedFunds": {
+        "question": "What happens to unused funds?",
+        "answer": "All unused funds will be returned to supporters proportionally. Full transparency on spending will be provided throughout the journey."
+      }
+    }
+  },
+  "contact": {
+    "eyebrow": "Reach Out",
+    "title": "Connect",
+    "intro": "Press, partners, or fellow travelers—we'd love to hear from you.",
+    "emailLabel": "Email",
+    "followLabel": "Follow Along",
+    "inquiriesLabel": "Inquiries",
+    "inquiries": {
+      "press": {
+        "title": "Press & Media",
+        "desc": "For interviews, press kits, and media coverage."
+      },
+      "sponsorship": {
+        "title": "Sponsorship",
+        "desc": "Brand partnerships and expedition sponsorship."
+      },
+      "landCrew": {
+        "title": "Land Crew",
+        "desc": "Know the route? Local support needed in select regions."
+      }
+    },
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "reason": "I'm reaching out about",
+      "message": "Message",
+      "submit": "Send Message",
+      "sending": "Sending..."
+    },
+    "reasons": {
+      "press": "Press & Media",
+      "sponsorship": "Sponsorship",
+      "landCrew": "Land Crew (Limited)",
+      "other": "Other"
+    },
+    "success": {
+      "title": "Message Sent",
+      "message": "Thanks for reaching out. We'll get back to you within 48 hours."
+    },
+    "emailFallback": "Prefer email?",
+    "crew": {
+      "title": "Land Crew",
+      "desc": "Know the route? Have a vehicle? We're looking for local support in select regions. This is a limited opportunity during specific segments of the journey."
+    }
+  },
+  "footer": {
+    "followTitle": "Follow the Journey",
+    "followDesc": "Training updates now, live dispatches from 17 countries starting May 2026.",
+    "followCta": "Follow on Instagram →",
+    "columns": {
+      "theRun": "The Run",
+      "follow": "Follow",
+      "support": "Support",
+      "connect": "Connect"
+    },
+    "links": {
+      "who": "Who",
+      "theJourney": "The Journey",
+      "runClub": "Run Club",
+      "instagram": "Instagram",
+      "strava": "Strava",
+      "tiktok": "TikTok",
+      "supportTheJourney": "Support the Journey",
+      "becomeSponsor": "Become a Sponsor",
+      "pressMedia": "Press & Media"
+    },
+    "brandStatement": "20,000KM is the first human attempt to run across Asia and Europe on the silk road. One woman. 17 countries. From Vladivostok to Lisbon.",
+    "copyright": "© 2026 Claire Sersun",
+    "contact": "Contact",
+    "email": "hello{'@'}20000km.com"
+  },
+  "map": {
+    "ariaLabel": "Interactive route progress map",
+    "runningDirection": "Running West",
+    "kmFunded": "km funded",
+    "routeAlt": "Route from Vladivostok to Lisbon"
+  },
+  "links": {
+    "journey": {
+      "label": "Stories & Updates",
+      "title": "The Journey",
+      "desc": "Real-time dispatches, podcast episodes, and stories from the communities along the route."
+    },
+    "newsletter": {
+      "label": "Read the Journey",
+      "title": "The Long Run Letter",
+      "desc": "Dispatches on endurance, philosophy, and what running teaches about being human."
+    },
+    "instagram": {
+      "label": "Follow Along",
+      "title": "Instagram",
+      "desc": "Real-time updates from training and the road."
+    },
+    "crew": {
+      "label": "Join the Team",
+      "title": "Crew Application",
+      "desc": "29 segments. 17 countries. Limited spots. Apply to support in-person."
+    }
+  },
+  "badge": {
+    "title": "Planetary Run Club",
+    "text": "Nowhere we run is too far to call neighborhood. No one we meet is too foreign to call neighbor."
+  },
+  "runClub": {
+    "twoWays": {
+      "title": "Two Ways to Join",
+      "virtual": {
+        "title": "Virtual",
+        "desc": "Planetary Run Club is a community of runners joining Ria's journey from the comfort of their home. Right now, that means weekly dispatches from training. Once the run begins, we'll be building virtual challenges, meetups, and more.",
+        "note": "Whether you're in Tokyo or Toronto, Berlin or Buenos Aires—you're part of this journey."
+      },
+      "inPerson": {
+        "title": "In Person",
+        "desc": "Run alongside Ria during the journey. There are two ways to join in person:",
+        "flagship": {
+          "title": "Flagship Runs",
+          "desc": "Major group runs in select cities along the route. These will be announced via the Strava Run Club.",
+          "cta": "Join the Run Club"
+        },
+        "local": {
+          "title": "Local Runs",
+          "desc": "Live along the route? Run with Ria when she passes through your area.",
+          "cta": "Sign Up to Run"
+        }
+      }
+    }
+  },
+  "sensory": {
+    "turnOnMotion": "Turn on motion",
+    "turnOffMotion": "Turn off motion"
+  },
+  "accessibility": {
+    "skipToContent": "Skip to main content",
+    "daysUntilDeparture": "days until departure"
+  }
+}
