@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// Simplified support section - progress bar + single CTA
+// Simplified support section - progress bar + CTAs (Donate primary, Tracker secondary)
 // Full details on /support page
 const { formattedFunded, formattedTotal, progress } = useFundraising()
 </script>
@@ -40,15 +40,20 @@ const { formattedFunded, formattedTotal, progress } = useFundraising()
         <a href="mailto:hello@20000km.com" class="support-section__sponsor">
           {{ $t('supportSection.sponsorText') }}
         </a>
-        <a
-          href="https://www.gofundme.com/rias-20000-km-run-across-asia-and-europe"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="support-section__cta"
-          aria-label="Donate now on GoFundMe (opens in new tab)"
-        >
-          {{ $t('supportSection.cta') }}
-        </a>
+        <div class="support-section__cta-stack">
+          <a
+            href="https://www.gofundme.com/rias-20000-km-run-across-asia-and-europe"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="support-section__cta"
+            aria-label="Donate now on GoFundMe (opens in new tab)"
+          >
+            {{ $t('supportSection.cta') }}
+          </a>
+          <NuxtLink to="/tracker" class="support-section__tracker">
+            {{ $t('supportSection.trackerCta') }}
+          </NuxtLink>
+        </div>
       </div>
     </div>
 
@@ -189,6 +194,11 @@ const { formattedFunded, formattedTotal, progress } = useFundraising()
     align-items: center;
     justify-content: space-between;
     gap: $space-4;
+
+    @media (max-width: $breakpoint-md) {
+      flex-direction: column;
+      align-items: stretch;
+    }
   }
 
   &__sponsor {
@@ -200,6 +210,14 @@ const { formattedFunded, formattedTotal, progress } = useFundraising()
     &:hover {
       text-decoration: underline;
     }
+  }
+
+  &__cta-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: $space-3;
+    min-width: 220px;
   }
 
   &__cta {
@@ -221,6 +239,28 @@ const { formattedFunded, formattedTotal, progress } = useFundraising()
     &:hover {
       background: $terracotta-800;
       border-color: $terracotta-800;
+      transform: translateY(-1px);
+    }
+  }
+
+  &__tracker {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: $warm-black;
+    color: $cream;
+    padding: $space-3 $space-10;
+    font-family: $font-mono;
+    font-size: $text-sm;
+    letter-spacing: $tracking-wide;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 2px solid $warm-black;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: $earth-800;
+      border-color: $earth-800;
       transform: translateY(-1px);
     }
   }

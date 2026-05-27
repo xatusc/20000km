@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // Intro section - appears below the fold
 // Contains the hook, CTA, and countdown with scroll reveals
-const { formatted } = useCountdown('2026-05-01')
+const { formatted, isElapsed } = useCountdown('2026-05-01')
 
 const sectionRef = ref<HTMLElement | null>(null)
 const { observeAll } = useScrollReveal({ threshold: 0.2 })
@@ -32,7 +32,13 @@ onMounted(() => {
 
       <!-- Countdown -->
       <div class="intro__countdown-wrapper">
-        <div class="intro__countdown" role="timer" :aria-label="`${formatted.days} ${$t('accessibility.daysUntilDeparture')}`">
+        <div
+          class="intro__countdown"
+          role="timer"
+          :aria-label="isElapsed
+            ? `${formatted.days} ${$t('accessibility.daysSinceDeparture')}`
+            : `${formatted.days} ${$t('accessibility.daysUntilDeparture')}`"
+        >
           <div class="intro__countdown-item">
             <span class="intro__countdown-number">{{ formatted.days }}</span>
             <span class="intro__countdown-label">{{ $t('intro.days') }}</span>
@@ -50,7 +56,9 @@ onMounted(() => {
             <span class="intro__countdown-label">{{ $t('intro.sec') }}</span>
           </div>
         </div>
-        <span class="intro__countdown-text">{{ $t('intro.untilDeparture') }}</span>
+        <span class="intro__countdown-text">
+          {{ isElapsed ? $t('intro.sinceDeparture') : $t('intro.untilDeparture') }}
+        </span>
       </div>
 
       <!-- CTA -->

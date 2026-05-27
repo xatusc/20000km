@@ -1,6 +1,7 @@
 <script setup lang="ts">
 /**
- * CountdownTimer - Retro style with offset border
+ * CountdownTimer - Retro style with offset border.
+ * Auto-flips to "Days Running" when target date is in the past.
  */
 const props = withDefaults(defineProps<{
   targetDate?: string
@@ -10,7 +11,7 @@ const props = withDefaults(defineProps<{
   showDate: true
 })
 
-const { formatted } = useCountdown(props.targetDate)
+const { formatted, isElapsed } = useCountdown(props.targetDate)
 
 const units = [
   { key: 'days', label: 'countdown.days' },
@@ -25,15 +26,21 @@ const units = [
     <div
       class="countdown__grid"
       role="timer"
-      :aria-label="`${formatted.days} days, ${formatted.hours} hours, ${formatted.minutes} minutes, ${formatted.seconds} seconds until departure`"
+      :aria-label="isElapsed
+        ? `${formatted.days} days since departure`
+        : `${formatted.days} days, ${formatted.hours} hours, ${formatted.minutes} minutes, ${formatted.seconds} seconds until departure`"
     >
       <div v-for="unit in units" :key="unit.key" class="countdown__item">
         <span class="countdown__number">{{ formatted[unit.key] }}</span>
         <span class="countdown__unit">{{ $t(unit.label) }}</span>
       </div>
     </div>
-    <h2 id="countdown-label" class="countdown__label">{{ $t('countdown.label') }}</h2>
-    <p v-if="showDate" class="countdown__date">{{ $t('countdown.startDate') }}</p>
+    <h2 id="countdown-label" class="countdown__label">
+      {{ isElapsed ? $t('countdown.labelRunning') : $t('countdown.label') }}
+    </h2>
+    <p v-if="showDate" class="countdown__date">
+      {{ isElapsed ? $t('countdown.startedOn') : $t('countdown.startDate') }}
+    </p>
   </div>
 </template>
 

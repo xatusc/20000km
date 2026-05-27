@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// Support page - SIMPLIFIED: Path visualization, Impact, Donate, Community, FAQ
+// Support page - SIMPLIFIED: Path visualization, Impact, Donate, Tracker, Community, FAQ
 const { t } = useI18n()
 
 useSeoMeta({
@@ -92,6 +92,10 @@ const toggleFaq = (index: number) => {
         >
           {{ $t('supportPage.donateCta') }}
         </a>
+
+        <NuxtLink to="/tracker" class="cta-tracker">
+          {{ $t('supportPage.trackerCta') }}
+        </NuxtLink>
 
         <NuxtLink to="/contact" class="cta-sponsor">
           {{ $t('supportPage.sponsorCta') }}
@@ -210,7 +214,7 @@ const toggleFaq = (index: number) => {
   font-size: $text-sm;
   letter-spacing: $tracking-wide;
   text-transform: uppercase;
-  color: $a11y-text-secondary; // WCAG AAA compliant
+  color: $a11y-text-secondary;
 
   strong {
     color: $terracotta-700;
@@ -242,7 +246,7 @@ const toggleFaq = (index: number) => {
   font-size: $text-xs;
   letter-spacing: $tracking-wide;
   text-transform: uppercase;
-  color: $a11y-text-secondary; // WCAG AAA compliant
+  color: $a11y-text-secondary;
   margin-top: $space-2;
 
   small {
@@ -252,14 +256,8 @@ const toggleFaq = (index: number) => {
   }
 }
 
-.path-start {
-  left: 0;
-}
-
-.path-end {
-  right: 0;
-  text-align: right;
-}
+.path-start { left: 0; }
+.path-end { right: 0; text-align: right; }
 
 // ============================================
 // YOUR IMPACT
@@ -293,9 +291,7 @@ const toggleFaq = (index: number) => {
   }
 }
 
-.impact-item {
-  text-align: center;
-}
+.impact-item { text-align: center; }
 
 .impact-amount {
   display: block;
@@ -311,7 +307,7 @@ const toggleFaq = (index: number) => {
   font-size: $text-xs;
   letter-spacing: $tracking-wide;
   text-transform: uppercase;
-  color: $a11y-text-secondary; // WCAG AAA compliant
+  color: $a11y-text-secondary;
   margin-top: $space-2;
 }
 
@@ -345,6 +341,28 @@ const toggleFaq = (index: number) => {
   }
 }
 
+.cta-tracker {
+  display: inline-block;
+  margin-top: $space-4;
+  padding: $space-4 $space-12;
+  background: $warm-black;
+  color: $cream;
+  font-family: $font-mono;
+  font-size: $text-base;
+  letter-spacing: $tracking-wide;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid $warm-black;
+  transition: all 0.2s ease;
+  min-height: 56px;
+
+  &:hover {
+    background: $earth-800;
+    border-color: $earth-800;
+    transform: translateY(-2px);
+  }
+}
+
 .cta-sponsor {
   display: block;
   margin-top: $space-6;
@@ -356,9 +374,7 @@ const toggleFaq = (index: number) => {
   text-decoration: underline;
   text-underline-offset: 4px;
 
-  &:hover {
-    color: $terracotta-700;
-  }
+  &:hover { color: $terracotta-700; }
 }
 
 // ============================================
@@ -374,7 +390,7 @@ const toggleFaq = (index: number) => {
   font-family: $font-serif;
   font-style: italic;
   font-size: $text-lg;
-  color: $a11y-text-secondary; // WCAG AAA compliant
+  color: $a11y-text-secondary;
   margin-bottom: $space-8;
 }
 
@@ -415,9 +431,7 @@ const toggleFaq = (index: number) => {
     text-decoration: underline;
     text-underline-offset: 2px;
 
-    &:hover {
-      color: $terracotta-800;
-    }
+    &:hover { color: $terracotta-800; }
   }
 }
 
@@ -433,9 +447,7 @@ const toggleFaq = (index: number) => {
   text-decoration: none;
   transition: all 0.2s ease;
 
-  &:hover {
-    background: $terracotta-700;
-  }
+  &:hover { background: $terracotta-700; }
 }
 
 // ============================================
@@ -446,17 +458,12 @@ const toggleFaq = (index: number) => {
   background: $cream;
 }
 
-.faq-list {
-  max-width: 700px;
-  margin: 0 auto;
-}
+.faq-list { max-width: 700px; margin: 0 auto; }
 
 .faq-item {
   border-bottom: 2px solid $warm-black;
 
-  &:first-child {
-    border-top: 2px solid $warm-black;
-  }
+  &:first-child { border-top: 2px solid $warm-black; }
 }
 
 .faq-question {
@@ -475,9 +482,7 @@ const toggleFaq = (index: number) => {
   cursor: pointer;
   text-align: left;
 
-  &:hover {
-    color: $terracotta-700;
-  }
+  &:hover { color: $terracotta-700; }
 }
 
 .faq-icon {
@@ -493,7 +498,7 @@ const toggleFaq = (index: number) => {
 
   p {
     font-size: $text-base;
-    color: $a11y-text-secondary; // WCAG AAA compliant
+    color: $a11y-text-secondary;
     line-height: $leading-relaxed;
     margin: 0;
   }
