@@ -34,6 +34,10 @@ export function useCountdown(targetDate: string | Date) {
     seconds.value = Math.floor((distance % (1000 * 60)) / 1000)
   }
 
+  // Compute initial state synchronously so SSR sees the correct values
+  // (otherwise the rendered HTML shows zeros + "until departure").
+  update()
+
   let interval: ReturnType<typeof setInterval> | null = null
 
   onMounted(() => {
