@@ -61,10 +61,15 @@ onMounted(() => {
         </span>
       </div>
 
-      <!-- CTA -->
-      <NuxtLink to="/support" class="intro__cta">
-        {{ $t('intro.cta') }}
-      </NuxtLink>
+      <!-- CTAs: primary Fund the Road + secondary Live Tracker -->
+      <div class="intro__ctas">
+        <NuxtLink to="/support" class="intro__cta">
+          {{ $t('intro.cta') }}
+        </NuxtLink>
+        <NuxtLink to="/tracker" class="intro__tracker">
+          {{ $t('intro.trackerCta') }}
+        </NuxtLink>
+      </div>
     </div>
   </section>
 </template>
@@ -209,7 +214,14 @@ onMounted(() => {
   color: $a11y-text-secondary; // WCAG AAA compliant
 }
 
-// CTA
+// CTAs (primary + secondary, stacked, centered)
+.intro__ctas {
+  display: inline-flex;
+  flex-direction: column;
+  gap: $space-3;
+  align-items: stretch;
+}
+
 .intro__cta {
   display: inline-flex;
   align-items: center;
@@ -229,6 +241,28 @@ onMounted(() => {
   &:hover {
     background: $terracotta-800;
     border-color: $terracotta-800;
+    transform: translateY(-1px);
+  }
+}
+
+.intro__tracker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: $warm-black;
+  color: $cream;
+  padding: $space-3 $space-12;
+  font-family: $font-mono;
+  font-size: $text-sm;
+  letter-spacing: $tracking-wide;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid $warm-black;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: $earth-800;
+    border-color: $earth-800;
     transform: translateY(-1px);
   }
 }
