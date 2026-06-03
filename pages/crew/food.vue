@@ -13,7 +13,6 @@ useSeoMeta({
 })
 
 const SUPABASE_URL = 'https://uipwxpyucbtdpxlagjvv.supabase.co'
-const PUBLISHABLE_KEY = 'sb_publishable_ATiFD6-zJ8TzSdHAYOQhmQ_UzPwDO_3'
 const PASSCODE_KEY = 'crew-food-passcode'
 
 const passcode = ref('')
@@ -73,18 +72,27 @@ async function estimate() {
   estimating.value = true
   error.value = null
   try {
-    const res = await fetch(`${SUPABASE_URL}/functions/v1/estimate-calories`, {
+    // Route the estimate through submit-crew-food so we don't need a Supabase
+    // JWT on the client. The function validates the same passcode and proxies
+    // the Groq call when mode === 'estimate'.
+    const res = await fetch(`${SUPABASE_URL}/functions/v1/submit-crew-food`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        apikey: PUBLISHABLE_KEY,
-        Authorization: `Bearer ${PUBLISHABLE_KEY}`,
-      },
-      body: JSON.stringify({ description: description.value.trim() }),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        passcode: passcode.value,
+        description: description.value.trim(),
+        mode: 'estimate',
+      }),
     })
     const data = await res.json()
-    if (data.error) {
-      error.value = 'AI估算失败,请手动输入'
+    if (!res.ok || data.error) {
+      if (data.error === 'invalid_passcode') {
+        error.value = '密码失效,请重新登录'
+        localStorage.removeItem(PASSCODE_KEY)
+        authed.value = false
+      } else {
+        error.value = 'AI估算失败,请手动输入'
+      }
       return
     }
     if (data.kcal != null) calories.value = data.kcal
