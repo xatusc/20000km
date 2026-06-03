@@ -9,7 +9,7 @@
 definePageMeta({ layout: false })
 
 useSeoMeta({
-  title: '团队记录 · 20,000KM',
+  title: 'Ria 吃了啥? · 20,000KM',
   description: 'Crew-only food entry for the 20,000KM Experiment.',
   robots: 'noindex,nofollow',
 })
@@ -19,7 +19,10 @@ const PASSCODE_KEY = 'crew-food-passcode'
 const ENDPOINT = `${SUPABASE_URL}/functions/v1/submit-crew-food`
 
 // Tunables — change here, no schema or env work needed
-const KCAL_TARGET = 5500 // typical ultra-runner daily intake on race days
+// 66kg / 175cm woman running 8-9hr/day low-intensity: BMR ~1460 + run cost
+// ~4000-4500 + daily activity ~400 → realistic burn ≈ 6000 kcal/day.
+const KCAL_TARGET = 6000
+const MILESTONE_KCAL = 1500 // toast every 1500 kcal crossed today
 
 const ENCOURAGEMENTS = [
   '棒!再来一笔',
@@ -197,16 +200,24 @@ async function submit() {
       }
       return
     }
-    // Determine celebration: was this first entry of the day? Milestone (5th, 10th)?
+    // Celebration logic:
+    //  - first entry of the day → 🌅 special
+    //  - this submission crosses a 1500-kcal milestone → 🔥 special
+    //  - otherwise → rotating encouragement
     const wasFirstOfDay = (stats.value?.today_count || 0) === 0
-    const nextCount = (stats.value?.today_count || 0) + 1
-    const isMilestone = nextCount === 5 || nextCount === 10 || (nextCount > 10 && nextCount % 5 === 0)
+    const prevKcal = stats.value?.today_kcal || 0
+    const addedKcal = data.calories ?? 0
+    const nextKcal = prevKcal + addedKcal
+    const crossedMilestone =
+      addedKcal > 0 &&
+      Math.floor(nextKcal / MILESTONE_KCAL) > Math.floor(prevKcal / MILESTONE_KCAL)
+    const milestoneKcal = Math.floor(nextKcal / MILESTONE_KCAL) * MILESTONE_KCAL
 
     if (wasFirstOfDay) {
       toast.value = '🌅 今日第一笔!Ria 准备出发'
       toastKind.value = 'first'
-    } else if (isMilestone) {
-      toast.value = `🍚 第 ${nextCount} 餐!Ria 吃得饱饱的`
+    } else if (crossedMilestone) {
+      toast.value = `🔥 已破 ${milestoneKcal.toLocaleString()} 千卡!Ria 满血推进`
       toastKind.value = 'milestone'
     } else {
       const cheer = pickEncouragement()
@@ -248,8 +259,8 @@ function logout() {
 <template>
   <div class="crew-page">
     <header class="crew-header">
-      <h1>为 Ria 记录吃了什么</h1>
-      <p class="crew-subtitle">20,000KM · 团队记录</p>
+      <h1>Ria 吃了啥?</h1>
+      <p class="crew-subtitle">20,000KM · 后援团</p>
     </header>
 
     <main class="crew-main">
@@ -281,7 +292,7 @@ function logout() {
         <div v-if="stats" class="crew-stats">
           <div class="crew-stats-row">
             <span class="crew-stat-pill">{{ fireEmoji }} 连续 {{ stats.streak }} 天</span>
-            <span class="crew-stat-pill">今日第 {{ stats.today_count }} 餐</span>
+            <span class="crew-stat-pill">今日已记 {{ stats.today_count }} 笔</span>
           </div>
           <div class="crew-energy">
             <div class="crew-energy-label">
