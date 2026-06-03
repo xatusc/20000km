@@ -1,19 +1,36 @@
 <script setup lang="ts">
 // Crew food log — Mandarin-only, passcode-gated.
-// Lets Ria's on-the-road crew log what she ate without giving them lab tracker access.
-// Posts to the `submit-crew-food` Supabase edge function which validates the passcode
-// and inserts via service role into the shared food_entries table.
+// Lets Ria's on-the-road support team log what she ate without giving them
+// lab tracker access. Posts to the `submit-crew-food` Supabase edge function
+// which validates the passcode and inserts via service role into the shared
+// food_entries table. Same endpoint also proxies the Groq nutrition estimator
+// (`mode: 'estimate'`) and returns gamification stats (`mode: 'stats'`).
 
 definePageMeta({ layout: false })
 
 useSeoMeta({
-  title: '机组录入 · 20,000KM',
+  title: '团队记录 · 20,000KM',
   description: 'Crew-only food entry for the 20,000KM Experiment.',
   robots: 'noindex,nofollow',
 })
 
 const SUPABASE_URL = 'https://uipwxpyucbtdpxlagjvv.supabase.co'
 const PASSCODE_KEY = 'crew-food-passcode'
+const ENDPOINT = `${SUPABASE_URL}/functions/v1/submit-crew-food`
+
+// Tunables — change here, no schema or env work needed
+const KCAL_TARGET = 5500 // typical ultra-runner daily intake on race days
+
+const ENCOURAGEMENTS = [
+  '棒!再来一笔',
+  'Ria 跑得动 多亏你们',
+  '记好了,继续保持',
+  '营养满满,加油',
+  '辛苦啦,小分队',
+  '干得漂亮',
+  '又一餐落账',
+  '再来点蛋白吧',
+]
 
 const passcode = ref('')
 const authed = ref(false)
@@ -27,13 +44,43 @@ const estimateMeta = ref<{ confidence?: string; items?: unknown; notes?: string 
 const estimating = ref(false)
 const submitting = ref(false)
 const toast = ref<string | null>(null)
+const toastKind = ref<'normal' | 'first' | 'milestone'>('normal')
 const error = ref<string | null>(null)
 
-onMounted(() => {
+const stats = ref<{
+  today_count: number
+  today_kcal: number
+  today_carbs: number
+  today_protein: number
+  streak: number
+} | null>(null)
+
+const kcalProgress = computed(() => {
+  if (!stats.value) return 0
+  return Math.min((stats.value.today_kcal / KCAL_TARGET) * 100, 100)
+})
+
+const fireEmoji = computed(() => {
+  const s = stats.value?.streak || 0
+  if (s >= 30) return '🔥🔥🔥'
+  if (s >= 7) return '🔥🔥'
+  if (s >= 1) return '🔥'
+  return '·'
+})
+
+const confidenceCn = (c?: string) => {
+  if (c === 'high') return '高'
+  if (c === 'medium') return '中'
+  if (c === 'low') return '低'
+  return c || '?'
+}
+
+onMounted(async () => {
   const stored = typeof window !== 'undefined' ? localStorage.getItem(PASSCODE_KEY) : null
   if (stored) {
     passcode.value = stored
     authed.value = true
+    await refreshStats()
   }
 })
 
@@ -42,21 +89,21 @@ async function tryAuth() {
   authChecking.value = true
   error.value = null
   try {
-    // Probe the function with an empty description. Returns 401 invalid_passcode
-    // if wrong, 400 description_required if passcode is right — that's our "valid" signal.
-    const res = await fetch(`${SUPABASE_URL}/functions/v1/submit-crew-food`, {
+    // Probe with mode: 'stats' — succeeds if passcode is valid, returns 401 if not.
+    const res = await fetch(ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ passcode: passcode.value, description: '' }),
+      body: JSON.stringify({ passcode: passcode.value, mode: 'stats' }),
     })
     const data = await res.json().catch(() => ({}))
     if (res.status === 401) {
       error.value = '密码错误'
       return
     }
-    if (res.status === 400 && data.error === 'description_required') {
+    if (res.ok) {
       localStorage.setItem(PASSCODE_KEY, passcode.value)
       authed.value = true
+      stats.value = data
       return
     }
     error.value = '验证失败,请稍后再试'
@@ -67,15 +114,23 @@ async function tryAuth() {
   }
 }
 
+async function refreshStats() {
+  try {
+    const res = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ passcode: passcode.value, mode: 'stats' }),
+    })
+    if (res.ok) stats.value = await res.json()
+  } catch { /* non-blocking */ }
+}
+
 async function estimate() {
   if (!description.value.trim() || estimating.value) return
   estimating.value = true
   error.value = null
   try {
-    // Route the estimate through submit-crew-food so we don't need a Supabase
-    // JWT on the client. The function validates the same passcode and proxies
-    // the Groq call when mode === 'estimate'.
-    const res = await fetch(`${SUPABASE_URL}/functions/v1/submit-crew-food`, {
+    const res = await fetch(ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -110,12 +165,16 @@ async function estimate() {
   }
 }
 
+function pickEncouragement() {
+  return ENCOURAGEMENTS[Math.floor(Math.random() * ENCOURAGEMENTS.length)]
+}
+
 async function submit() {
   if (!description.value.trim() || submitting.value) return
   submitting.value = true
   error.value = null
   try {
-    const res = await fetch(`${SUPABASE_URL}/functions/v1/submit-crew-food`, {
+    const res = await fetch(ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -138,18 +197,33 @@ async function submit() {
       }
       return
     }
-    const summary = [
-      data.calories != null ? `${data.calories} 千卡` : null,
-      data.carbs_g != null ? `${data.carbs_g}g 碳水` : null,
-      data.protein_g != null ? `${data.protein_g}g 蛋白` : null,
-    ].filter(Boolean).join(' · ')
-    toast.value = `✓ 已记录 · ${summary || '无营养数据'}`
+    // Determine celebration: was this first entry of the day? Milestone (5th, 10th)?
+    const wasFirstOfDay = (stats.value?.today_count || 0) === 0
+    const nextCount = (stats.value?.today_count || 0) + 1
+    const isMilestone = nextCount === 5 || nextCount === 10 || (nextCount > 10 && nextCount % 5 === 0)
+
+    if (wasFirstOfDay) {
+      toast.value = '🌅 今日第一笔!Ria 准备出发'
+      toastKind.value = 'first'
+    } else if (isMilestone) {
+      toast.value = `🍚 第 ${nextCount} 餐!Ria 吃得饱饱的`
+      toastKind.value = 'milestone'
+    } else {
+      const cheer = pickEncouragement()
+      const summary = data.calories != null ? ` · +${data.calories} 千卡` : ''
+      toast.value = `✓ ${cheer}${summary}`
+      toastKind.value = 'normal'
+    }
+
     description.value = ''
     calories.value = null
     carbs_g.value = null
     protein_g.value = null
     estimateMeta.value = null
     setTimeout(() => { toast.value = null }, 4500)
+
+    // Refresh stats so the progress bar / streak update immediately
+    refreshStats()
   } catch {
     error.value = '网络错误'
   } finally {
@@ -166,6 +240,7 @@ function logout() {
   carbs_g.value = null
   protein_g.value = null
   estimateMeta.value = null
+  stats.value = null
   error.value = null
 }
 </script>
@@ -173,8 +248,8 @@ function logout() {
 <template>
   <div class="crew-page">
     <header class="crew-header">
-      <h1>为 Ria 记录食物</h1>
-      <p class="crew-subtitle">20,000KM · 机组录入</p>
+      <h1>为 Ria 记录吃了什么</h1>
+      <p class="crew-subtitle">20,000KM · 团队记录</p>
     </header>
 
     <main class="crew-main">
@@ -200,8 +275,31 @@ function logout() {
         <p v-if="error" class="crew-error">{{ error }}</p>
       </section>
 
-      <!-- Entry form -->
+      <!-- Entry form (with stats + progress bar at top) -->
       <section v-else class="crew-block">
+        <!-- Stats strip -->
+        <div v-if="stats" class="crew-stats">
+          <div class="crew-stats-row">
+            <span class="crew-stat-pill">{{ fireEmoji }} 连续 {{ stats.streak }} 天</span>
+            <span class="crew-stat-pill">今日第 {{ stats.today_count }} 餐</span>
+          </div>
+          <div class="crew-energy">
+            <div class="crew-energy-label">
+              <span>🍚 Ria 今日能量</span>
+              <span class="crew-energy-num">
+                <strong>{{ stats.today_kcal.toLocaleString() }}</strong>
+                <span class="crew-energy-unit"> / {{ KCAL_TARGET.toLocaleString() }} 千卡</span>
+              </span>
+            </div>
+            <div class="crew-energy-bar">
+              <div class="crew-energy-fill" :style="{ width: `${kcalProgress}%` }"></div>
+            </div>
+            <div class="crew-energy-macros">
+              碳水 {{ stats.today_carbs }}g · 蛋白 {{ stats.today_protein }}g
+            </div>
+          </div>
+        </div>
+
         <label class="crew-field">
           <span>食物描述</span>
           <input
@@ -236,7 +334,7 @@ function logout() {
         </div>
 
         <p v-if="estimateMeta" class="crew-meta">
-          AI估算 · 置信度: <strong>{{ estimateMeta.confidence || '?' }}</strong>
+          AI估算 · 把握: <strong>{{ confidenceCn(estimateMeta.confidence) }}</strong>
           <span v-if="estimateMeta.notes"> · {{ estimateMeta.notes }}</span>
         </p>
 
@@ -253,7 +351,9 @@ function logout() {
         <button class="crew-logout" @click="logout">登出</button>
       </section>
 
-      <div v-if="toast" class="crew-toast">{{ toast }}</div>
+      <div v-if="toast" class="crew-toast" :class="`crew-toast--${toastKind}`">
+        {{ toast }}
+      </div>
     </main>
   </div>
 </template>
@@ -271,7 +371,7 @@ function logout() {
 
 .crew-header {
   text-align: center;
-  margin: 0 auto $space-8;
+  margin: 0 auto $space-6;
   max-width: 480px;
 }
 
@@ -304,6 +404,79 @@ function logout() {
   gap: $space-4;
 }
 
+// --------- Stats strip (streak + today + energy bar) ---------
+.crew-stats {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  padding: $space-4;
+  background: $sand-100;
+  border: 2px solid $warm-black;
+  margin-bottom: $space-2;
+}
+
+.crew-stats-row {
+  display: flex;
+  gap: $space-2;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.crew-stat-pill {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  letter-spacing: $tracking-wide;
+  background: $warm-black;
+  color: $cream;
+  padding: $space-1 $space-3;
+  border-radius: 999px;
+}
+
+.crew-energy-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: $font-mono;
+  font-size: $text-xs;
+  letter-spacing: $tracking-wide;
+  color: $earth-700;
+  margin-bottom: $space-2;
+}
+
+.crew-energy-num strong {
+  font-size: $text-base;
+  color: $terracotta-700;
+}
+
+.crew-energy-unit {
+  color: $earth-500;
+}
+
+.crew-energy-bar {
+  position: relative;
+  width: 100%;
+  height: 14px;
+  background: $earth-200;
+  border: 1px solid $warm-black;
+  overflow: hidden;
+}
+
+.crew-energy-fill {
+  height: 100%;
+  background: $terracotta;
+  transition: width 0.6s ease;
+}
+
+.crew-energy-macros {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  letter-spacing: $tracking-wide;
+  color: $earth-600;
+  text-align: center;
+  margin-top: $space-2;
+}
+
+// --------- Form fields ---------
 .crew-field {
   display: flex;
   flex-direction: column;
@@ -362,6 +535,7 @@ function logout() {
   }
 }
 
+// --------- Buttons ---------
 .crew-btn-primary {
   padding: $space-4;
   background: $terracotta-700;
@@ -440,6 +614,7 @@ function logout() {
   text-align: center;
 }
 
+// --------- Toast ---------
 .crew-toast {
   position: fixed;
   bottom: $space-6;
@@ -454,5 +629,21 @@ function logout() {
   max-width: calc(100vw - #{$space-8});
   text-align: center;
   z-index: 1000;
+  animation: crew-toast-in 0.25s ease-out;
+}
+
+.crew-toast--first {
+  background: $terracotta-700;
+  font-size: $text-base;
+}
+
+.crew-toast--milestone {
+  background: $terracotta-700;
+  font-size: $text-base;
+}
+
+@keyframes crew-toast-in {
+  from { transform: translate(-50%, 20px); opacity: 0; }
+  to { transform: translate(-50%, 0); opacity: 1; }
 }
 </style>
